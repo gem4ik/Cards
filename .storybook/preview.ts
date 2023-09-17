@@ -1,3 +1,5 @@
+import '@/styles/index.scss'
+
 import type { Preview } from '@storybook/react'
 
 const preview: Preview = {
@@ -5,11 +7,11 @@ const preview: Preview = {
     actions: { argTypesRegex: '^on[A-Z].*' },
     controls: {
       matchers: {
-       color: /(background|color)$/i,
-       date: /Date$/,
+        color: /(background|color)$/i,
+        date: /Date$/,
       },
     },
   },
-};
+}
 
-export default preview;
+export default preview

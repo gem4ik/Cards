@@ -1,0 +1,32 @@
+a,
+button {
+  all: unset;
+}
+.primary {
+  display: inline-flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+
+  padding: 6px 28px;
+
+  background: var(--color-accent-500);
+  border-radius: 4px;
+  box-shadow: 0 4px 18px 0 rgb(140 97 255 / 35%);
+}
+
+.secondary {
+  background-color: green;
+}
+
+.tertiary {
+  background-color: blue;
+}
+
+.link {
+  background-color: yellow;
+}
+
+.fullWidth {
+  width: 100%;
+}

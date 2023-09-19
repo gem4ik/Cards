@@ -1,0 +1,39 @@
+.field {
+  width: max-content;
+  min-width: 284px;
+  height: 36px;
+  padding-right: 30px;
+  padding-left: 30px;
+
+  color: black;
+}
+
+.error {
+  border: 2px solid var(--color-danger-500);
+}
+
+.PasswordButton {
+  cursor: pointer;
+
+  position: absolute;
+  top: 5px;
+  right: 5px;
+
+  background: none;
+  border: none;
+}
+
+.SearchButton {
+  cursor: pointer;
+
+  position: absolute;
+  top: 5px;
+
+  background: none;
+  border: none;
+}
+
+.inputWrapper {
+  position: relative;
+  width: max-content;
+}

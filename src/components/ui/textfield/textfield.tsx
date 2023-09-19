@@ -1,10 +1,10 @@
 import { ChangeEvent, ComponentPropsWithoutRef, useState } from 'react'
 
-import Eye from './../../../assets/eye.png'
-import EyeOff from './../../../assets/eyeOff.png'
-import search from './../../../assets/search.png'
+import search from './search.svg'
 import s from './textfield.module.scss'
 
+import { Eye } from '@/components/ui/textfield/eye.tsx'
+import { EyeOff } from '@/components/ui/textfield/eyeOff.tsx'
 import { Typography } from '@/components/ui/typography'
 
 type Props = {
@@ -19,11 +19,13 @@ type Props = {
 export const Textfield = (props: Props) => {
   const { error, label, placeholder, onChangeText, className, type } = props
   const [showPassword, setShowPassword] = useState(false)
-  const isShowPasswordButtonShown = type === 'password'
-  const isSearchButtonShown = type === 'search'
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     onChangeText(e.currentTarget.value)
   }
+
+  const searchButton = `${s.button} ${type === 'search' ? s.searchButton : ''}`
+  const passwordButton = `${s.button} ${s.EyeButton} ${type === 'password' ? s.passwordButton : ''}`
+  const input = `${type === 'password' || type === 'search' ? s.input : ''}`
 
   return (
     <div>
@@ -33,25 +35,18 @@ export const Textfield = (props: Props) => {
         </Typography>
       )}
       <div className={s.fieldContainer}>
-        <div className={s.inputWrapper}>
-          {isSearchButtonShown && (
-            <button className={s.SearchButton} onClick={() => setShowPassword(prev => !prev)}>
-              <img src={search} alt="search" />
-            </button>
-          )}
-          <input
-            className={`${s.field} ${error ? s.error : ''} ${className || ''}`}
-            type="text"
-            placeholder={placeholder}
-            onChange={handleChange}
-            value={'asdasdasdasdasdasdasdasdasdaasdasda'}
-          />
-          {isShowPasswordButtonShown && (
-            <button className={s.PasswordButton} onClick={() => setShowPassword(prev => !prev)}>
-              {showPassword ? <img src={EyeOff} alt={'eyeOff'} /> : <img src={Eye} alt={'Eye'} />}
-            </button>
-          )}
-        </div>
+        <input
+          className={`${s.field} ${input} ${error ? s.error : ''} ${className || ''}`}
+          type="text"
+          placeholder={placeholder}
+          onChange={handleChange}
+        />
+        <button className={passwordButton} onClick={() => setShowPassword(!showPassword)}>
+          {showPassword ? <Eye /> : <EyeOff />}
+        </button>
+        <button className={searchButton}>
+          <img src={search} alt="search" />
+        </button>
       </div>
       {error && <Typography variant={'body2'}>{error}</Typography>}
     </div>

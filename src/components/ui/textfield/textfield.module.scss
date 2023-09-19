@@ -2,38 +2,56 @@
   width: max-content;
   min-width: 284px;
   height: 36px;
-  padding-right: 30px;
-  padding-left: 30px;
+  padding-right: 10px;
+  padding-left: 10px;
 
-  color: black;
+  color: var(--color-dark-300);
+
+  background-color: var(--color-dark-900);
+  border: 2px solid var(--color-dark-300);
+  border-radius: 2px;
+}
+
+.field:hover {
 }
 
 .error {
   border: 2px solid var(--color-danger-500);
 }
 
-.PasswordButton {
-  cursor: pointer;
-
-  position: absolute;
-  top: 5px;
-  right: 5px;
-
-  background: none;
-  border: none;
-}
-
-.SearchButton {
-  cursor: pointer;
-
-  position: absolute;
-  top: 5px;
-
-  background: none;
-  border: none;
-}
-
-.inputWrapper {
+.fieldContainer {
   position: relative;
   width: max-content;
+}
+
+.button {
+  cursor: pointer;
+
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+
+  display: none;
+
+  font-size: 14px;
+
+  background: none;
+  border: none;
+}
+
+.passwordButton {
+  display: flex;
+}
+
+.searchButton {
+  display: flex;
+}
+
+.EyeButton {
+  right: 5px;
+}
+
+.input {
+  padding-right: 30px;
+  padding-left: 30px;
 }

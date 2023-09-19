@@ -13,8 +13,6 @@ type Story = StoryObj<typeof meta>
 
 export const Text: Story = {
   args: {
-    error: 'error!',
-    label: 'input',
     placeholder: 'input',
     type: 'password',
   },

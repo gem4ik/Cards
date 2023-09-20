@@ -24,11 +24,12 @@ export interface TextProps<T extends ElementType> {
 
 export function Typography<T extends ElementType = 'p'>({
   as,
-  className,
+  className = '',
   variant = 'body1',
   ...restProps
 }: TextProps<T> & Omit<ComponentPropsWithoutRef<T>, keyof TextProps<T>>) {
-  const classNames = [s.text, s[variant], className].join(' ')
+  const classNames = [s.text, s[variant], s[className]].join(' ')
+
   const Component = as || 'p'
 
   return <Component className={classNames} {...restProps} />

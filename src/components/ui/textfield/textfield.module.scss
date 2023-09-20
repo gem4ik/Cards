@@ -1,3 +1,7 @@
+input {
+  all: unset;
+}
+
 .field {
   width: max-content;
   min-width: 284px;
@@ -7,16 +11,42 @@
 
   color: var(--color-dark-300);
 
-  background-color: var(--color-dark-900);
+  background-color: var(--color-dark-500);
   border: 2px solid var(--color-dark-300);
   border-radius: 2px;
 }
 
 .field:hover {
+  background-color: var(--color-dark-700);
+  border: 2px solid var(--color-dark-100);
+}
+
+.field:hover::placeholder {
+  color: var(--color-dark-100);
+}
+
+.field:focus {
+  border: 2px solid var(--color-info-500);
+}
+
+.field:active {
+  border: 2px solid var(--color-light-900);
+}
+
+.field:active::placeholder {
+  color: var(--color-light-900);
+}
+
+.field:disabled {
+  opacity: 0.5;
 }
 
 .error {
   border: 2px solid var(--color-danger-500);
+}
+
+.error::placeholder {
+  color: var(--color-danger-500);
 }
 
 .fieldContainer {
@@ -24,7 +54,7 @@
   width: max-content;
 }
 
-.button {
+button {
   cursor: pointer;
 
   position: absolute;
@@ -43,7 +73,7 @@
   display: flex;
 }
 
-.searchButton {
+.searchButton button {
   display: flex;
 }
 
@@ -54,4 +84,13 @@
 .input {
   padding-right: 30px;
   padding-left: 30px;
+}
+
+.passwordInput {
+  padding-right: 30px;
+  padding-left: 10px;
+}
+
+.cross {
+  right: 5px;
 }

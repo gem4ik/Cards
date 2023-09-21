@@ -1,0 +1,96 @@
+input {
+  all: unset;
+}
+
+.field {
+  width: max-content;
+  min-width: 284px;
+  height: 36px;
+  padding-right: 10px;
+  padding-left: 10px;
+
+  color: var(--color-dark-300);
+
+  background-color: var(--color-dark-500);
+  border: 2px solid var(--color-dark-300);
+  border-radius: 2px;
+}
+
+.field:hover {
+  background-color: var(--color-dark-700);
+  border: 2px solid var(--color-dark-100);
+}
+
+.field:hover::placeholder {
+  color: var(--color-dark-100);
+}
+
+.field:focus {
+  border: 2px solid var(--color-info-500);
+}
+
+.field:active {
+  border: 2px solid var(--color-light-900);
+}
+
+.field:active::placeholder {
+  color: var(--color-light-900);
+}
+
+.field:disabled {
+  opacity: 0.5;
+}
+
+.error {
+  border: 2px solid var(--color-danger-500);
+}
+
+.error::placeholder {
+  color: var(--color-danger-500);
+}
+
+.fieldContainer {
+  position: relative;
+  width: max-content;
+}
+
+button {
+  cursor: pointer;
+
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+
+  display: none;
+
+  font-size: 14px;
+
+  background: none;
+  border: none;
+}
+
+.passwordButton {
+  display: flex;
+}
+
+.searchButton button {
+  display: flex;
+}
+
+.EyeButton {
+  right: 5px;
+}
+
+.input {
+  padding-right: 30px;
+  padding-left: 30px;
+}
+
+.passwordInput {
+  padding-right: 30px;
+  padding-left: 10px;
+}
+
+.cross {
+  right: 5px;
+}

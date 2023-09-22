@@ -9,7 +9,7 @@ export type Props = {
   disabled: boolean
 }
 
-export const select = (props: Props) => {
+export const Selector = (props: Props) => {
   const { items } = props
   const mappedItems = items?.map((el, index) => {
     return (
@@ -23,7 +23,7 @@ export const select = (props: Props) => {
     <div style={{ margin: 'auto' }}>
       <Select.Root>
         <Select.Trigger disabled={props.disabled} className={s.SelectTrigger} aria-label="Food">
-          <Select.Value placeholder="hyi" />
+          <Select.Value placeholder="select" />
           <Select.Icon className={s.SelectIcon}>
             <ChevronDownIcon />
           </Select.Icon>

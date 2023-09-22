@@ -1,4 +1,5 @@
-import logo from './../../../assets/Logo.svg'
+import logo from 'src/assets/components/headerIcon/Logo.svg'
+
 import s from './header.module.css'
 
 import { Button } from '@/components/ui/button'

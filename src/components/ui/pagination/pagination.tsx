@@ -1,6 +1,9 @@
 import s from './pagination.module.scss'
 
+import { LeftArrow } from '@/assets/components/paginationArrow/leftArrow.tsx'
+import { RightArrow } from '@/assets/components/paginationArrow/rightArrow.tsx'
 import { DOTS, usePagination } from '@/components/ui/pagination/usePagination.tsx'
+import { Selector } from '@/components/ui/select/select.tsx'
 
 type PaginationProps = {
   onPageChange: (nextPage: number) => void
@@ -29,6 +32,7 @@ export const Pagination = (props: PaginationProps) => {
   }
   //определяем последнюю страницу
   const lastPage = paginationRange[paginationRange.length - 1]
+  const changePageSizeParams = ['10', '20', '30', '50', '100']
 
   return (
     <ul className={`${s.paginationWrapper} ${s[className]}`}>
@@ -37,7 +41,9 @@ export const Pagination = (props: PaginationProps) => {
         className={`${s.pagination__item} ${currentPage === 1 ? s.disabled : ''}`}
         onClick={PreviousPageButtonHandel}
       >
-        <div className={s.arrow__left} />
+        <div className={s.arrow__left}>
+          <LeftArrow />
+        </div>
       </li>
       {paginationRange.map(pageNumber => {
         //если текущая страницы это точки, то отрисовываем их через юникод
@@ -65,10 +71,12 @@ export const Pagination = (props: PaginationProps) => {
         className={`${s.pagination__item} ${currentPage === lastPage ? s.disabled : ''}`}
         onClick={nextPageButtonHandel}
       >
-        <div className={s.arrow__right} />
+        <div className={s.arrow__right}>
+          <RightArrow />
+        </div>
       </li>
       <span>показать</span>
-
+      <Selector disabled={false} items={changePageSizeParams} />
       <span>на странице</span>
     </ul>
   )

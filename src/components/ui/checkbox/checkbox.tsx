@@ -1,62 +1,44 @@
-import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
+import { ComponentPropsWithoutRef, FC } from 'react'
 
 import * as RadixCheckbox from '@radix-ui/react-checkbox'
-import * as RadixLabel from '@radix-ui/react-label'
-import cn from 'classnames'
+import { CheckIcon } from '@radix-ui/react-icons'
+
+import { Typography } from '../typography'
 
 import s from './checkbox.module.scss'
-// eslint-disable-next-line import/no-unresolved
 
-import Check from '@/components/ui/checkbox/check.tsx'
-import { Typography } from '@/components/ui/typography'
-
-export type CheckboxProps = Partial<{
-  checked: boolean
-  onChange: (checked: boolean) => void
-  disabled: boolean
+export type Props = Partial<{
+  checked?: boolean
+  onChange?: (checked: boolean) => void
+  disabled?: boolean
   required: boolean
   label: string
-  id: string
-  position: 'left'
-  className: string
+  variant: 'default' | 'withText'
 }> &
   ComponentPropsWithoutRef<typeof RadixCheckbox.Root>
 
-export const Checkbox = forwardRef<ElementRef<typeof RadixCheckbox.Root>, CheckboxProps>(
-  ({ checked, onChange, disabled, required, label, id, position, className }, ref): JSX.Element => {
-    const classNames = {
-      container: className,
-      checkboxWrapper: cn(s.checkboxWrapper, disabled && s.disabled, position === 'left' && s.left),
-      root: s.checkboxRoot,
-      indicator: s.indicator,
-      label: (s.label, disabled && s.disabled),
-    }
-
-    return (
-      <div className={classNames.container}>
-        <RadixLabel.Root asChild>
-          <Typography className={s.label}>
-            <div className={classNames.checkboxWrapper}>
-              <RadixCheckbox.Root
-                ref={ref}
-                className={classNames.root}
-                checked={checked}
-                onCheckedChange={onChange}
-                disabled={disabled}
-                required={required}
-                id={id}
-              >
-                {checked && (
-                  <RadixCheckbox.Indicator className={classNames.indicator} forceMount>
-                    <Check />
-                  </RadixCheckbox.Indicator>
-                )}
-              </RadixCheckbox.Root>
-            </div>
-            {label}
-          </Typography>
-        </RadixLabel.Root>
-      </div>
-    )
-  }
-)
+export const Checkbox: FC<Props> = ({ disabled = false, onChange, checked, required, label }) => {
+  return (
+    <div className={s.checkBoxWrapper}>
+      <RadixCheckbox.Root
+        className={`${s.checkboxRoot} ${checked ? s.active : s.inActive}`}
+        checked={checked}
+        onCheckedChange={onChange}
+        disabled={disabled}
+        required={required}
+        id={'l1'}
+      >
+        {checked && (
+          <RadixCheckbox.Indicator className={s.checkboxIndicator}>
+            <CheckIcon className={s.checkIcon} />
+          </RadixCheckbox.Indicator>
+        )}
+      </RadixCheckbox.Root>
+      {label && (
+        <label className={`${s.label} ${disabled ? s.labelDisabled : ''}`} htmlFor={'l1'}>
+          <Typography variant={'body2'}>{label}</Typography>
+        </label>
+      )}
+    </div>
+  )
+}

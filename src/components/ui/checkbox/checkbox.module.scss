@@ -1,75 +1,92 @@
-.checkboxRoot {
+.checkBoxWrapper {
+  display: flex;
+  align-items: center;
 
+  .checkboxRoot {
+    cursor: pointer;
 
-  cursor: pointer;
+    position: relative;
 
-  width: 1.4rem;
-  height: 1.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-  background-color: var(--color-dark-900);
-  border-radius: 2px;
+    width: 1.5rem;
+    height: 1.5rem;
 
-  &:not([data-state='checked']) {
     border: 2px solid var(--color-light-900);
+    border-radius: 0.25rem;
+
+    &:focus-within {
+      &::before {
+        content: '';
+
+        position: absolute;
+        z-index: -1;
+
+        width: calc(100% + 25px);
+        height: calc(100% + 25px);
+
+        background-color: var(--color-dark-100);
+        border-radius: 50%;
+      }
+    }
+
+    &[data-disabled]  {
+      background-color: var(--color-dark-100);
+    }
+
+    &:not([data-disabled])  {
+      &:hover {
+        &::before {
+          content: '';
+
+          position: absolute;
+          z-index: -1;
+
+          width: calc(100% + 1.5625rem);
+          height: calc(100% + 1.5625rem);
+
+          background-color: var(--color-dark-500);
+          border-radius: 50%;
+        }
+      }
+    }
   }
 
-  &[data-disabled] {
-    pointer-events: none;
-    cursor: initial;
-    border: 2px solid var(--color-dark-100);
+  .active {
+    background-color: var(--color-light-100);
+
+    .checkboxIndicator {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-dark-900);
+
+      .checkIcon {
+        width: 1.55rem;
+        height: 1.55rem;
+      }
+    }
   }
 
-  &:active:not([data-disabled]) {
-    background-color: var(--color-dark-900);
-    border: 2px solid var(--color-light-100);
+  .inActive {
+    background-color: transparent;
   }
 
-  &:not([data-state='checked']):focus-within {
-    background-color: var(--color-dark-100);
-    border: 2px solid var(--color-light-900);
+  .checkboxRoot:disabled .checkboxIndicator {
+    color: var(--color-light-700);
   }
 
-  &[data-state='checked'][data-disabled] {
-    background-color: var(--color-light-700);
-  }
-}
-
-.checkboxWrapper {
-
-
-  width: 3.6rem;
-  height: 3.6rem;
-  border-radius: 50%;
-
-  &:focus-within {
-    background-color: var(--color-dark-100);
+  .label {
+    cursor: pointer;
+    user-select: none;
+    margin-left: 0.75rem;
   }
 
-  &:hover:not(.disabled) {
-    background-color: var(--color-dark-500);
+  .labelDisabled {
+    p {
+      color: var(--color-light-700);
+    }
   }
-
-  &:hover:not(.disabled) .root:not([data-state='checked']) {
-    background-color: var(--color-dark-500);
-  }
-
-  &.left {
-    margin-left: -0.9rem;
-  }
-}
-
-.label {
-
-
-  cursor: pointer;
-
-  &.disabled {
-    cursor: initial;
-    color: var(--color-dark-100);
-  }
-}
-
-.indicator {
-  width: 1.8rem;
-  height: 1.8rem;
 }

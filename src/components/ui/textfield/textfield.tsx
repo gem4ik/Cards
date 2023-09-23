@@ -9,6 +9,7 @@ import { Search } from '@/assets/svgComponents/search.tsx'
 import { Typography } from '@/components/ui/typography'
 
 type Props = {
+  checked: boolean
   error?: string
   label?: string
   placeholder?: string

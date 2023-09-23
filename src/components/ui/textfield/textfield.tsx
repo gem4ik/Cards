@@ -2,10 +2,10 @@ import { ChangeEvent, ComponentPropsWithoutRef, useState } from 'react'
 
 import s from './textfield.module.scss'
 
-import { Cross } from '@/assets/svgComponents/cross.tsx'
-import { Eye } from '@/assets/svgComponents/eye.tsx'
-import { EyeOff } from '@/assets/svgComponents/eyeOff.tsx'
-import { Search } from '@/assets/svgComponents/search.tsx'
+import { Cross } from '@/assets/components/inputIcon/cross.tsx'
+import { Eye } from '@/assets/components/inputIcon/eye.tsx'
+import { EyeOff } from '@/assets/components/inputIcon/eyeOff.tsx'
+import { Search } from '@/assets/components/inputIcon/search.tsx'
 import { Typography } from '@/components/ui/typography'
 
 type Props = {

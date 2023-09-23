@@ -1,7 +1,6 @@
-import logo from 'src/assets/components/headerIcon/Logo.svg'
-
 import s from './header.module.css'
 
+import logo from '@/assets/components/avatarIcon/avatar3.png'
 import { Button } from '@/components/ui/button'
 
 type Props = {

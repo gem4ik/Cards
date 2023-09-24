@@ -12,30 +12,27 @@ export type Props = Partial<{
   onChange?: (checked: boolean) => void
   disabled?: boolean
   required: boolean
-  label: string
+  label?: string
   variant: 'default' | 'withText'
 }> &
   ComponentPropsWithoutRef<typeof RadixCheckbox.Root>
 
-export const Checkbox: FC<Props> = ({ disabled = false, onChange, checked, required, label }) => {
+export const Checkbox: FC<Props> = ({ disabled = false, onChange, checked, label }) => {
   return (
     <div className={s.checkBoxWrapper}>
       <RadixCheckbox.Root
         className={`${s.checkboxRoot} ${checked ? s.active : s.inActive}`}
         checked={checked}
-        onCheckedChange={onChange}
+        onChange={onChange}
         disabled={disabled}
-        required={required}
-        id={'l1'}
+        id="l1"
       >
-        {checked && (
-          <RadixCheckbox.Indicator className={s.checkboxIndicator}>
-            <CheckIcon className={s.checkIcon} />
-          </RadixCheckbox.Indicator>
-        )}
+        <RadixCheckbox.Indicator className={s.checkboxIndicator}>
+          <CheckIcon className={s.checkIcon} />
+        </RadixCheckbox.Indicator>
       </RadixCheckbox.Root>
       {label && (
-        <label className={`${s.label} ${disabled ? s.labelDisabled : ''}`} htmlFor={'l1'}>
+        <label className={`${s.label} ${disabled ? '' : s.labelDisabled}`} htmlFor={'l1'}>
           <Typography variant={'body2'}>{label}</Typography>
         </label>
       )}

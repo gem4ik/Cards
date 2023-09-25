@@ -10,7 +10,7 @@ type Props = {
 export const ToggleGroupDemo = (props: Props) => {
     const items = props.values.map(el => {
         return (
-            <ToggleGroup.Item key={el} className={s.ToggleGroupItem} value={el} >
+            <ToggleGroup.Item key={el} className={s.ToggleGroupItem} value={el}  >
                 <Typography variant={"body1"} className={'toggle'}>{el}</Typography>
             </ToggleGroup.Item>
         )

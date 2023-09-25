@@ -1,0 +1,22 @@
+.ToggleGroupItem{
+  display: inline-flex;
+  padding: 6px 24px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 2px 0px 0px 2px;
+  border: 1px solid var(--dark-300, #4C4C4C);
+  background-color: var(--color-dark-900);
+}
+.ToggleGroupItem:hover{
+  background-color: var(--color-dark-100);
+}
+.ToggleGroupItem:active{
+  background-color: var(--color-accent-700);
+}
+.ToggleGroupItem:focus{
+ border: var(--color-info-900);
+}
+.ToggleGroup{
+
+}

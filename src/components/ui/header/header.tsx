@@ -1,3 +1,5 @@
+import { ComponentPropsWithoutRef, forwardRef } from 'react'
+
 import s from './header.module.css'
 
 import logo from '@/assets/components/avatarIcon/avatar3.png'
@@ -11,13 +13,13 @@ type Props = {
     email?: string | null
   }
   onLogOut?: () => void
-}
+} & ComponentPropsWithoutRef<'header'>
 
-export const Header = (props: Props) => {
+export const Header = forwardRef<HTMLHeadElement, Props>((props, ref) => {
   const { isAuth, user } = props
 
   return (
-    <header className={s.headerWrapper}>
+    <header ref={ref} className={s.headerWrapper}>
       <img className={s.logo} src={logo} alt="logo" />
       {isAuth && (
         <div className={s.user__header}>
@@ -28,4 +30,4 @@ export const Header = (props: Props) => {
       {!isAuth && <Button variant={'primary'}> Sign In </Button>}
     </header>
   )
-}
+})

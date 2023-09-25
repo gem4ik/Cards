@@ -1,17 +1,13 @@
+import { ComponentPropsWithoutRef, forwardRef } from 'react'
+
 import cn from 'classnames'
+
 import s from './card.module.scss'
-import {ComponentPropsWithoutRef, forwardRef} from "react";
 
-export type CardProps = {
+export type CardProps = {} & ComponentPropsWithoutRef<'div'>
 
-} & ComponentPropsWithoutRef<'div'>
+export const Card = forwardRef<HTMLDivElement, CardProps>(({ className, ...restProp }, ref) => {
+  const classNames = cn(s.root, className)
 
-export const Card = forwardRef<HTMLDivElement, CardProps>(({className, ...restProp}, ref) => {
-    const classNames = cn(s.root, className)
-
-    return (
-        <div ref={ref} className={classNames} {...restProp}>
-
-        </div>
-    )
+  return <div ref={ref} className={classNames} {...restProp}></div>
 })

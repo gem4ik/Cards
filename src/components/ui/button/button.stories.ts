@@ -20,7 +20,7 @@ type Story = StoryObj<typeof meta>
 export const Primary: Story = {
   args: {
     variant: 'primary',
-    children: 'Primary Button',
+    children: 'Button primary',
     disabled: false,
   },
 }
@@ -28,7 +28,7 @@ export const Primary: Story = {
 export const PrimaryWithIcon: Story = {
   args: {
     variant: 'primary',
-    children: 'Primary Button',
+    children: 'Button primary',
     disabled: false,
   },
 }
@@ -36,21 +36,21 @@ export const PrimaryWithIcon: Story = {
 export const Secondary: Story = {
   args: {
     variant: 'secondary',
-    children: 'Secondary Button',
+    children: 'Button secondary',
     disabled: false,
   },
 }
 export const Tertiary: Story = {
   args: {
     variant: 'tertiary',
-    children: 'Tertiary Button',
+    children: 'Tertiary',
     disabled: false,
   },
 }
 export const Link: Story = {
   args: {
     variant: 'link',
-    children: 'Tertiary Button',
+    children: 'Link-button',
     disabled: false,
   },
 }

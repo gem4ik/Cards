@@ -1,4 +1,4 @@
-import { ChangeEvent, ComponentPropsWithoutRef, useState } from 'react'
+import { ChangeEvent, ComponentPropsWithoutRef, ElementRef, forwardRef, useState } from 'react'
 
 import s from './textfield.module.scss'
 
@@ -19,7 +19,7 @@ type Props = {
   disabled?: boolean
 } & ComponentPropsWithoutRef<'input'>
 
-export const Textfield = (props: Props) => {
+export const Textfield = forwardRef<ElementRef<'input'>, Props>((props, ref) => {
   const { error, label, placeholder, onChangeText, className, type, disabled } = props
   const [showPassword, setShowPassword] = useState(false)
   const [click, setClick] = useState(false)
@@ -51,6 +51,7 @@ export const Textfield = (props: Props) => {
       <div className={s.fieldContainer}>
         <input
           disabled={disabled}
+          ref={ref}
           onMouseDown={() => setClick(true)}
           onMouseUp={() => setClick(false)}
           className={`${s.field} ${input} ${error ? s.error : ''} ${className || ''}`}
@@ -73,4 +74,4 @@ export const Textfield = (props: Props) => {
       {error && <Typography variant={'error'}>{error}</Typography>}
     </div>
   )
-}
+})

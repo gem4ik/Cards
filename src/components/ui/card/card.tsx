@@ -2,7 +2,6 @@ import cn from 'classnames'
 import s from './card.module.scss'
 import {ComponentPropsWithoutRef, forwardRef} from "react";
 
-
 export type CardProps = {
 
 } & ComponentPropsWithoutRef<'div'>

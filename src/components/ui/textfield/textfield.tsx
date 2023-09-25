@@ -9,7 +9,7 @@ import { Search } from '@/assets/components/inputIcon/search.tsx'
 import { Typography } from '@/components/ui/typography'
 
 type Props = {
-  checked: boolean
+  checked?: boolean
   error?: string
   label?: string
   placeholder?: string

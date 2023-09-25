@@ -1,20 +1,17 @@
-import {clsx} from 'clsx'
-
+import cn from 'classnames'
 import s from './card.module.scss'
-import {FC} from "react";
+import {ComponentPropsWithoutRef, forwardRef} from "react";
+
 
 export type CardProps = {
-    className?: string
-}
 
-export const Card: FC<CardProps> = (({className}) => {
-    className? className:className=s.default
-    const classNames = {
-        root: clsx(s.root, className)
-    }
+} & ComponentPropsWithoutRef<'div'>
+
+export const Card = forwardRef<HTMLDivElement, CardProps>(({className, ...restProp}, ref) => {
+    const classNames = cn(s.root, className)
 
     return (
-        <div className={classNames.root}>
+        <div ref={ref} className={classNames} {...restProp}>
 
         </div>
     )

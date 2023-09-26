@@ -24,25 +24,25 @@ export const SignUp = () => {
     },
   })
 
-  const submitHandler = handleSubmit(data => {
-    console.log(data)
-  })
-
   return (
     <>
-      <form onSubmit={submitHandler}>
+      <form
+        onSubmit={handleSubmit(data => {
+          console.log(data)
+        })}
+      >
         <div className={s.signUpWrapper}>
           <Header isAuth={false} />
           <Card className={s.card}>
             <Typography style={{ color: 'var(--color-light-100)' }} variant={'large'}>
-              Sign in
+              Sign Up
             </Typography>
 
             <ControlledTextfield
+              name={'email'}
               control={control}
               label={'Email'}
               placeholder={'Email'}
-              name={'email'}
             />
             <ControlledTextfield
               control={control}

@@ -2,7 +2,7 @@ import { ComponentPropsWithoutRef, forwardRef } from 'react'
 
 import s from './header.module.css'
 
-import logo from '@/assets/components/avatarIcon/avatar3.png'
+import logo from '@/assets/components/headerIcon/Logo.svg'
 import { Button } from '@/components/ui/button'
 
 type Props = {

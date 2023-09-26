@@ -1,3 +1,5 @@
+import { SignUp } from '@/components/auth/signUp/signUp.tsx'
+
 export function App() {
-  return <div>Hello</div>
+  return <SignUp />
 }

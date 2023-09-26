@@ -14,7 +14,7 @@ type Props = {
   label?: string
   placeholder?: string
   className?: string
-  onChangeText: (value: string) => void
+  onChangeText?: (value: string) => void
   type?: string
   disabled?: boolean
 } & ComponentPropsWithoutRef<'input'>
@@ -24,7 +24,7 @@ export const Textfield = (props: Props) => {
   const [showPassword, setShowPassword] = useState(false)
   const [click, setClick] = useState(false)
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    onChangeText(e.currentTarget.value)
+    onChangeText?.(e.currentTarget.value)
   }
 
   const searchButton = `${s.button} ${type === 'search' ? s.searchButton : ''}`
@@ -42,9 +42,9 @@ export const Textfield = (props: Props) => {
   }
 
   return (
-    <div>
+    <div className={s.textfieldWrapper}>
       {label && (
-        <Typography className={label} variant={'body2'}>
+        <Typography style={{ color: 'var(--color-dark-100)' }} className={label} variant={'body2'}>
           {label}
         </Typography>
       )}

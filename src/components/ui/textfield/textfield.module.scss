@@ -3,15 +3,13 @@ input {
 }
 
 .field {
-  width: max-content;
-  min-width: 284px;
+  width: 100%;
   height: 36px;
-  padding-right: 10px;
   padding-left: 10px;
 
-  color: var(--color-dark-300);
+  color: var(--color-light-100);
 
-  background-color: var(--color-dark-500);
+  background-color: transparent;
   border: 2px solid var(--color-dark-300);
   border-radius: 2px;
 }
@@ -51,7 +49,7 @@ input {
 
 .fieldContainer {
   position: relative;
-  width: max-content;
+  width: 100%;
 }
 
 button {
@@ -77,20 +75,21 @@ button {
   display: flex;
 }
 
-.EyeButton {
-  right: 5px;
-}
-
 .input {
-  padding-right: 30px;
-  padding-left: 30px;
 }
 
 .passwordInput {
-  padding-right: 30px;
   padding-left: 10px;
+}
+
+.EyeButton {
+  right: 0;
 }
 
 .cross {
   right: 5px;
+}
+
+.textfieldWrapper {
+  width: 100%;
 }

@@ -11,7 +11,7 @@ export type Props = {
   disabled: boolean
 } & ComponentPropsWithoutRef<typeof Select.Root>
 
-export const Selector = forwardRef<ElementRef<typeof Select.Root>, Props>(props => {
+export const Selector = forwardRef<ElementRef<typeof Select.Trigger>, Props>((props, ref) => {
   const { items } = props
   const mappedItems = items?.map((el, index) => {
     return (
@@ -23,7 +23,12 @@ export const Selector = forwardRef<ElementRef<typeof Select.Root>, Props>(props 
 
   return (
     <Select.Root>
-      <Select.Trigger disabled={props.disabled} className={s.SelectTrigger} aria-label="Food">
+      <Select.Trigger
+        ref={ref}
+        disabled={props.disabled}
+        className={s.SelectTrigger}
+        aria-label="Food"
+      >
         <Select.Value placeholder="select" />
         <Select.Icon className={s.SelectIcon}>
           <ChevronDownIcon />

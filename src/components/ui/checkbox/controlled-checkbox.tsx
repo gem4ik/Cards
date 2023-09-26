@@ -8,7 +8,7 @@ export type ControlledCheckboxProps<T extends FieldValues> = Pick<
 > &
   Omit<CheckboxProps, 'checked' | 'onValueChange'>
 
-const ControlledCheckbox = <T extends FieldValues>({
+export const ControlledCheckbox = <T extends FieldValues>({
   control,
   name,
   ...rest
@@ -22,5 +22,3 @@ const ControlledCheckbox = <T extends FieldValues>({
 
   return <Checkbox {...rest} checked={value} onValueChange={onChange} id={name} />
 }
-
-export default ControlledCheckbox

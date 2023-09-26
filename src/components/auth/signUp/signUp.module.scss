@@ -15,3 +15,12 @@
   margin-top: 60px;
   padding: 36px;
 }
+
+.formWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 23px;
+  align-items: center;
+
+  width: 100%;
+}

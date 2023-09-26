@@ -8,7 +8,7 @@ import { EyeOff } from '@/assets/components/inputIcon/eyeOff.tsx'
 import { Search } from '@/assets/components/inputIcon/search.tsx'
 import { Typography } from '@/components/ui/typography'
 
-type Props = {
+export type TextfieldProps = {
   checked?: boolean
   error?: string
   label?: string
@@ -19,11 +19,12 @@ type Props = {
   disabled?: boolean
 } & ComponentPropsWithoutRef<'input'>
 
-export const Textfield = (props: Props) => {
-  const { error, label, placeholder, onChangeText, className, type, disabled } = props
+export const Textfield = (props: TextfieldProps) => {
+  const { error, label, placeholder, onChangeText, className, type, disabled, onChange } = props
   const [showPassword, setShowPassword] = useState(false)
   const [click, setClick] = useState(false)
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    onChange?.(e)
     onChangeText?.(e.currentTarget.value)
   }
 

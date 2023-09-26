@@ -1,4 +1,6 @@
+import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
+import { z } from 'zod'
 
 import s from './signUp.module.scss'
 
@@ -8,27 +10,46 @@ import { Header } from '@/components/ui/header'
 import { ControlledTextfield } from '@/components/ui/textfield/controlledTextfield.tsx'
 import { Typography } from '@/components/ui/typography'
 
-type FormValues = {
-  email: string
-  password: string
-  passwordConfirmation: string
+const signUpSchema = z
+  .object({
+    email: z.string().email('Invalid email address').nonempty('Enter email'),
+    password: z.string().nonempty('Enter password'),
+    passwordConfirmation: z.string().nonempty('Confirm your password'),
+  })
+  .superRefine((value, ctx) => {
+    if (value.password !== value.passwordConfirmation) {
+      ctx.addIssue({
+        message: 'Пароли не совпадают',
+        code: z.ZodIssueCode.custom,
+        path: ['passwordConfirmation'],
+      })
+    }
+
+    return value
+  })
+
+type Schema = z.infer<typeof signUpSchema>
+
+type Props = {
+  onSubmit: (email: string, password: string) => void
 }
 
-export const SignUp = () => {
-  const { handleSubmit, control } = useForm<FormValues>({
+export const SignUp = (props: Props) => {
+  const { handleSubmit, control } = useForm<Schema>({
     mode: 'onSubmit',
     defaultValues: {
       email: '',
       password: '',
       passwordConfirmation: '',
     },
+    resolver: zodResolver(signUpSchema),
   })
 
   return (
     <>
       <form
         onSubmit={handleSubmit(data => {
-          console.log(data)
+          props.onSubmit(data.email, data.password)
         })}
       >
         <div className={s.signUpWrapper}>

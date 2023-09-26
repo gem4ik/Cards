@@ -1,5 +1,5 @@
 import { SignUp } from '@/components/auth/signUp/signUp.tsx'
 
 export function App() {
-  return <SignUp />
+  return <SignUp onSubmit={() => {}} />
 }

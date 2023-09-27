@@ -1,0 +1,25 @@
+.signInWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 60px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 36px;
+  margin-top: 60px;
+}
+
+.checkboxWrapper {
+  display: flex;
+  justify-content: center;
+  align-self: flex-start;
+}
+
+.textWrapper {
+  align-self: flex-end;
+}

@@ -7,10 +7,23 @@ import {
 } from 'react-router-dom'
 
 import { Layout } from '@/components/layout'
+// import { useGetDecksQuery } from '@/services/DecksAPI.ts'
+
+// const Component = () => {
+//   const { data } = useGetDecksQuery({})
+//
+//   console.log(data)
+//
+//   return <div>2</div>
+// }
 
 const publicRoutes: RouteObject[] = [
   {
     path: '/login',
+    element: <Layout />,
+  },
+  {
+    path: '/getDecks',
     element: <Layout />,
   },
 ]

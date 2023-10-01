@@ -1,4 +1,4 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query'
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 export const baseApi = createApi({
   reducerPath: 'baseApi',
@@ -9,13 +9,5 @@ export const baseApi = createApi({
       headers.append('x-auth-skip', 'true')
     },
   }),
-  endpoints: build => {
-    return {
-      getDecks: build.query<any, void>({
-        query: () => 'v1/decks',
-      }),
-    }
-  },
+  endpoints: () => ({}),
 })
-
-export const { useGetDecksQuery } = baseApi

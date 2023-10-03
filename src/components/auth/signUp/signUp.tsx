@@ -9,6 +9,7 @@ import { Card } from '@/components/ui/card/card.tsx'
 import { Header } from '@/components/ui/header'
 import { ControlledTextfield } from '@/components/ui/textfield/controlledTextfield.tsx'
 import { Typography } from '@/components/ui/typography'
+import { Link } from 'react-router-dom'
 
 const signUpSchema = z
   .object({
@@ -83,9 +84,9 @@ export const SignUp = (props: Props) => {
               Sign Up
             </Button>
             <Typography style={{ color: 'var(--color-light-900)' }} variant={'body2'}>
-              Already have an account?
+              Already have an account? <Link to="/login" ><Button variant={'link'}>Sign In</Button></Link> 
             </Typography>
-            <Button variant={'link'}>Sign In</Button>
+          
           </Card>
         </div>
       </form>

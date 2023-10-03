@@ -9,6 +9,7 @@ import { Card } from '@/components/ui/card/card.tsx'
 import { Header } from '@/components/ui/header'
 import { ControlledTextfield } from '@/components/ui/textfield/controlledTextfield.tsx'
 import { Typography } from '@/components/ui/typography'
+import { Link } from 'react-router-dom'
 
 type Data = {
   email: string
@@ -54,11 +55,11 @@ export const ForgotPassword = (props: Props) => {
             <Button fullWidth={true}>Send Instructions</Button>
             <div className={s.buttonTextWrapper}>
               <Typography style={{ color: 'var(--color-light-100)' }} variant={'body2'}>
-                Did you remember your password?
+                If you remember the password? <Link to="/login"><Button variant={'link'}>Log In</Button></Link>
               </Typography>
             </div>
             <div className={s.buttonLinkWrapper}>
-              <Button variant={'link'}>Try logging in</Button>
+              
             </div>
           </div>
         </Card>

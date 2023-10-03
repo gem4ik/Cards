@@ -10,6 +10,7 @@ import { ControlledCheckbox } from '@/components/ui/checkbox/controlled-checkbox
 import { Header } from '@/components/ui/header'
 import { ControlledTextfield } from '@/components/ui/textfield/controlledTextfield.tsx'
 import { Typography } from '@/components/ui/typography'
+import { Link } from 'react-router-dom'
 
 type Data = {
   email: string
@@ -58,16 +59,16 @@ export const SignIn = (props: Props) => {
             ></ControlledCheckbox>
           </div>
           <div className={s.textWrapper}>
-            <Typography style={{ color: 'var(--color-light-100)' }} variant={'body2'}>
-              Forgot Password?
+            <Typography style={{ color: 'var(--color-light-100)',textDecoration:"underline" }} variant={'body2'}>
+              <Link to="/forgot-password">Forgot Password?</Link>
             </Typography>
           </div>
           <Button fullWidth={true}>Sign In</Button>
           <Typography style={{ color: 'var(--color-light-100)' }} variant={'body2'}>
             {/* eslint-disable-next-line react/no-unescaped-entities */}
-            Don't have an account?
+            Don't have an account? <Link to="/sign-up"><Button variant={'link'}>Sign Up</Button></Link>
           </Typography>
-          <Button variant={'link'}>Sign In</Button>
+          
         </Card>
       </div>
     </form>

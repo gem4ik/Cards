@@ -9,6 +9,7 @@ import {
 import { SignIn } from '@/components/auth/signIn/signIn.tsx'
 import { SignUp } from '@/components/auth/signUp/signUp.tsx'
 import { Layout } from '@/components/layout'
+import { ForgotPassword } from '@/components/auth/forgotPassword'
 
 const publicRoutes: RouteObject[] = [
   {
@@ -16,8 +17,12 @@ const publicRoutes: RouteObject[] = [
     element: <SignIn onSubmit={() => {}} />,
   },
   {
-    path: 'sign-up',
+    path: '/sign-up',
     element: <SignUp onSubmit={() => {}} />,
+  },
+  {
+    path: '/forgot-password',
+    element: <ForgotPassword onSubmit={() => {}}  />,
   },
 ]
 

@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom'
 
 import { Layout } from '@/components/layout'
+import { PacksList } from '@/pages/packsList/packsList.tsx'
 // import { useGetDecksQuery } from '@/services/DecksAPI.ts'
 
 // const Component = () => {
@@ -25,6 +26,16 @@ const publicRoutes: RouteObject[] = [
   {
     path: '/getDecks',
     element: <Layout />,
+  },
+  {
+    path: '/',
+    element: <Layout />,
+    children: [
+      {
+        path: '/cards',
+        element: <PacksList />,
+      },
+    ],
   },
 ]
 

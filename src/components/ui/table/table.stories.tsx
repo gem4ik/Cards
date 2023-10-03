@@ -36,6 +36,13 @@ export const Default = {
             <Table.Cell>Mihael sozdal</Table.Cell>
             <Table.Cell>icon</Table.Cell>
           </Table.Row>
+          <Table.Row>
+            <Table.Cell>Aslan card</Table.Cell>
+            <Table.Cell>1</Table.Cell>
+            <Table.Cell>new date</Table.Cell>
+            <Table.Cell>Aslan sozdal</Table.Cell>
+            <Table.Cell>acon</Table.Cell>
+          </Table.Row>
         </Table.Tbody>
       </>
     ),

@@ -1,16 +1,19 @@
 .tableRoot {
+  overflow-x: auto;
+  border-spacing: 1px;
   border-collapse: collapse;
+
+  width: 100%;
   margin: 0;
   padding: 0;
-  border-spacing: 1px;
+
   border-right: 1px solid var(--dark-500, #333);
   border-left: 1px solid var(--dark-500, #333);
-  width: 100%;
 }
 
 .headCell {
-  background-color: var(--color-dark-500);
   padding: 6px 24px;
+  background-color: var(--color-dark-500);
 }
 
 .body {
@@ -18,6 +21,15 @@
 }
 
 .row {
-  border-bottom: 1px solid var(--color-dark-500);
   text-align: center;
+  border-bottom: 1px solid var(--color-dark-500);
+  transition: all 0.3s;
+}
+
+.row:hover {
+  background-color: var(--color-dark-100);
+}
+
+.cell:not(last-chilrd) {
+  border-right: 1px solid var(--dark-500, #333);
 }

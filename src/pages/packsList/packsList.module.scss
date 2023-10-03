@@ -1,0 +1,20 @@
+.packlistWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 80%;
+}
+
+.packlistSection {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.filterWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+  align-items: center;
+  justify-content: space-between;
+}

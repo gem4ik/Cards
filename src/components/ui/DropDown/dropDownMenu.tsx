@@ -17,7 +17,7 @@ export const DropdownMenuRadix = ({ align = 'end', children, trigger }: Props) =
   return (
     <DropdownMenu.Root open={open} onOpenChange={setOpen}>
       <DropdownMenu.Trigger asChild>
-        <button className={s.dropdownMenuTriggerButton}>{trigger}</button>
+        <button className={s.dropdownMenuTrigger}>{trigger}</button>
       </DropdownMenu.Trigger>
       <DropdownMenu.Portal>
         <DropdownMenu.Content
@@ -25,9 +25,15 @@ export const DropdownMenuRadix = ({ align = 'end', children, trigger }: Props) =
           asChild
           align={align} // предположиттельно куда ровнять текс
           sideOffset={12} // количесво пикселей от кнопки относительно которой будет выпаадать меню
+          alignOffset={-5}
           onClick={event => event.stopPropagation()}
         >
-          <div>{children}</div>
+          <div>
+            <DropdownMenu.Arrow className={s.dropdownMenuArrow} asChild>
+              <div className={s.dropdownMenuArrow}></div>
+            </DropdownMenu.Arrow>
+            {children}
+          </div>
         </DropdownMenu.Content>
       </DropdownMenu.Portal>
     </DropdownMenu.Root>
@@ -41,7 +47,10 @@ export const DropDownItem = ({ children, className }: DropDownMenuItemProps) => 
   // const DropDownMenuItemClass = clsx {s.item,className}
   return (
     <DropdownMenu.Item className={className}>
-      <>{children}</>
+      <div>
+        {children}
+        <DropdownMenu.Separator className={s.dropdownMenuSeparator} />
+      </div>
     </DropdownMenu.Item>
   )
 }
@@ -57,15 +66,17 @@ export const DropDownMenuWithIcon = ({ icon, onSelect, itemText }: DropDownMenuI
       asChild
       onSelect={onSelect}
       onClick={event => event.stopPropagation()}
-      className={s.itemIcon}
+      // className={s.itemWrapper}
     >
-      <div className={s.itemIcon}>
-        <div className={s.itemIconImg}>{icon}</div>
-        <Typography variant="caption" className="white">
-          {itemText}
-        </Typography>
+      <>
+        <div className={s.itemWrapper}>
+          <div className={s.itemIconImg}>{icon}</div>
+          <Typography variant="caption" className="white">
+            {itemText}
+          </Typography>
+        </div>
         <DropdownMenu.Separator className={s.dropdownMenuSeparator} />
-      </div>
+      </>
     </DropdownMenu.Item>
   )
 }

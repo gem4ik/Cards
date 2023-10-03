@@ -28,10 +28,22 @@ export const DropdownMenuAvatar: Story = {
     children: (
       <>
         <div>
-          {/* eslint-disable-next-line react/no-children-prop */}
-          <DropDownItem className={''} children={<Avatar />} />
-          <Typography className={s.white}>{'Ivan'}</Typography>
-          <Typography className={s.white}>{'j&johnson@gmail.com'}</Typography>
+          <DropDownItem
+            className={''}
+            children={
+              <div className={s.dropDownItemWrapper}>
+                <Avatar />
+                <div>
+                  <Typography style={{ color: 'white' }} variant={'subtitle2'}>
+                    {'Ivan'}
+                  </Typography>
+                  <Typography style={{ color: 'grey' }} variant={'caption'}>
+                    {'j&johnson@gmail.com'}
+                  </Typography>
+                </div>
+              </div>
+            }
+          />
         </div>
         <DropDownMenuWithIcon icon={<PersonOutline />} onSelect={() => {}} itemText={'Edit'} />
         <DropDownMenuWithIcon icon={<LogOut />} onSelect={() => {}} itemText={'Sign Out'} />
@@ -42,12 +54,14 @@ export const DropdownMenuAvatar: Story = {
 
 export const DropdownMenuDefault: Story = {
   args: {
-    align: 'start',
+    align: 'end',
     trigger: <Avatar />,
     children: (
       <>
         <DropDownMenuWithIcon icon={<PlayCircleOutline />} onSelect={() => {}} itemText={'Learn'} />
+
         <DropDownMenuWithIcon icon={<Edit2Outline />} onSelect={() => {}} itemText={'Edit'} />
+
         <DropDownMenuWithIcon icon={<TrashOutline />} onSelect={() => {}} itemText={'Delete'} />
       </>
     ),

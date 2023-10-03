@@ -6,25 +6,18 @@ import {
   RouterProvider,
 } from 'react-router-dom'
 
+import { SignIn } from '@/components/auth/signIn/signIn.tsx'
+import { SignUp } from '@/components/auth/signUp/signUp.tsx'
 import { Layout } from '@/components/layout'
-// import { useGetDecksQuery } from '@/services/DecksAPI.ts'
-
-// const Component = () => {
-//   const { data } = useGetDecksQuery({})
-//
-//   console.log(data)
-//
-//   return <div>2</div>
-// }
 
 const publicRoutes: RouteObject[] = [
   {
     path: '/login',
-    element: <Layout />,
+    element: <SignIn onSubmit={() => {}} />,
   },
   {
-    path: '/getDecks',
-    element: <Layout />,
+    path: 'sign-up',
+    element: <SignUp onSubmit={() => {}} />,
   },
 ]
 
@@ -47,7 +40,7 @@ export const Router = () => {
 }
 
 function PrivateRoutes() {
-  const isAuthenticated = false
+  const isAuthenticated = true
 
   return isAuthenticated ? <Outlet /> : <Navigate to="/login" />
 }

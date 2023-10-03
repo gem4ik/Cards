@@ -7,16 +7,18 @@ import { Filters } from '@/assets/components/filters/filters.tsx'
 import s from './packsList.module.scss'
 import { Table } from '@/components/ui/table/table.tsx'
 import { useGetDecksQuery } from '@/services/DecksAPI.ts'
+import moment from 'moment'
 
 export const PacksList = () => {
   const { data } = useGetDecksQuery({})
   console.log(data)
   const dataV = data?.items.map(el => {
+    const formattedDate = moment(el.updated).format('DD.MM.YYYY')
     return (
       <Table.Row>
         <Table.Cell>{el.name}</Table.Cell>
         <Table.Cell>{el.cardsCount}</Table.Cell>
-        <Table.Cell>{el.updated}</Table.Cell>
+        <Table.Cell>{formattedDate}</Table.Cell>
         <Table.Cell>{el.author.name}</Table.Cell>
         <Table.Cell>{<Filters />}</Table.Cell>
       </Table.Row>

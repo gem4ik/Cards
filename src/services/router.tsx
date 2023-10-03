@@ -8,6 +8,7 @@ import {
 
 import { Layout } from '@/components/layout'
 import { PacksList } from '@/pages/packsList/packsList.tsx'
+import { ChekEmail } from '@/components/auth/chekEmail/chekEmail.tsx'
 
 const publicRoutes: RouteObject[] = [
   {
@@ -27,6 +28,10 @@ const publicRoutes: RouteObject[] = [
         element: <PacksList />,
       },
     ],
+  },
+  {
+    path: '/email',
+    element: <ChekEmail />,
   },
 ]
 

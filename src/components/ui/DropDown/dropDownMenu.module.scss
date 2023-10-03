@@ -1,0 +1,44 @@
+.dropdownMenuTriggerButton {
+  all: unset;
+
+  cursor: pointer;
+
+  width: 2.4rem;
+  height: 2.4rem;
+  padding: 0;
+
+  background-color: transparent;
+  border: none;
+  border-radius: 50%;
+  outline: none;
+}
+
+.itemIcon {
+  display: flex;
+}
+
+.itemIconImg {
+  width: 16px;
+  height: 16px;
+  margin-right: 6px;
+}
+
+.downMenuWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  padding: 12px;
+
+  background: var(--color-dark-700);
+  border: 1px solid var(--color-dark-500);
+  border-radius: 4px;
+}
+
+.dropdownMenuSeparator {
+  width: 100%;
+  height: 5px;
+  border: 2px solid green;
+}

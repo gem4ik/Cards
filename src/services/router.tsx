@@ -6,18 +6,27 @@ import {
   RouterProvider,
 } from 'react-router-dom'
 
-import { SignIn } from '@/components/auth/signIn/signIn.tsx'
-import { SignUp } from '@/components/auth/signUp/signUp.tsx'
 import { Layout } from '@/components/layout'
+import { PacksList } from '@/pages/packsList/packsList.tsx'
 
 const publicRoutes: RouteObject[] = [
   {
     path: '/login',
-    element: <SignIn onSubmit={() => {}} />,
+    element: <Layout />,
   },
   {
-    path: 'sign-up',
-    element: <SignUp onSubmit={() => {}} />,
+    path: '/getDecks',
+    element: <Layout />,
+  },
+  {
+    path: '/',
+    element: <Layout />,
+    children: [
+      {
+        path: '/cards',
+        element: <PacksList />,
+      },
+    ],
   },
 ]
 
@@ -40,7 +49,7 @@ export const Router = () => {
 }
 
 function PrivateRoutes() {
-  const isAuthenticated = true
+  const isAuthenticated = false
 
   return isAuthenticated ? <Outlet /> : <Navigate to="/login" />
 }

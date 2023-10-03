@@ -12,7 +12,7 @@ type Props = {
   onValueChange: (value: string) => void
 } & ComponentPropsWithoutRef<typeof Tabs.Root>
 
-export const ToggleGroupDemo = forwardRef<ElementRef<typeof Tabs.Root>, Props>((props, ref) => {
+export const TabSwitcher = forwardRef<ElementRef<typeof Tabs.Root>, Props>((props, ref) => {
   const items = props.values.map(el => {
     return (
       <ToggleGroup.Item key={el} className={s.ToggleGroupItem} value={el}>

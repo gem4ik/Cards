@@ -11,7 +11,7 @@ import moment from 'moment'
 
 export const PacksList = () => {
   const { data } = useGetDecksQuery({})
-  console.log('gdeeeee', data)
+  console.log(data)
   const dataV = data?.items.map(el => {
     const formattedDate = moment(el.updated).format('DD.MM.YYYY')
     return (

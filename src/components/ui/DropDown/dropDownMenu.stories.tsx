@@ -1,16 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { Avatar } from '../../../../../../master/src/components/ui/avatar'
-import { Typography } from '../../../../../../master/src/components/ui/typography'
-
 import s from './dropDownMenu.module.scss'
 import { DropDownItem, DropdownMenuRadix, DropDownMenuWithIcon } from './dropDownMenu.tsx'
 
+import { Avatar } from '@/components/ui/avatar'
 import { Edit2Outline } from '@/components/ui/DropDown/IconDropDownMenu/edit2Outline.tsx'
 import { LogOut } from '@/components/ui/DropDown/IconDropDownMenu/logOut.tsx'
 import { PersonOutline } from '@/components/ui/DropDown/IconDropDownMenu/personOutline.tsx'
 import { PlayCircleOutline } from '@/components/ui/DropDown/IconDropDownMenu/playCircleOutline.tsx'
 import { TrashOutline } from '@/components/ui/DropDown/IconDropDownMenu/trashOutline.tsx'
+import { Typography } from '@/components/ui/typography'
 
 const meta = {
   title: 'Components/DropdownMenuRadix',

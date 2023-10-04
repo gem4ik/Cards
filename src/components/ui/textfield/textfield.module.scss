@@ -50,47 +50,30 @@ input {
 
 .fieldContainer {
   position: relative;
-  width: 100%;
+  display: flex;
+  width: max-content;
 }
 
-button {
+.button {
   cursor: pointer;
-
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-
-  display: none;
-
-  font-size: 14px;
-
-  background: none;
-  border: none;
-}
-
-.passwordButton {
-  display: flex;
-}
-
-.searchButton button {
-  display: flex;
-}
-
-.input {
-}
-
-.passwordInput {
-  padding-left: 10px;
+  top: 9px;
 }
 
 .EyeButton {
-  right: 0;
+  right: 8px;
+}
+
+.searchButton {
+  left: 5px;
 }
 
 .cross {
-  right: 5px;
+  top: 10px;
+  right: 8px;
 }
 
-.textfieldWrapper {
-  width: 100%;
+.searchInput {
+  padding-right: 20px;
+  padding-left: 30px;
 }

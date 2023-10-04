@@ -32,7 +32,7 @@ export const Textfield = (props: TextfieldProps) => {
   const passwordButton = `${s.button} ${s.EyeButton} ${type === 'password' ? s.passwordButton : ''}`
   const input = `${type === 'password' || type === 'search' ? s.input : ''} ${
     type === 'password' ? s.passwordInput : ''
-  }`
+  } ${type === 'search' ? s.searchInput : ''}`
 
   let searchButtonColor: string
 
@@ -59,17 +59,21 @@ export const Textfield = (props: TextfieldProps) => {
           placeholder={error ? error : placeholder}
           onChange={handleChange}
         />
-        <button className={passwordButton} onClick={() => setShowPassword(!showPassword)}>
-          {showPassword ? <Eye /> : <EyeOff />}
-        </button>
-        <div className={searchButton}>
-          <button className={`${s.button} ${s.search}`}>
-            <Search color={searchButtonColor} />
+        {type === 'password' && (
+          <button className={passwordButton} onClick={() => setShowPassword(!showPassword)}>
+            {showPassword ? <Eye /> : <EyeOff />}
           </button>
-          <button className={`${s.button} ${s.cross}`} onClick={() => {}}>
-            <Cross color={searchButtonColor} />
-          </button>
-        </div>
+        )}
+        {type === 'search' && (
+          <>
+            <button className={searchButton}>
+              <Search color={searchButtonColor} />
+            </button>
+            <button className={`${s.button} ${s.cross}`}>
+              <Cross color={searchButtonColor} />
+            </button>
+          </>
+        )}
       </div>
       {error && <Typography variant={'error'}>{error}</Typography>}
     </div>

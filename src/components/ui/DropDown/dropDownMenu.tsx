@@ -1,4 +1,4 @@
-import { ReactNode, useState } from 'react'
+import { ComponentPropsWithoutRef, ElementRef, forwardRef, ReactNode, useState } from 'react'
 
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
 
@@ -10,35 +10,37 @@ type Props = {
   align?: 'start' | 'center' | 'end'
   trigger: ReactNode
   children: ReactNode
-}
-export const DropdownMenuRadix = ({ align = 'end', children, trigger }: Props) => {
-  const [open, setOpen] = useState(false)
+} & ComponentPropsWithoutRef<typeof DropdownMenu.Root>
+export const DropdownMenuRadix = forwardRef<ElementRef<typeof DropdownMenu.Trigger>, Props>(
+  ({ align = 'end', children, trigger }, ref) => {
+    const [open, setOpen] = useState(false)
 
-  return (
-    <DropdownMenu.Root open={open} onOpenChange={setOpen}>
-      <DropdownMenu.Trigger asChild>
-        <button className={s.dropdownMenuTrigger}>{trigger}</button>
-      </DropdownMenu.Trigger>
-      <DropdownMenu.Portal>
-        <DropdownMenu.Content
-          className={s.downMenuWrapper}
-          asChild
-          align={align} // предположиттельно куда ровнять текс
-          sideOffset={12} // количесво пикселей от кнопки относительно которой будет выпаадать меню
-          alignOffset={-5}
-          onClick={event => event.stopPropagation()}
-        >
-          <div>
-            <DropdownMenu.Arrow className={s.dropdownMenuArrow} asChild>
-              <div className={s.dropdownMenuArrow}></div>
-            </DropdownMenu.Arrow>
-            {children}
-          </div>
-        </DropdownMenu.Content>
-      </DropdownMenu.Portal>
-    </DropdownMenu.Root>
-  )
-}
+    return (
+      <DropdownMenu.Root open={open} onOpenChange={setOpen}>
+        <DropdownMenu.Trigger ref={ref} asChild>
+          <button className={s.dropdownMenuTrigger}>{trigger}</button>
+        </DropdownMenu.Trigger>
+        <DropdownMenu.Portal>
+          <DropdownMenu.Content
+            className={s.downMenuWrapper}
+            asChild
+            align={align} // предположиттельно куда ровнять текс
+            sideOffset={12} // количесво пикселей от кнопки относительно которой будет выпаадать меню
+            alignOffset={-5}
+            onClick={event => event.stopPropagation()}
+          >
+            <div>
+              <DropdownMenu.Arrow className={s.dropdownMenuArrow} asChild>
+                <div className={s.dropdownMenuArrow}></div>
+              </DropdownMenu.Arrow>
+              {children}
+            </div>
+          </DropdownMenu.Content>
+        </DropdownMenu.Portal>
+      </DropdownMenu.Root>
+    )
+  }
+)
 export type DropDownMenuItemProps = {
   children: ReactNode
   className?: string

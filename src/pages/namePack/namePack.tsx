@@ -7,37 +7,37 @@ import { Textfield } from '@/components/ui/textfield'
 import { Table } from '@/components/ui/table/table.tsx'
 import { useGetDecksByIdQuery } from '@/services/DecksAPI.ts'
 import moment from 'moment/moment'
-import { Filters } from '@/assets/components/filters/filters.tsx'
 
 export const NamePack = () => {
-  const { data } = useGetDecksByIdQuery(`cln2zvdvf0pdxvo2qwlenj6st`)
-  console.log(data.items)
-  // const cardsFriend = data.items
+  const idCard = 'cln2zvdvf0pdxvo2qwlenj6st'
+  const { data } = useGetDecksByIdQuery(idCard)
+  console.log(data)
 
-  const cardsFriend = data?.items.map(el => {
+  const dataV = data?.items.map(el => {
     const formattedDate = moment(el.updated).format('DD.MM.YYYY')
     return (
       <Table.Row>
-        <Table.Cell>{el}</Table.Cell>
-        <Table.Cell>{el.cardsCount}</Table.Cell>
+        <Table.Cell>{el.question}</Table.Cell>
+        <Table.Cell>{el.answer}</Table.Cell>
         <Table.Cell>{formattedDate}</Table.Cell>
-        <Table.Cell>{el.author.name}</Table.Cell>
-        <Table.Cell>{<Filters />}</Table.Cell>
+        <Table.Cell>{el.grade}</Table.Cell>
       </Table.Row>
     )
   })
   return (
     <div>
-      <Header isAuth={true} />
-      <div className={s.buttonWrapper}>
-        <Button variant={'link'}>{<BackArrow />}Back to Packs List</Button>
-      </div>
-      <div>
-        <Typography style={{ color: 'white' }} variant={'large'}>
-          Friend’s Pack
-        </Typography>
-        <Button variant={'primary'}>Learn to Pack</Button>
-        <Textfield type={'search'} placeholder={'Input search'} />
+      <div className={s.packWrapper}>
+        <Header isAuth={true} />
+        <div className={s.buttonWrapper}>
+          <Button variant={'link'}>{<BackArrow />}Back to Packs List</Button>
+        </div>
+        <div>
+          <Typography style={{ color: 'white' }} variant={'large'}>
+            Friend’s Pack
+          </Typography>
+          <Button variant={'primary'}>Learn to Pack</Button>
+          <Textfield type={'search'} placeholder={'Input search'} />
+        </div>
       </div>
       <Table.Thead>
         <Table.Row>
@@ -47,6 +47,7 @@ export const NamePack = () => {
           <Table.HeadCell>Grade</Table.HeadCell>
         </Table.Row>
       </Table.Thead>
+      <Table.Tbody>{dataV}</Table.Tbody>
     </div>
   )
 }

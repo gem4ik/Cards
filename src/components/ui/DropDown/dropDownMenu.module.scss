@@ -1,0 +1,87 @@
+.dropdownMenuTrigger {
+  all: unset;
+
+  cursor: pointer;
+
+  position: relative;
+
+  display: flex;
+  justify-content: right;
+
+  width: 2.4rem;
+  height: 2.4rem;
+  margin: 0 auto;
+  padding: 0;
+
+  background-color: transparent;
+  border: none;
+  border-radius: 50%;
+  outline: none;
+}
+
+.itemWrapper {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.itemIconImg {
+  width: 16px;
+  height: 16px;
+  margin-right: 6px;
+  margin-bottom: 5px;
+}
+
+.downMenuWrapper {
+  cursor: pointer;
+
+  position: relative;
+  z-index: 3;
+
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  padding: 12px;
+
+  background: var(--color-dark-700);
+  border: 1px solid var(--color-dark-500);
+  border-radius: 4px;
+}
+
+.dropdownMenuArrow {
+  position: absolute;
+  top: -3px;
+  right: 10%;
+  transform: rotate(45deg);
+
+  width: 7px;
+  height: 7px;
+
+  background-color: var(--color-dark-700);
+  border: 1px solid var(--color-dark-500);
+  border-top: none;
+  border-left: none;
+}
+
+.dropdownMenuSeparator {
+  width: 100%;
+  height: 1px;
+  background: var(--dark-500, #333);
+}
+
+.dropdownMenuSeparator:last-child:not(:only-child) {
+  display: none;
+}
+
+.dropDownItemWrapper {
+  cursor: pointer;
+  display: flex;
+  gap: 12px;
+}
+
+.noOutline {
+  outline: none;
+}

@@ -73,7 +73,7 @@ export const DropDownMenuWithIcon = ({ icon, onSelect, itemText }: DropDownMenuI
       <>
         <div className={s.itemWrapper}>
           <div className={s.itemIconImg}>{icon}</div>
-          <Typography variant="caption" className="white">
+          <Typography variant="caption" style={{ color: 'white' }}>
             {itemText}
           </Typography>
         </div>

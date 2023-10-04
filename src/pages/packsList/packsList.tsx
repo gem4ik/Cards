@@ -53,7 +53,7 @@ export const PacksList = () => {
         </div>
         <Button variant={'secondary'}>{<Filters />}Clear Filter</Button>
       </div>
-      <div>
+      <div className={s.tableWrapper}>
         <Table.Thead>
           <Table.Row>
             <Table.HeadCell>Name</Table.HeadCell>

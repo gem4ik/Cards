@@ -2,13 +2,14 @@
   display: flex;
   flex-direction: column;
   gap: 24px;
-  width: 80%;
+  align-items: center;
 }
 
 .packlistSection {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  width: 100%;
 }
 
 .filterWrapper {
@@ -17,4 +18,8 @@
   gap: 25px;
   align-items: center;
   justify-content: space-between;
+}
+
+.tableWrapper {
+  width: 100%;
 }

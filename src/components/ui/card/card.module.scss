@@ -1,6 +1,9 @@
 .root {
-  width: 420px;
-  height: 552px;
+  display: flex;
+
+  width: 100%;
+  max-width: 420px;
+  padding: 20px;
 
   background-color: var(--color-dark-700);
   border-radius: 2px;

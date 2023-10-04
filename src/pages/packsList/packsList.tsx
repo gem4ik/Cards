@@ -14,12 +14,11 @@ import { useGetDecksQuery } from '@/services/DecksAPI.ts'
 export const PacksList = () => {
   const { data } = useGetDecksQuery({})
 
-  console.log(data)
   const dataV = data?.items.map(el => {
     const formattedDate = moment(el.updated).format('DD.MM.YYYY')
 
     return (
-      <Table.Row>
+      <Table.Row key={el.id}>
         <Table.Cell>{el.name}</Table.Cell>
         <Table.Cell>{el.cardsCount}</Table.Cell>
         <Table.Cell>{formattedDate}</Table.Cell>

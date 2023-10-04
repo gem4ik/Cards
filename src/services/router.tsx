@@ -6,10 +6,10 @@ import {
   RouterProvider,
 } from 'react-router-dom'
 
-import { Layout } from '@/components/layout'
-import { PacksList } from '@/pages/packsList/packsList.tsx'
 import { ChekEmail } from '@/components/auth/chekEmail/chekEmail.tsx'
 import { ForgotPassword } from '@/components/auth/forgotPassword'
+import { Layout } from '@/components/layout'
+import { PacksList } from '@/pages/packsList/packsList.tsx'
 
 const publicRoutes: RouteObject[] = [
   {

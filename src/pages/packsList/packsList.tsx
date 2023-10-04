@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 import moment from 'moment'
 
 import s from './packsList.module.scss'
@@ -12,7 +14,13 @@ import { Typography } from '@/components/ui/typography'
 import { useGetDecksQuery } from '@/services/DecksAPI.ts'
 
 export const PacksList = () => {
-  const { data } = useGetDecksQuery({})
+  const [range, setRange] = useState<string[]>(['0', '100'])
+  const [filterByName, setFilterByName] = useState('')
+  const { data } = useGetDecksQuery({
+    minCardsCount: range[0],
+    maxCardsCount: range[1],
+    name: filterByName,
+  })
 
   const dataV = data?.items.map(el => {
     const formattedDate = moment(el.updated).format('DD.MM.YYYY')
@@ -37,7 +45,12 @@ export const PacksList = () => {
         <Button>Add New Pack</Button>
       </div>
       <div className={s.filterWrapper}>
-        <Textfield placeholder={'Input Search'} type={'search'}></Textfield>
+        <Textfield
+          value={filterByName}
+          onChangeText={value => setFilterByName(value)}
+          placeholder={'Input Search'}
+          type={'search'}
+        />
         <div>
           <Typography style={{ color: 'white' }} variant={'body2'}>
             Show packs cards
@@ -48,7 +61,9 @@ export const PacksList = () => {
           <Typography style={{ color: 'white' }} variant={'body2'}>
             Number of cards
           </Typography>
-          <RangeSlider></RangeSlider>
+          {data?.maxCardsCount && (
+            <RangeSlider onChange={values => setRange(values)} range={[0, data?.maxCardsCount]} />
+          )}
         </div>
         <Button variant={'secondary'}>{<Filters />}Clear Filter</Button>
       </div>

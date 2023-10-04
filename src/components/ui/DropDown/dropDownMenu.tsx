@@ -45,13 +45,15 @@ export type DropDownMenuItemProps = {
   children: ReactNode
   className?: string
 }
-export const DropDownItem = ({ children, className }: DropDownMenuItemProps) => {
+export const DropDownItem = ({ children }: DropDownMenuItemProps) => {
   // const DropDownMenuItemClass = clsx {s.item,className}
   return (
-    <DropdownMenu.Item className={className}>
+    <DropdownMenu.Item className={s.noOutline}>
       <div>
         {children}
-        <DropdownMenu.Separator className={s.dropdownMenuSeparator} />
+        <div>
+          <DropdownMenu.Separator className={s.dropdownMenuSeparator} />
+        </div>
       </div>
     </DropdownMenu.Item>
   )

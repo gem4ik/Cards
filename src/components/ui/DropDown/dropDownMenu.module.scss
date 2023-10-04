@@ -36,6 +36,7 @@
   cursor: pointer;
 
   position: relative;
+  z-index: 3;
 
   display: flex;
   flex-direction: column;
@@ -71,7 +72,7 @@
   background: var(--dark-500, #333);
 }
 
-.dropdownMenuSeparator:last-child {
+.dropdownMenuSeparator:last-child:not(:only-child) {
   display: none;
 }
 
@@ -81,6 +82,6 @@
   gap: 12px;
 }
 
-.dropDownItemWrapper:hover {
+.noOutline {
   outline: none;
 }

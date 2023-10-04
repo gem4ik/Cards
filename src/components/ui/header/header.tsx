@@ -1,9 +1,20 @@
 import { ComponentPropsWithoutRef, forwardRef } from 'react'
 
+import st from '../DropDown/dropDownMenu.module.scss'
+
 import s from './header.module.css'
 
 import logo from '@/assets/components/headerIcon/Logo.svg'
+import { Avatar } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
+import {
+  DropDownItem,
+  DropdownMenuRadix,
+  DropDownMenuWithIcon,
+} from '@/components/ui/DropDown/dropDownMenu.tsx'
+import { LogOut } from '@/components/ui/DropDown/IconDropDownMenu/logOut.tsx'
+import { PersonOutline } from '@/components/ui/DropDown/IconDropDownMenu/personOutline.tsx'
+import { Typography } from '@/components/ui/typography'
 
 type Props = {
   isAuth: boolean
@@ -24,7 +35,26 @@ export const Header = forwardRef<HTMLHeadElement, Props>((props, ref) => {
       {isAuth && (
         <div className={s.user__header}>
           <p>{user?.name}</p>
-          <img className={s.userPhoto} src={user?.photo ?? ''} alt="photo" />
+          {/*<img className={s.userPhoto} src={user?.photo ?? ''} alt="photo" />*/}
+          <DropdownMenuRadix trigger={<Avatar />}>
+            <DropDownItem
+              children={
+                <div className={st.dropDownItemWrapper}>
+                  <Avatar />
+                  <div>
+                    <Typography style={{ color: 'white' }} variant={'subtitle2'}>
+                      {'Ivan'}
+                    </Typography>
+                    <Typography style={{ color: 'grey' }} variant={'caption'}>
+                      {'j&johnson@gmail.com'}
+                    </Typography>
+                  </div>
+                </div>
+              }
+            />
+            <DropDownMenuWithIcon icon={<PersonOutline />} onSelect={() => {}} itemText={'Edit'} />
+            <DropDownMenuWithIcon icon={<LogOut />} onSelect={() => {}} itemText={'Sign Out'} />
+          </DropdownMenuRadix>
         </div>
       )}
       {!isAuth && <Button variant={'primary'}> Sign In </Button>}

@@ -3,8 +3,6 @@
 
   cursor: pointer;
 
-  //user-select: none;
-
   position: relative;
 
   display: flex;
@@ -37,9 +35,8 @@
 .downMenuWrapper {
   cursor: pointer;
 
-  //user-select: none; // если кнопка не будет работать то убрать
-
   position: relative;
+  z-index: 3;
 
   display: flex;
   flex-direction: column;
@@ -75,7 +72,7 @@
   background: var(--dark-500, #333);
 }
 
-.dropdownMenuSeparator:last-child {
+.dropdownMenuSeparator:last-child:not(:only-child) {
   display: none;
 }
 
@@ -85,6 +82,6 @@
   gap: 12px;
 }
 
-.dropDownItemWrapper:hover {
+.noOutline {
   outline: none;
 }

@@ -26,7 +26,7 @@ const publicRoutes: RouteObject[] = [
     element: <Layout />,
     children: [
       {
-        path: '/packsList',
+        path: '/decks',
         element: <Decks />,
       },
     ],
@@ -36,7 +36,7 @@ const publicRoutes: RouteObject[] = [
     element: <ChekEmail />,
   },
   {
-    path: '/namePack',
+    path: '/cards',
     element: <Cards />,
   },
   {

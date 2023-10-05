@@ -15,7 +15,7 @@ type TheadProps = ComponentProps<'thead'>
 export const Thead = (props: TheadProps) => {
   const { className, ...res } = props
 
-  return <thead {...res} />
+  return <thead className={s.head} {...res} />
 }
 
 export type TbodyProps = ComponentProps<'tbody'>

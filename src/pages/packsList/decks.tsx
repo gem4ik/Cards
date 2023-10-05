@@ -4,7 +4,9 @@ import moment from 'moment'
 
 import s from './decks.module.scss'
 
-import { Filters } from '@/assets/components/filters/filters.tsx'
+import { Pencil } from '@/assets/components/decksTable/pencil.tsx'
+import { Play } from '@/assets/components/decksTable/play.tsx'
+import { Trash } from '@/assets/components/decksTable/trash.tsx'
 import { Button } from '@/components/ui/button'
 import { RangeSlider } from '@/components/ui/slider'
 import { Column, Sort, Table } from '@/components/ui/table/table.tsx'
@@ -14,8 +16,9 @@ import { Typography } from '@/components/ui/typography'
 import { useGetDecksQuery } from '@/services/DecksAPI.ts'
 
 export const Decks = () => {
-  const [sort, setSort] = useState<Sort>({ key: 'updated', direction: 'asc' })
+  const [sort, setSort] = useState<Sort>({ key: 'cardsCount', direction: 'asc' })
   const sortString = sort ? `${sort.key}-${sort.direction}` : null
+
   const { data } = useGetDecksQuery({ orderBy: sortString })
 
   const columns: Column[] = [
@@ -67,9 +70,9 @@ export const Decks = () => {
           </Typography>
           <RangeSlider range={[1, 50]} onChange={() => {}}></RangeSlider>
         </div>
-        <Button variant={'secondary'}>{<Filters />}Clear Filter</Button>
+        <Button variant={'secondary'}>{<Trash />}Clear Filter</Button>
       </div>
-      <div>
+      <div className={s.tableWrapper}>
         <div>
           <Table.Header columns={columns} sort={sort} onSort={setSort} />
           <Table.Tbody>
@@ -79,6 +82,11 @@ export const Decks = () => {
                 <Table.Cell>{el.cardsCount}</Table.Cell>
                 <Table.Cell>{moment(el.updated).format('DD.MM.YYYY')}</Table.Cell>
                 <Table.Cell>{el.author.name}</Table.Cell>
+                <Table.Cell>
+                  <Trash />
+                  <Play />
+                  <Pencil />
+                </Table.Cell>
               </Table.Row>
             ))}
           </Table.Tbody>

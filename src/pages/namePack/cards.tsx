@@ -1,5 +1,6 @@
 import moment from 'moment/moment'
-import s from 'src/pages/namePack/cards.module.scss'
+
+import s from './cards.module.scss'
 
 import { BackArrow } from '@/assets/components/backArrow/backArrow.tsx'
 import { Button } from '@/components/ui/button'
@@ -17,7 +18,7 @@ export const Cards = () => {
     const formattedDate = moment(el.updated).format('DD.MM.YYYY')
 
     return (
-      <Table.Row>
+      <Table.Row key={el.id}>
         <Table.Cell>{el.question}</Table.Cell>
         <Table.Cell>{el.answer}</Table.Cell>
         <Table.Cell>{formattedDate}</Table.Cell>

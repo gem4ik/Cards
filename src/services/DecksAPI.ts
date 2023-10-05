@@ -1,9 +1,4 @@
-import {
-  CardParams,
-  CardsResponse,
-  DeckResponce,
-  GetDeckParams,
-} from '@/assets/types/DecksTypes.ts'
+import { CardsResponse, DeckResponce, GetDeckParams } from '@/assets/types/DecksTypes.ts'
 import { baseApi } from '@/services/base-api.ts'
 
 const DecksAPI = baseApi.injectEndpoints({

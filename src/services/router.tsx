@@ -22,6 +22,10 @@ const publicRoutes: RouteObject[] = [
     element: <Layout />,
   },
   {
+    path: '/editprofile',
+    element: <EditProfile onSubmit={() => {}} />,
+  },
+  {
     path: '/',
     element: <Layout />,
     children: [
@@ -38,10 +42,6 @@ const publicRoutes: RouteObject[] = [
   {
     path: '/forgot',
     element: <ForgotPassword onSubmit={() => {}} />,
-  },
-  {
-    path: '/editprofile',
-    element: <EditProfile onSubmit={() => {}} />,
   },
 ]
 

@@ -2,6 +2,8 @@ import s from './editProfile.module.scss'
 import { EditProfileValues, useEditProfile } from './useEditProfile'
 
 import { Button } from '@/components/ui/button'
+import { Card } from '@/components/ui/card/card.tsx'
+import { Header } from '@/components/ui/header'
 import { ControlledTextfield } from '@/components/ui/textfield/controlledTextfield.tsx'
 
 type Props = {
@@ -14,10 +16,15 @@ export const EditProfile = ({ onSubmit, initialValues }: Props): JSX.Element => 
 
   return (
     <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
-      <ControlledTextfield className={s.input} name="name" control={control} label="Nickmame" />
-      <Button type="submit" fullWidth>
-        Save Changes
-      </Button>
+      <Header isAuth={true} />
+      <div className={s.editProfileWrapper}>
+        <Card className={s.card}>
+          <ControlledTextfield className={s.input} name="name" control={control} label="Nickname" />
+          <Button type="submit" fullWidth>
+            Save Changes
+          </Button>
+        </Card>
+      </div>
     </form>
   )
 }

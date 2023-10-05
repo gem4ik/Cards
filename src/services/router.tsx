@@ -6,10 +6,11 @@ import {
   RouterProvider,
 } from 'react-router-dom'
 
-import { ChekEmail } from '@/components/auth/chekEmail/chekEmail.tsx'
-import { ForgotPassword } from '@/components/auth/forgotPassword'
 import { Layout } from '@/components/layout'
 import { PacksList } from '@/pages/packsList/packsList.tsx'
+import { ChekEmail } from '@/components/auth/chekEmail/chekEmail.tsx'
+import { ForgotPassword } from '@/components/auth/forgotPassword'
+import { NamePack } from '@/pages/namePack/namePack.tsx'
 
 const publicRoutes: RouteObject[] = [
   {
@@ -25,7 +26,7 @@ const publicRoutes: RouteObject[] = [
     element: <Layout />,
     children: [
       {
-        path: '/cards',
+        path: '/packsList',
         element: <PacksList />,
       },
     ],
@@ -33,6 +34,10 @@ const publicRoutes: RouteObject[] = [
   {
     path: '/email',
     element: <ChekEmail />,
+  },
+  {
+    path: '/namePack',
+    element: <NamePack />,
   },
   {
     path: '/forgot',

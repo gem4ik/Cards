@@ -1,10 +1,12 @@
+import Ava from './ava2.png'
 import s from './editProfile.module.scss'
-import { EditProfileValues, useEditProfile } from './useEditProfile'
 
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card/card.tsx'
 import { Header } from '@/components/ui/header'
 import { ControlledTextfield } from '@/components/ui/textfield/controlledTextfield.tsx'
+import { Typography } from '@/components/ui/typography'
+import { EditProfileValues, useEditProfile } from '@/pages/profile/editProfile/useEditProfile.ts'
 
 type Props = {
   onSubmit: (data: EditProfileValues) => void
@@ -19,6 +21,14 @@ export const EditProfile = ({ onSubmit, initialValues }: Props): JSX.Element => 
       <Header isAuth={true} />
       <div className={s.editProfileWrapper}>
         <Card className={s.card}>
+          <Typography style={{ color: 'var(--color-light-100)' }} variant={'large'}>
+            Personal Information
+          </Typography>
+          <div className={s.photoContainer}>
+            <div>
+              <img src={Ava} alt={'avatar'} />
+            </div>
+          </div>
           <ControlledTextfield className={s.input} name="name" control={control} label="Nickname" />
           <Button type="submit" fullWidth>
             Save Changes

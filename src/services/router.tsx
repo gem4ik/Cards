@@ -6,11 +6,13 @@ import {
   RouterProvider,
 } from 'react-router-dom'
 
+import { EditProfile } from '../pages/profile/editProfile'
+
 import { ChekEmail } from '@/components/auth/chekEmail/chekEmail.tsx'
 import { ForgotPassword } from '@/components/auth/forgotPassword'
 import { Layout } from '@/components/layout'
-import { EditProfile } from '@/pages/editProfile'
 import { PacksList } from '@/pages/packsList/packsList.tsx'
+import { Personal } from '@/pages/profile/personal-information/personalInformation.tsx'
 
 const publicRoutes: RouteObject[] = [
   {
@@ -24,6 +26,10 @@ const publicRoutes: RouteObject[] = [
   {
     path: '/editprofile',
     element: <EditProfile onSubmit={() => {}} />,
+  },
+  {
+    path: '/logout',
+    element: <Personal onSubmit={() => {}} />,
   },
   {
     path: '/',

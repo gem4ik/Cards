@@ -57,7 +57,11 @@ export const Decks = () => {
         <Button>Add New Pack</Button>
       </div>
       <div className={s.filterWrapper}>
-        <Textfield placeholder={'Input Search'} type={'search'}></Textfield>
+        <Textfield
+          className={s.searchInput}
+          placeholder={'Input Search'}
+          type={'search'}
+        ></Textfield>
         <div>
           <Typography style={{ color: 'white' }} variant={'body2'}>
             Show packs cards
@@ -73,24 +77,24 @@ export const Decks = () => {
         <Button variant={'secondary'}>{<Trash />}Clear Filter</Button>
       </div>
       <div className={s.tableWrapper}>
-        <div>
-          <Table.Header columns={columns} sort={sort} onSort={setSort} />
-          <Table.Tbody>
-            {data?.items?.map(el => (
-              <Table.Row key={el.id}>
-                <Table.Cell>{el.name}</Table.Cell>
-                <Table.Cell>{el.cardsCount}</Table.Cell>
-                <Table.Cell>{moment(el.updated).format('DD.MM.YYYY')}</Table.Cell>
-                <Table.Cell>{el.author.name}</Table.Cell>
-                <Table.Cell>
+        <Table.Header columns={columns} sort={sort} onSort={setSort} />
+        <Table.Tbody>
+          {data?.items?.map(el => (
+            <Table.Row key={el.id}>
+              <Table.Cell>{el.name}</Table.Cell>
+              <Table.Cell>{el.cardsCount}</Table.Cell>
+              <Table.Cell>{moment(el.updated).format('DD.MM.YYYY')}</Table.Cell>
+              <Table.Cell>{el.author.name}</Table.Cell>
+              <Table.Cell>
+                <div className={s.icons}>
                   <Trash />
                   <Play />
                   <Pencil />
-                </Table.Cell>
-              </Table.Row>
-            ))}
-          </Table.Tbody>
-        </div>
+                </div>
+              </Table.Cell>
+            </Table.Row>
+          ))}
+        </Table.Tbody>
       </div>
     </div>
   )

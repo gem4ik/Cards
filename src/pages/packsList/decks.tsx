@@ -9,7 +9,7 @@ import { Play } from '@/assets/components/decksTable/play.tsx'
 import { Trash } from '@/assets/components/decksTable/trash.tsx'
 import { Button } from '@/components/ui/button'
 import { RangeSlider } from '@/components/ui/slider'
-import { Column, Sort, Table } from '@/components/ui/table/table.tsx'
+import { Column, Sort, Table, TableRoot } from '@/components/ui/table/table.tsx'
 import { TabSwitcher } from '@/components/ui/tabSwitcher/tabSwitcher.tsx'
 import { Textfield } from '@/components/ui/textfield'
 import { Typography } from '@/components/ui/typography'
@@ -77,24 +77,26 @@ export const Decks = () => {
         <Button variant={'secondary'}>{<Trash />}Clear Filter</Button>
       </div>
       <div className={s.tableWrapper}>
-        <Table.Header columns={columns} sort={sort} onSort={setSort} />
-        <Table.Tbody>
-          {data?.items?.map(el => (
-            <Table.Row key={el.id}>
-              <Table.Cell>{el.name}</Table.Cell>
-              <Table.Cell>{el.cardsCount}</Table.Cell>
-              <Table.Cell>{moment(el.updated).format('DD.MM.YYYY')}</Table.Cell>
-              <Table.Cell>{el.author.name}</Table.Cell>
-              <Table.Cell>
-                <div className={s.icons}>
-                  <Trash />
-                  <Play />
-                  <Pencil />
-                </div>
-              </Table.Cell>
-            </Table.Row>
-          ))}
-        </Table.Tbody>
+        <TableRoot>
+          <Table.Header columns={columns} sort={sort} onSort={setSort} />
+          <Table.Tbody>
+            {data?.items?.map(el => (
+              <Table.Row key={el.id}>
+                <Table.Cell>{el.name}</Table.Cell>
+                <Table.Cell>{el.cardsCount}</Table.Cell>
+                <Table.Cell>{moment(el.updated).format('DD.MM.YYYY')}</Table.Cell>
+                <Table.Cell>{el.author.name}</Table.Cell>
+                <Table.Cell>
+                  <div className={s.icons}>
+                    <Trash />
+                    <Play />
+                    <Pencil />
+                  </div>
+                </Table.Cell>
+              </Table.Row>
+            ))}
+          </Table.Tbody>
+        </TableRoot>
       </div>
     </div>
   )

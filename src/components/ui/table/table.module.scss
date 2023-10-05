@@ -3,12 +3,11 @@
   border-spacing: 1px;
   border-collapse: collapse;
 
-  width: 100%;
   margin: 0;
   padding: 0;
 
-  border-right: 1px solid var(--dark-500, #333);
-  border-left: 1px solid var(--dark-500, #333);
+  border-right: 1px solid var(--color-dark-500);
+  border-left: 1px solid var(--color-dark-500);
 }
 
 .headCell {
@@ -16,7 +15,7 @@
   background-color: var(--color-dark-500);
 }
 
-.body {
+.cell {
   width: 100%;
 }
 
@@ -31,5 +30,5 @@
 }
 
 .cell:not(last-chilrd) {
-  border-right: 1px solid var(--dark-500, #333);
+  border-right: 1px solid var(--color-dark-500);
 }

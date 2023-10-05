@@ -1,12 +1,13 @@
 import { Outlet } from 'react-router-dom'
 
-import { Header } from '@/components/ui/header'
 import s from './layout.module.scss'
+
+import { Header } from '@/components/ui/header'
 
 export const Layout = () => {
   return (
     <div className={s.layout}>
-      <Header isAuth={false} />
+      <Header isAuth={true} />
       <Outlet />
     </div>
   )

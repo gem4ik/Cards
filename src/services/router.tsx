@@ -10,7 +10,6 @@ import { Layout } from '@/components/layout'
 import { PacksList } from '@/pages/packsList/packsList.tsx'
 import { ChekEmail } from '@/components/auth/chekEmail/chekEmail.tsx'
 import { ForgotPassword } from '@/components/auth/forgotPassword'
-import { NamePack } from '@/pages/namePack/namePack.tsx'
 
 const publicRoutes: RouteObject[] = [
   {
@@ -26,7 +25,7 @@ const publicRoutes: RouteObject[] = [
     element: <Layout />,
     children: [
       {
-        path: '/packsList',
+        path: '/cards',
         element: <PacksList />,
       },
     ],
@@ -38,10 +37,6 @@ const publicRoutes: RouteObject[] = [
   {
     path: '/forgot',
     element: <ForgotPassword onSubmit={() => {}} />,
-  },
-  {
-    path: '/namePack',
-    element: <NamePack />,
   },
 ]
 

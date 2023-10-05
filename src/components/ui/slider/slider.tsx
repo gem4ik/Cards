@@ -4,11 +4,18 @@ import * as Slider from '@radix-ui/react-slider'
 
 import s from './slider.module.scss'
 
-export const RangeSlider = forwardRef<ElementRef<typeof Slider.Root>>((_, ref) => {
-  const [values, setValues] = useState<number[]>([1, 8])
+type Props = {
+  range: number[]
+  onChange: (values: string[]) => void
+}
+
+export const RangeSlider = forwardRef<ElementRef<typeof Slider.Root>, Props>((props, ref) => {
+  const [values, setValues] = useState<number[]>(props.range)
 
   const changeHandler = (value: number[]) => {
     const [minValue, maxValue] = value
+
+    props.onChange([minValue.toString(), maxValue.toString()])
 
     if (minValue < maxValue) {
       setValues(value)
@@ -26,7 +33,7 @@ export const RangeSlider = forwardRef<ElementRef<typeof Slider.Root>>((_, ref) =
       <span className={s.count}>{values[0]}</span>
       <Slider.Root
         min={0}
-        max={10}
+        max={props.range[1]}
         defaultValue={values}
         step={1}
         value={values}

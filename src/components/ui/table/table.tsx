@@ -31,7 +31,9 @@ export const Row = (props: RowType) => {
 
   return <tr className={s.row} {...res} />
 }
-export type HeadCellProps = ComponentProps<'th'>
+export type HeadCellProps = ComponentProps<'th'> & {
+  sortable?: boolean
+}
 export const HeadCell = (props: HeadCellProps) => {
   const { className, children, ...res } = props
 
@@ -51,17 +53,43 @@ export const Cell = (props: CellProps) => {
 export type Column = {
   title: string
   key: string
+  sortable?: boolean
 }
+export type Sort = {
+  key: string
+  direction: 'asc' | 'desc'
+} | null
+
 export type HeadProps = {
   columns: Column[]
+  sort?: Sort
+  onSort?: (sort: Sort) => void
 }
+
 export const Header = (props: HeadProps) => {
-  const { columns, ...res } = props
+  const { columns, sort, onSort, ...res } = props
+
+  const handleSort = (key: string, sortable?: boolean) => () => {
+    if (!onSort || !sortable) return
+
+    if (sort?.key !== key) return onSort({ key, direction: 'asc' })
+
+    if (sort.direction === 'desc') return onSort(null)
+
+    return onSort({
+      key,
+      direction: sort?.direction === 'asc' ? 'desc' : 'asc',
+    })
+  }
 
   const columnsMap = (
     <Row>
-      {columns.map(el => {
-        return <HeadCell key={el.key}>{el.title}</HeadCell>
+      {columns.map(({ title, key, sortable }) => {
+        return (
+          <HeadCell key={key} onClick={handleSort(key, sortable)} sortable={sortable}>
+            {title}
+          </HeadCell>
+        )
       })}
     </Row>
   )

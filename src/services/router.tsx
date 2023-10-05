@@ -6,11 +6,11 @@ import {
   RouterProvider,
 } from 'react-router-dom'
 
-import { Layout } from '@/components/layout'
-import { PacksList } from '@/pages/packsList/packsList.tsx'
 import { ChekEmail } from '@/components/auth/chekEmail/chekEmail.tsx'
 import { ForgotPassword } from '@/components/auth/forgotPassword'
-import { NamePack } from '@/pages/namePack/namePack.tsx'
+import { Layout } from '@/components/layout'
+import { Cards } from '@/pages/namePack/cards.tsx'
+import { Decks } from '@/pages/packsList/decks.tsx'
 
 const publicRoutes: RouteObject[] = [
   {
@@ -27,7 +27,7 @@ const publicRoutes: RouteObject[] = [
     children: [
       {
         path: '/packsList',
-        element: <PacksList />,
+        element: <Decks />,
       },
     ],
   },
@@ -37,7 +37,7 @@ const publicRoutes: RouteObject[] = [
   },
   {
     path: '/namePack',
-    element: <NamePack />,
+    element: <Cards />,
   },
   {
     path: '/forgot',

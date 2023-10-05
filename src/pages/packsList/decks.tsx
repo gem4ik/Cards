@@ -1,6 +1,8 @@
+import { useState } from 'react'
+
 import moment from 'moment'
 
-import s from './packsList.module.scss'
+import s from './decks.module.scss'
 
 import { Filters } from '@/assets/components/filters/filters.tsx'
 import { Button } from '@/components/ui/button'
@@ -10,15 +12,12 @@ import { TabSwitcher } from '@/components/ui/tabSwitcher/tabSwitcher.tsx'
 import { Textfield } from '@/components/ui/textfield'
 import { Typography } from '@/components/ui/typography'
 import { useGetDecksQuery } from '@/services/DecksAPI.ts'
-import { useState } from 'react'
 
-export const PacksList = () => {
+export const Decks = () => {
   const [sort, setSort] = useState<Sort>({ key: 'updated', direction: 'asc' })
   const sortString = sort ? `${sort.key}-${sort.direction}` : null
-  console.log(sort)
   const { data } = useGetDecksQuery({ orderBy: sortString })
 
-  // console.log(data)
   const columns: Column[] = [
     {
       key: 'name',

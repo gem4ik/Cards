@@ -1,20 +1,21 @@
-import { Header } from '@/components/ui/header'
-import { Button } from '@/components/ui/button'
-import s from './namePack.module.scss'
-import { BackArrow } from '@/assets/components/backArrow/backArrow.tsx'
-import { Typography } from '@/components/ui/typography'
-import { Textfield } from '@/components/ui/textfield'
-import { Table } from '@/components/ui/table/table.tsx'
-import { useGetDecksByIdQuery } from '@/services/DecksAPI.ts'
 import moment from 'moment/moment'
+import s from 'src/pages/namePack/cards.module.scss'
 
-export const NamePack = () => {
+import { BackArrow } from '@/assets/components/backArrow/backArrow.tsx'
+import { Button } from '@/components/ui/button'
+import { Header } from '@/components/ui/header'
+import { Table } from '@/components/ui/table/table.tsx'
+import { Textfield } from '@/components/ui/textfield'
+import { Typography } from '@/components/ui/typography'
+import { useGetDecksByIdQuery } from '@/services/DecksAPI.ts'
+
+export const Cards = () => {
   const idCard = 'cln2zvdvf0pdxvo2qwlenj6st'
   const { data } = useGetDecksByIdQuery(idCard)
-  console.log(data)
 
   const dataV = data?.items.map(el => {
     const formattedDate = moment(el.updated).format('DD.MM.YYYY')
+
     return (
       <Table.Row>
         <Table.Cell>{el.question}</Table.Cell>
@@ -24,6 +25,7 @@ export const NamePack = () => {
       </Table.Row>
     )
   })
+
   return (
     <div>
       <div className={s.packWrapper}>

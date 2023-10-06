@@ -1,9 +1,3 @@
-import { CheckEmail } from '@/components/auth/checkEmail/checkEmail.tsx'
-import { ForgotPassword } from '@/components/auth/forgotPassword'
-import { Layout } from '@/components/layout'
-import { Login } from '@/pages/login/login.tsx'
-import { Decks } from '@/pages/packsList/decks.tsx'
-import { SignUpPage } from '@/pages/signUp/SignUpPage.tsx'
 import {
   createBrowserRouter,
   Navigate,
@@ -11,6 +5,14 @@ import {
   RouteObject,
   RouterProvider,
 } from 'react-router-dom'
+
+import { CheckEmail } from '@/components/auth/checkEmail/checkEmail.tsx'
+import { CreateNewPassword } from '@/components/auth/CreateNewPassword/CreateNewPassword.tsx'
+import { ForgotPassword } from '@/components/auth/forgotPassword'
+import { Layout } from '@/components/layout'
+import { Login } from '@/pages/login/login.tsx'
+import { Decks } from '@/pages/packsList/decks.tsx'
+import { SignUpPage } from '@/pages/signUp/SignUpPage.tsx'
 
 const publicRoutes: RouteObject[] = [
   {
@@ -39,6 +41,10 @@ const publicRoutes: RouteObject[] = [
           {
             path: 'check-email',
             element: <CheckEmail />,
+          },
+          {
+            path: 'create-new-password',
+            element: <CreateNewPassword />,
           },
         ],
       },

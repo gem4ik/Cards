@@ -9,7 +9,7 @@ import { Play } from '@/assets/components/decksTable/play.tsx'
 import { Trash } from '@/assets/components/decksTable/trash.tsx'
 import { Button } from '@/components/ui/button'
 import { RangeSlider } from '@/components/ui/slider'
-import { Column, Sort, Table } from '@/components/ui/table/table.tsx'
+import { Column, Sort, Table, TableRoot } from '@/components/ui/table/table.tsx'
 import { TabSwitcher } from '@/components/ui/tabSwitcher/tabSwitcher.tsx'
 import { Textfield } from '@/components/ui/textfield'
 import { Typography } from '@/components/ui/typography'
@@ -51,29 +51,27 @@ export const Decks = () => {
   return (
     <div className={s.packlistWrapper}>
       <div className={s.packlistSection}>
-        <Typography style={{ color: 'white' }} variant={'large'}>
-          Packs list
-        </Typography>
+        <Typography variant={'large'}>Packs list</Typography>
         <Button>Add New Pack</Button>
       </div>
       <div className={s.filterWrapper}>
-        <Textfield placeholder={'Input Search'} type={'search'}></Textfield>
+        <Textfield
+          className={s.searchInput}
+          placeholder={'Input Search'}
+          type={'search'}
+        ></Textfield>
         <div>
-          <Typography style={{ color: 'white' }} variant={'body2'}>
-            Show packs cards
-          </Typography>
+          <Typography variant={'body2'}>Show packs cards</Typography>
           <TabSwitcher values={['My Cards', 'All Cards']} onValueChange={() => {}} />
         </div>
         <div>
-          <Typography style={{ color: 'white' }} variant={'body2'}>
-            Number of cards
-          </Typography>
+          <Typography variant={'body2'}>Number of cards</Typography>
           <RangeSlider range={[1, 50]} onChange={() => {}}></RangeSlider>
         </div>
         <Button variant={'secondary'}>{<Trash />}Clear Filter</Button>
       </div>
       <div className={s.tableWrapper}>
-        <div>
+        <TableRoot>
           <Table.Header columns={columns} sort={sort} onSort={setSort} />
           <Table.Tbody>
             {data?.items?.map(el => (
@@ -83,14 +81,16 @@ export const Decks = () => {
                 <Table.Cell>{moment(el.updated).format('DD.MM.YYYY')}</Table.Cell>
                 <Table.Cell>{el.author.name}</Table.Cell>
                 <Table.Cell>
-                  <Trash />
-                  <Play />
-                  <Pencil />
+                  <div className={s.icons}>
+                    <Trash />
+                    <Play />
+                    <Pencil />
+                  </div>
                 </Table.Cell>
               </Table.Row>
             ))}
           </Table.Tbody>
-        </div>
+        </TableRoot>
       </div>
     </div>
   )

@@ -4,7 +4,6 @@ input {
 
 .field {
   width: 100%;
-  max-width: 250px;
   height: 36px;
   padding-left: 10px;
 
@@ -13,6 +12,10 @@ input {
   background-color: transparent;
   border: 2px solid var(--color-dark-300);
   border-radius: 2px;
+}
+
+.textfieldWrapper {
+  width: 100%;
 }
 
 .field:hover {
@@ -51,7 +54,7 @@ input {
 .fieldContainer {
   position: relative;
   display: flex;
-  width: max-content;
+  width: 100%;
 }
 
 .button {

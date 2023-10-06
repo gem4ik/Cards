@@ -45,7 +45,7 @@ export const Textfield = (props: TextfieldProps) => {
   return (
     <div className={s.textfieldWrapper}>
       {label && (
-        <Typography style={{ color: 'var(--color-dark-100)' }} className={label} variant={'body2'}>
+        <Typography className={label} variant={'body2'}>
           {label}
         </Typography>
       )}
@@ -60,16 +60,20 @@ export const Textfield = (props: TextfieldProps) => {
           onChange={handleChange}
         />
         {type === 'password' && (
-          <button className={passwordButton} onClick={() => setShowPassword(!showPassword)}>
+          <button
+            type={'button'}
+            className={passwordButton}
+            onClick={() => setShowPassword(!showPassword)}
+          >
             {showPassword ? <Eye /> : <EyeOff />}
           </button>
         )}
         {type === 'search' && (
           <>
-            <button className={searchButton}>
+            <button type={'button'} className={searchButton}>
               <Search color={searchButtonColor} />
             </button>
-            <button className={`${s.button} ${s.cross}`}>
+            <button type={'button'} className={`${s.button} ${s.cross}`}>
               <Cross color={searchButtonColor} />
             </button>
           </>

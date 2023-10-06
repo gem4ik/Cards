@@ -16,10 +16,38 @@
   display: flex;
   flex-wrap: wrap;
   gap: 25px;
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-between;
 }
 
 .tableWrapper {
   width: 100%;
+}
+
+@media (width >= 1440px) {
+  .packlistWrapper {
+    width: 100%;
+    padding: 0 140px;
+  }
+
+  .packlistSection {
+    width: 100%;
+  }
+
+  .filterWrapper {
+    width: 100%;
+  }
+}
+
+@media (width >= 2140px) {
+  .packlistWrapper {
+    max-width: 2140px;
+  }
+}
+
+.icons {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  padding-right: 10%;
 }

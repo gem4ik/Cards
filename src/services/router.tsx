@@ -9,6 +9,7 @@ import {
 import { CheckEmail } from '@/components/auth/checkEmail/checkEmail.tsx'
 import { CreateNewPassword } from '@/components/auth/CreateNewPassword/CreateNewPassword.tsx'
 import { ForgotPassword } from '@/components/auth/forgotPassword'
+import { NewPasswordConfirm } from '@/components/auth/newPasswordConfirm/NewPasswordConfirm.tsx'
 import { Layout } from '@/components/layout'
 import { Login } from '@/pages/login/login.tsx'
 import { Decks } from '@/pages/packsList/decks.tsx'
@@ -45,6 +46,10 @@ const publicRoutes: RouteObject[] = [
           {
             path: 'create-new-password',
             element: <CreateNewPassword />,
+          },
+          {
+            path: 'new-password-confirm',
+            element: <NewPasswordConfirm />,
           },
         ],
       },

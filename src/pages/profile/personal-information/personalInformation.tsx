@@ -9,15 +9,20 @@ import { Header } from '@/components/ui/header'
 import { Typography } from '@/components/ui/typography'
 import { Edit } from '@/pages/personalInformation/edit.tsx'
 import { EditProfile } from '@/pages/profile/editProfile'
-import { Personal } from '@/pages/profile/profilePage'
+import { Profile } from '@/pages/profile/profilePage'
 
 type Props = {
-  email: string
-  name: string
+  email?: string
+  name?: string
+  onAvatarChange: (newAvatar: string) => void
 }
 
-export const PersonalInformation = ({ email, name }: Props): JSX.Element => {
+export const PersonalInformation = ({ email, name, onAvatarChange }: Props): JSX.Element => {
   const [editMode, setEditMode] = useState(false)
+
+  const handleAvatarChanged = () => {
+    onAvatarChange('new Avatar')
+  }
 
   const onEditProfile = () => {
     setEditMode(true)
@@ -38,7 +43,7 @@ export const PersonalInformation = ({ email, name }: Props): JSX.Element => {
           <div className={s.photoContainer}>
             <div>
               <img src={Ava} alt={'avatar'} />
-              <button className={s.editAvatarButton}>
+              <button className={s.editAvatarButton} onClick={handleAvatarChanged}>
                 <Edit />
               </button>
             </div>
@@ -46,7 +51,7 @@ export const PersonalInformation = ({ email, name }: Props): JSX.Element => {
           {editMode ? (
             <EditProfile onSubmit={onSubmit} />
           ) : (
-            <Personal email={email} name={name} onEditProfile={onEditProfile} />
+            <Profile email={email} name={name} onEditProfile={onEditProfile} />
           )}
         </Card>
       </div>

@@ -31,8 +31,8 @@ const publicRoutes: RouteObject[] = [
             element: <SignUpPage />,
           },
           {
-            path: '/profile',
-            element: <PersonalInformation />,
+            path: 'profile',
+            element: <PersonalInformation onAvatarChange={() => {}} />,
           },
           {
             path: 'login',

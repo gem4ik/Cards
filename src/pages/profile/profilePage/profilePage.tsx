@@ -11,7 +11,7 @@ type Props = {
   onEditProfile: () => void
 }
 
-export const Personal = ({ email, name, onEditProfile }: Props): JSX.Element => {
+export const Profile = ({ email, name, onEditProfile }: Props): JSX.Element => {
   return (
     <div className={s.editProfileWrapper}>
       <div className={s.nameContainer}>

@@ -1,10 +1,4 @@
-import {
-  createBrowserRouter,
-  Navigate,
-  Outlet,
-  RouteObject,
-  RouterProvider,
-} from 'react-router-dom'
+import { createBrowserRouter, Navigate, Outlet, RouterProvider } from 'react-router-dom'
 
 import { CheckEmail } from '@/components/auth/checkEmail/checkEmail.tsx'
 import { CreateNewPassword } from '@/components/auth/CreateNewPassword/CreateNewPassword.tsx'
@@ -15,25 +9,21 @@ import { Login } from '@/pages/login/login.tsx'
 import { Decks } from '@/pages/packsList/decks.tsx'
 import { SignUpPage } from '@/pages/signUp/SignUpPage.tsx'
 
-const publicRoutes: RouteObject[] = [
+const router = createBrowserRouter([
   {
-    path: '/',
-    element: <Layout />,
+    element: <PrivateRoutes />,
     children: [
       {
-        element: <PrivateRoutes />,
+        path: '/',
+        element: <Layout />,
         children: [
           {
-            path: '/',
+            path: '',
             element: <Decks />,
           },
           {
             path: 'signup',
             element: <SignUpPage />,
-          },
-          {
-            path: 'login',
-            element: <Login />,
           },
           {
             path: 'forgot-password',
@@ -55,20 +45,16 @@ const publicRoutes: RouteObject[] = [
       },
     ],
   },
-]
-
-const privateRoutes: RouteObject[] = [
   {
     path: '/',
     element: <Layout />,
+    children: [
+      {
+        path: 'login',
+        element: <Login />,
+      },
+    ],
   },
-]
-const router = createBrowserRouter([
-  {
-    element: <PrivateRoutes />,
-    children: privateRoutes,
-  },
-  ...publicRoutes,
 ])
 
 export const Router = () => {
@@ -78,5 +64,5 @@ export const Router = () => {
 function PrivateRoutes() {
   const isAuthenticated = true
 
-  return isAuthenticated ? <Outlet /> : <Navigate to="/login" />
+  return isAuthenticated ? <Outlet /> : <Navigate to="login" />
 }

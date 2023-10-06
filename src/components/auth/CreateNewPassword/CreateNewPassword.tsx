@@ -1,5 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
+import { Link } from 'react-router-dom'
 import { z } from 'zod'
 
 import s from './CreateNewPassword.module.scss'
@@ -51,7 +52,9 @@ export const CreateNewPassword = (props: Props) => {
             Create new password and we will send you further instructions to email
           </Typography>
         </div>
-        <Button fullWidth>Create New Password</Button>
+        <Link to={'/new-password-confirm'} className={s.buttonLinkWrapper}>
+          <Button fullWidth>Create New Password</Button>
+        </Link>
       </Card>
     </form>
   )

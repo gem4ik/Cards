@@ -11,8 +11,7 @@ import { ForgotPassword } from '@/components/auth/forgotPassword'
 import { Layout } from '@/components/layout'
 import { Login } from '@/pages/login/login.tsx'
 import { Decks } from '@/pages/packsList/decks.tsx'
-import { EditProfile } from '@/pages/profile/editProfile'
-import { Personal } from '@/pages/profile/personal-information/personalInformation.tsx'
+import { PersonalInformation } from '@/pages/profile/personal-information/personalInformation.tsx'
 import { SignUpPage } from '@/pages/signUp/SignUpPage.tsx'
 
 const publicRoutes: RouteObject[] = [
@@ -44,12 +43,8 @@ const publicRoutes: RouteObject[] = [
             element: <CheckEmail />,
           },
           {
-            path: 'logout',
-            element: <Personal onAvatarChange={() => {}} onSubmit={() => {}} />,
-          },
-          {
-            path: 'edit-profile',
-            element: <EditProfile onSubmit={() => {}} />,
+            path: 'profile',
+            element: <PersonalInformation onAvatarChange={() => {}} onSubmit={() => {}} />,
           },
         ],
       },

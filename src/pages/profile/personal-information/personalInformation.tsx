@@ -1,15 +1,16 @@
+import { useState } from 'react'
+
 import Ava from '../editProfile/ava2.png'
 
 import s from './personalInformation.module.scss'
 
-import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card/card.tsx'
 import { Header } from '@/components/ui/header'
 import { Typography } from '@/components/ui/typography'
-import { Edit } from '@/pages/profile/editProfile/edit.tsx'
+import { EditProfile } from '@/pages/profile/editProfile'
 import EditIcon from '@/pages/profile/editProfile/editIcon.tsx'
-import { Logout } from '@/pages/profile/editProfile/logout.tsx'
 import { EditProfileValues, useEditProfile } from '@/pages/profile/editProfile/useEditProfile.ts'
+import { Personal } from '@/pages/profile/profilePage'
 
 type Props = {
   onSubmit: (data: EditProfileValues) => void
@@ -19,14 +20,23 @@ type Props = {
   name?: string
 }
 
-export const Personal = ({
-  onSubmit,
+export const PersonalInformation = ({
   initialValues,
   onAvatarChange,
   email,
   name,
 }: Props): JSX.Element => {
   const { handleSubmit } = useEditProfile(initialValues)
+  const [editMode, setEditMode] = useState(false)
+
+  const onEditProfile = () => {
+    setEditMode(true)
+  }
+
+  const onSubmit = (data: EditProfileValues) => {
+    console.log(data)
+    setEditMode(false)
+  }
 
   const handleAvatarChanged = () => {
     onAvatarChange('new Avatar')
@@ -37,13 +47,8 @@ export const Personal = ({
       <Header isAuth={true} />
       <div className={s.editProfileWrapper}>
         <Card className={s.card}>
-          <Typography
-            style={{ color: 'var(--color-light-100)' }}
-            variant={'large'}
-            as="h1"
-            className={s.title}
-          >
-            Personal Information
+          <Typography style={{ color: 'var(--color-light-100)' }} variant={'large'} as="h1">
+            <p className={s.title}>Personal Information</p>
           </Typography>
           <div className={s.photoContainer}>
             <div>
@@ -53,18 +58,11 @@ export const Personal = ({
               </button>
             </div>
           </div>
-          <div className={s.nameContainer}>
-            <Typography variant={'h1'}>{name ? name : 'Gem4ik'}</Typography>
-            <Edit />
-          </div>
-          <div className={s.emailPersonal}></div>
-          <Typography>{email ? email : 'busidoza4emhueta@gmail.com'}</Typography>
-          <div className={s.logout}>
-            <Button variant={'secondary'}>
-              <Logout />
-              Logout
-            </Button>
-          </div>
+          {editMode ? (
+            <EditProfile onSubmit={onSubmit} />
+          ) : (
+            <Personal email={email} name={name} onEditProfile={onEditProfile} />
+          )}
         </Card>
       </div>
     </form>

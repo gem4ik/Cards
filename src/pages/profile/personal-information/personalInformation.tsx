@@ -15,8 +15,8 @@ type Props = {
   onSubmit: (data: EditProfileValues) => void
   initialValues?: EditProfileValues
   onAvatarChange: (newAvatar: string) => void
-  email: string
-  name: string
+  email?: string
+  name?: string
 }
 
 export const Personal = ({

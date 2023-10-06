@@ -1,11 +1,18 @@
-import { Card } from '@/components/ui/card/card.tsx'
-import { Typography } from '@/components/ui/typography'
+import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
+
+import s from './checEmail.module.scss'
+
 import { EmailIcon } from '@/assets/components/emailIcon/emailIcon.tsx'
 import { Button } from '@/components/ui/button'
-import s from './checEmail.module.scss'
+import { Card } from '@/components/ui/card/card.tsx'
 import { Header } from '@/components/ui/header'
+import { Typography } from '@/components/ui/typography'
+import { RootState } from '@/services/store.ts'
 
-export const ChekEmail = () => {
+export const CheckEmail = () => {
+  const email = useSelector<RootState, string>(state => state.app.forgottenEmail)
+
   return (
     <div className={s.checkEmailWrapper}>
       <Header isAuth={false} />
@@ -20,12 +27,12 @@ export const ChekEmail = () => {
         </div>
         <div className={s.typographyText}>
           <Typography style={{ color: '#C3C1C7' }} variant={'body2'}>
-            We’ve sent an Email with instructions to example@mail.com
+            We’ve sent an Email with instructions to {email}
           </Typography>
         </div>
-        <div className={s.buttonStyle}>
+        <Link to={'/login'} className={s.buttonStyle}>
           <Button>Back to Sign In</Button>
-        </div>
+        </Link>
       </Card>
     </div>
   )

@@ -43,9 +43,7 @@ export const SignIn = (props: Props) => {
       })}
     >
       <Card className={s.card}>
-        <Typography style={{ color: 'var(--color-light-100)' }} variant={'large'}>
-          Sign In
-        </Typography>
+        <Typography variant={'large'}>Sign In</Typography>
         <ControlledTextfield control={control} name={'email'} label={'email'} />
         <ControlledTextfield
           control={control}
@@ -61,18 +59,12 @@ export const SignIn = (props: Props) => {
           ></ControlledCheckbox>
         </div>
         <div className={s.form__forgotPassword}>
-          <Typography
-            as={Link}
-            to={'/forgot-password'}
-            style={{ color: 'var(--color-light-100)' }}
-            variant={'body2'}
-            className={'link'}
-          >
+          <Typography as={Link} to={'/forgot-password'} variant={'body2'} className={'link'}>
             Forgot Password?
           </Typography>
         </div>
         <Button fullWidth={true}>Sign In</Button>
-        <Typography style={{ color: 'var(--color-light-100)' }} variant={'body2'}>
+        <Typography variant={'body2'}>
           {/* eslint-disable-next-line react/no-unescaped-entities */}
           Don't have an account?
         </Typography>

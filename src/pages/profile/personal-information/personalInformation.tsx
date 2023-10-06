@@ -37,9 +37,7 @@ export const Personal = ({
       <Header isAuth={true} />
       <div className={s.editProfileWrapper}>
         <Card className={s.card}>
-          <Typography style={{ color: 'var(--color-light-100)' }} variant={'large'}>
-            Personal Information
-          </Typography>
+          <Typography variant={'large'}>Personal Information</Typography>
           <div className={s.photoContainer}>
             <div>
               <img src={Ava} alt={'avatar'} />

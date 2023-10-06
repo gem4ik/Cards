@@ -35,9 +35,7 @@ export const Cards = () => {
           <Button variant={'link'}>{<BackArrow />}Back to Packs List</Button>
         </div>
         <div>
-          <Typography style={{ color: 'white' }} variant={'large'}>
-            Friend’s Pack
-          </Typography>
+          <Typography variant={'large'}>Friend’s Pack</Typography>
           <Button variant={'primary'}>Learn to Pack</Button>
           <Textfield type={'search'} placeholder={'Input search'} />
         </div>

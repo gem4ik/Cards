@@ -53,9 +53,7 @@ export const SignUp = (props: Props) => {
         })}
       >
         <Card className={s.card}>
-          <Typography style={{ color: 'var(--color-light-100)' }} variant={'large'}>
-            Sign Up
-          </Typography>
+          <Typography variant={'large'}>Sign Up</Typography>
 
           <ControlledTextfield
             name={'email'}
@@ -80,9 +78,7 @@ export const SignUp = (props: Props) => {
           <Button className={s.form__submit} type={'submit'} fullWidth={true}>
             Sign Up
           </Button>
-          <Typography style={{ color: 'var(--color-light-900)' }} variant={'body2'}>
-            Already have an account?
-          </Typography>
+          <Typography variant={'body2'}>Already have an account?</Typography>
           <Button variant={'link'}>Sign In</Button>
         </Card>
       </form>

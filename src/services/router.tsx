@@ -4,6 +4,13 @@ import { Layout } from '@/components/layout'
 import { Login } from '@/pages/login/login.tsx'
 import { Decks } from '@/pages/packsList/decks.tsx'
 import { SignUpPage } from '@/pages/signUp/SignUpPage.tsx'
+import {
+  createBrowserRouter,
+  Navigate,
+  Outlet,
+  RouteObject,
+  RouterProvider,
+} from 'react-router-dom'
 
 const publicRoutes: RouteObject[] = [
   {

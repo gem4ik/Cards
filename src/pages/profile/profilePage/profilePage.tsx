@@ -2,7 +2,7 @@ import s from './profilePage.module.scss'
 
 import { Button } from '@/components/ui/button'
 import { Typography } from '@/components/ui/typography'
-import { Edit } from '@/pages/profile/editProfile/edit.tsx'
+import { Edit } from '@/pages/personalInformation/edit.tsx'
 import { Logout } from '@/pages/profile/editProfile/logout.tsx'
 
 type Props = {

@@ -7,43 +7,28 @@ import s from './personalInformation.module.scss'
 import { Card } from '@/components/ui/card/card.tsx'
 import { Header } from '@/components/ui/header'
 import { Typography } from '@/components/ui/typography'
+import { Edit } from '@/pages/personalInformation/edit.tsx'
 import { EditProfile } from '@/pages/profile/editProfile'
-import EditIcon from '@/pages/profile/editProfile/editIcon.tsx'
-import { EditProfileValues, useEditProfile } from '@/pages/profile/editProfile/useEditProfile.ts'
 import { Personal } from '@/pages/profile/profilePage'
 
 type Props = {
-  onSubmit: (data: EditProfileValues) => void
-  initialValues?: EditProfileValues
-  onAvatarChange: (newAvatar: string) => void
-  email?: string
-  name?: string
+  email: string
+  name: string
 }
 
-export const PersonalInformation = ({
-  initialValues,
-  onAvatarChange,
-  email,
-  name,
-}: Props): JSX.Element => {
-  const { handleSubmit } = useEditProfile(initialValues)
+export const PersonalInformation = ({ email, name }: Props): JSX.Element => {
   const [editMode, setEditMode] = useState(false)
 
   const onEditProfile = () => {
     setEditMode(true)
   }
 
-  const onSubmit = (data: EditProfileValues) => {
-    console.log(data)
+  const onSubmit = () => {
     setEditMode(false)
   }
 
-  const handleAvatarChanged = () => {
-    onAvatarChange('new Avatar')
-  }
-
   return (
-    <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
+    <form className={s.form}>
       <Header isAuth={true} />
       <div className={s.editProfileWrapper}>
         <Card className={s.card}>
@@ -53,8 +38,8 @@ export const PersonalInformation = ({
           <div className={s.photoContainer}>
             <div>
               <img src={Ava} alt={'avatar'} />
-              <button className={s.editAvatarButton} onClick={handleAvatarChanged}>
-                <EditIcon />
+              <button className={s.editAvatarButton}>
+                <Edit />
               </button>
             </div>
           </div>

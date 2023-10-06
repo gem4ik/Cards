@@ -1,6 +1,6 @@
-import { SVGProps, Ref, forwardRef, memo } from 'react'
+import { forwardRef, memo } from 'react'
 
-export const SvgComponent = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
+export const SvgComponent = () => (
   <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
     <g filter="url(#filter0_d_5918_2450)">
       <rect x="10" y="8" width="24" height="24" rx="4" fill="#4C4C4C" />
@@ -52,6 +52,7 @@ export const SvgComponent = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElem
     </defs>
   </svg>
 )
+
 const ForwardRef = forwardRef(SvgComponent)
 
-export default memo(ForwardRef)
+export const Edit = memo(ForwardRef)

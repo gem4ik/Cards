@@ -31,6 +31,10 @@ const publicRoutes: RouteObject[] = [
             element: <SignUpPage />,
           },
           {
+            path: '/profile',
+            element: <PersonalInformation />,
+          },
+          {
             path: 'login',
             element: <Login />,
           },
@@ -41,10 +45,6 @@ const publicRoutes: RouteObject[] = [
           {
             path: 'check-email',
             element: <CheckEmail />,
-          },
-          {
-            path: 'profile',
-            element: <PersonalInformation onAvatarChange={() => {}} onSubmit={() => {}} />,
           },
         ],
       },

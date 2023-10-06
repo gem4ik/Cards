@@ -57,7 +57,12 @@ export const Header = forwardRef<HTMLHeadElement, Props>((props, ref) => {
           </DropdownMenuRadix>
         </div>
       )}
-      {!isAuth && <Button variant={'primary'}> Sign In </Button>}
+      {!isAuth && (
+        <Button type={'button'} variant={'primary'}>
+          {' '}
+          Sign In{' '}
+        </Button>
+      )}
     </header>
   )
 })

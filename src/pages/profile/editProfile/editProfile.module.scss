@@ -1,0 +1,75 @@
+.form {
+  width: 100%;
+
+  .input {
+    margin-bottom: 3.6rem;
+  }
+}
+
+.editProfileWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 60px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  margin-top: 60px;
+  padding: 36px;
+}
+
+.edit {
+  cursor: pointer;
+
+  position: absolute;
+  right: 0;
+
+  display: flex;
+
+  width: 24px;
+  height: 24px;
+  padding: 6px;
+
+  background: #4c4c4c;
+  border-radius: 5px;
+}
+
+.photoContainer {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 6px;
+
+  > div {
+    position: relative;
+
+    > img {
+      width: 96px;
+      height: 96px;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    > .editAvatarButton {
+      all: unset;
+
+      cursor: pointer;
+
+      position: absolute;
+      right: 0;
+      bottom: 0;
+
+      width: 32px;
+      height: 32px;
+
+      &:focus-visible {
+        outline: var(--outline-focus);
+      }
+    }
+  }
+}

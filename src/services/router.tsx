@@ -1,11 +1,3 @@
-import {
-  createBrowserRouter,
-  Navigate,
-  Outlet,
-  RouteObject,
-  RouterProvider,
-} from 'react-router-dom'
-
 import { CheckEmail } from '@/components/auth/checkEmail/checkEmail.tsx'
 import { ForgotPassword } from '@/components/auth/forgotPassword'
 import { Layout } from '@/components/layout'

@@ -1,4 +1,4 @@
-import { DeckResponce, GetDeckParams } from '@/assets/types/DecksTypes.ts'
+import { CardsResponse, DeckResponce, GetDeckParams } from '@/assets/types/DecksTypes.ts'
 import { baseApi } from '@/services/base-api.ts'
 
 const DecksAPI = baseApi.injectEndpoints({
@@ -13,8 +13,16 @@ const DecksAPI = baseApi.injectEndpoints({
           }
         },
       }),
+      getDecksById: build.query<CardsResponse, string>({
+        query: id => {
+          return {
+            url: `v1/decks/${id}/cards`,
+            method: 'GET',
+          }
+        },
+      }),
     }
   },
 })
 
-export const { useGetDecksQuery } = DecksAPI
+export const { useGetDecksQuery, useGetDecksByIdQuery } = DecksAPI

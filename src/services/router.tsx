@@ -1,53 +1,41 @@
-import {
-  createBrowserRouter,
-  Navigate,
-  Outlet,
-  RouteObject,
-  RouterProvider,
-} from 'react-router-dom'
-
-import { EditProfile } from '../pages/profile/editProfile'
-
-import { ChekEmail } from '@/components/auth/chekEmail/chekEmail.tsx'
+import { CheckEmail } from '@/components/auth/checkEmail/checkEmail.tsx'
 import { ForgotPassword } from '@/components/auth/forgotPassword'
 import { Layout } from '@/components/layout'
-import { PacksList } from '@/pages/packsList/packsList.tsx'
-import { Personal } from '@/pages/profile/personal-information/personalInformation.tsx'
+import { Login } from '@/pages/login/login.tsx'
+import { Decks } from '@/pages/packsList/decks.tsx'
+import { SignUpPage } from '@/pages/signUp/SignUpPage.tsx'
 
 const publicRoutes: RouteObject[] = [
-  {
-    path: '/login',
-    element: <Layout />,
-  },
-  {
-    path: '/getDecks',
-    element: <Layout />,
-  },
-  {
-    path: '/editprofile',
-    element: <EditProfile onSubmit={() => {}} />,
-  },
-  {
-    path: '/logout',
-    element: <Personal onSubmit={() => {}} />,
-  },
   {
     path: '/',
     element: <Layout />,
     children: [
       {
-        path: '/cards',
-        element: <PacksList />,
+        element: <PrivateRoutes />,
+        children: [
+          {
+            path: '/',
+            element: <Decks />,
+          },
+          {
+            path: 'signup',
+            element: <SignUpPage />,
+          },
+          {
+            path: 'login',
+            element: <Login />,
+          },
+          {
+            path: 'forgot-password',
+            element: <ForgotPassword />,
+          },
+          {
+            path: 'check-email',
+            element: <CheckEmail />,
+          },
+        ],
       },
     ],
-  },
-  {
-    path: '/email',
-    element: <ChekEmail />,
-  },
-  {
-    path: '/forgot',
-    element: <ForgotPassword onSubmit={() => {}} />,
   },
 ]
 
@@ -70,7 +58,7 @@ export const Router = () => {
 }
 
 function PrivateRoutes() {
-  const isAuthenticated = false
+  const isAuthenticated = true
 
   return isAuthenticated ? <Outlet /> : <Navigate to="/login" />
 }

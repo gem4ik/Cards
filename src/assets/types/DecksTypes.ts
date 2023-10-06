@@ -34,6 +34,40 @@ export type GetDeckParams = {
   maxCardsCount?: string
   name?: string
   authorId?: string
+  orderBy?: string | null
+  currentPage?: number
+  itemsPerPage?: number
+}
+
+export type CardsResponse = {
+  pagination: Pagination
+  items: CardsItems[]
+}
+export type Pagination = {
+  totalPages: number
+  currentPage: number
+  itemsPerPage: number
+  totalItems: number
+}
+export type CardsItems = {
+  id: string
+  question: string
+  answer: string
+  deckId: string
+  questionImg?: any
+  answerImg?: any
+  questionVideo?: any
+  answerVideo?: any
+  created: string
+  updated: string
+  shots: number
+  grade: number
+  userId: string
+}
+export type CardParams = {
+  id: string
+  question?: string
+  answer?: string
   orderBy?: string
   currentPage?: number
   itemsPerPage?: number

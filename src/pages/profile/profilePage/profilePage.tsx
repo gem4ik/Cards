@@ -6,20 +6,17 @@ import { Edit } from '@/pages/profile/editProfile/edit.tsx'
 import { Logout } from '@/pages/profile/editProfile/logout.tsx'
 
 type Props = {
-  email: string
-  name: string
+  email?: string
+  name?: string
   onEditProfile: () => void
 }
 
 export const Personal = ({ email, name, onEditProfile }: Props): JSX.Element => {
-  // const { handleSubmit } = useEditProfile(initialValues)
-  // const [editMode, setEditMode] = useState(false)
-
   return (
     <div className={s.editProfileWrapper}>
       <div className={s.nameContainer}>
         <Typography variant={'h1'}>{name ? name : 'Gem4ik'}</Typography>
-        <button className={s.editUserName} onClick={onEditProfile}>
+        <button onClick={onEditProfile}>
           <Edit />
         </button>
       </div>

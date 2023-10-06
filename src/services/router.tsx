@@ -56,6 +56,12 @@ const privateRoutes: RouteObject[] = [
   {
     path: '/',
     element: <Layout />,
+    children: [
+      {
+        path: '/',
+        element: <Decks />,
+      },
+    ],
   },
 ]
 const router = createBrowserRouter([

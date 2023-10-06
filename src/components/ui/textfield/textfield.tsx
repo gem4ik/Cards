@@ -34,8 +34,13 @@ export const Textfield = (props: TextfieldProps) => {
   const passwordButton = clsx(s.button, s.EyeButton, {
     [s.passwordButton]: type === 'password',
   })
-  const input = clsx(s.field, error && s.error, className)
-
+  const inputClasses = clsx(
+    s.field,
+    error && s.error,
+    className,
+    type === 'password' && s.passwordInput,
+    type === 'search' && s.searchInput
+  )
   let searchButtonColor: string
 
   if (!disabled) {
@@ -56,7 +61,7 @@ export const Textfield = (props: TextfieldProps) => {
           disabled={disabled}
           onMouseDown={() => setClick(true)}
           onMouseUp={() => setClick(false)}
-          className={input}
+          className={inputClasses}
           type={showPassword ? 'password' : 'text'}
           placeholder={error ? error : placeholder}
           onChange={handleChange}

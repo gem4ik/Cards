@@ -19,24 +19,11 @@
   align-items: center;
   justify-content: center;
 
-  margin-top: 60px;
-  padding: 36px;
+  padding: 33px 36px 84px;
 }
 
-.edit {
-  cursor: pointer;
-
-  position: absolute;
-  right: 0;
-
-  display: flex;
-
-  width: 24px;
-  height: 24px;
-  padding: 6px;
-
-  background: #4c4c4c;
-  border-radius: 5px;
+.title {
+  margin-bottom: 27px;
 }
 
 .photoContainer {

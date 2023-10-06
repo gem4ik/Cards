@@ -22,7 +22,7 @@ export const EditProfile = ({ onSubmit, initialValues }: Props): JSX.Element => 
       <div className={s.editProfileWrapper}>
         <Card className={s.card}>
           <Typography style={{ color: 'var(--color-light-100)' }} variant={'large'}>
-            Personal Information
+            <p className={s.title}>Personal Information</p>
           </Typography>
           <div className={s.photoContainer}>
             <div>

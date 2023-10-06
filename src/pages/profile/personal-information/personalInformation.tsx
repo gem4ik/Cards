@@ -37,7 +37,12 @@ export const Personal = ({
       <Header isAuth={true} />
       <div className={s.editProfileWrapper}>
         <Card className={s.card}>
-          <Typography style={{ color: 'var(--color-light-100)' }} variant={'large'}>
+          <Typography
+            style={{ color: 'var(--color-light-100)' }}
+            variant={'large'}
+            as="h1"
+            className={s.title}
+          >
             Personal Information
           </Typography>
           <div className={s.photoContainer}>

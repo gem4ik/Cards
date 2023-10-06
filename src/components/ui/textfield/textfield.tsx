@@ -45,7 +45,7 @@ export const Textfield = (props: TextfieldProps) => {
   return (
     <div className={s.textfieldWrapper}>
       {label && (
-        <Typography style={{ color: 'var(--color-dark-100)' }} className={label} variant={'body2'}>
+        <Typography className={label} variant={'body2'}>
           {label}
         </Typography>
       )}

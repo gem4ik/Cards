@@ -51,9 +51,7 @@ export const Decks = () => {
   return (
     <div className={s.packlistWrapper}>
       <div className={s.packlistSection}>
-        <Typography style={{ color: 'white' }} variant={'large'}>
-          Packs list
-        </Typography>
+        <Typography variant={'large'}>Packs list</Typography>
         <Button>Add New Pack</Button>
       </div>
       <div className={s.filterWrapper}>
@@ -63,15 +61,11 @@ export const Decks = () => {
           type={'search'}
         ></Textfield>
         <div>
-          <Typography style={{ color: 'white' }} variant={'body2'}>
-            Show packs cards
-          </Typography>
+          <Typography variant={'body2'}>Show packs cards</Typography>
           <TabSwitcher values={['My Cards', 'All Cards']} onValueChange={() => {}} />
         </div>
         <div>
-          <Typography style={{ color: 'white' }} variant={'body2'}>
-            Number of cards
-          </Typography>
+          <Typography variant={'body2'}>Number of cards</Typography>
           <RangeSlider range={[1, 50]} onChange={() => {}}></RangeSlider>
         </div>
         <Button variant={'secondary'}>{<Trash />}Clear Filter</Button>

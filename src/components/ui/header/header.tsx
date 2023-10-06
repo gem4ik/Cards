@@ -42,12 +42,8 @@ export const Header = forwardRef<HTMLHeadElement, Props>((props, ref) => {
                 <div className={st.dropDownItemWrapper}>
                   <Avatar />
                   <div>
-                    <Typography style={{ color: 'white' }} variant={'subtitle2'}>
-                      {'Ivan'}
-                    </Typography>
-                    <Typography style={{ color: 'grey' }} variant={'caption'}>
-                      {'j&johnson@gmail.com'}
-                    </Typography>
+                    <Typography variant={'subtitle2'}>{'Ivan'}</Typography>
+                    <Typography variant={'caption'}>{'j&johnson@gmail.com'}</Typography>
                   </div>
                 </div>
               }

@@ -1,5 +1,7 @@
 import { ChangeEvent, ComponentPropsWithoutRef, useState } from 'react'
 
+import { clsx } from 'clsx'
+
 import s from './textfield.module.scss'
 
 import { Cross } from '@/assets/components/inputIcon/cross.tsx'
@@ -28,12 +30,17 @@ export const Textfield = (props: TextfieldProps) => {
     onChangeText?.(e.currentTarget.value)
   }
 
-  const searchButton = `${s.button} ${type === 'search' ? s.searchButton : ''}`
-  const passwordButton = `${s.button} ${s.EyeButton} ${type === 'password' ? s.passwordButton : ''}`
-  const input = `${type === 'password' || type === 'search' ? s.input : ''} ${
-    type === 'password' ? s.passwordInput : ''
-  } ${type === 'search' ? s.searchInput : ''}`
-
+  const searchButton = clsx(s.button, { [s.searchButton]: type === 'search' })
+  const passwordButton = clsx(s.button, s.EyeButton, {
+    [s.passwordButton]: type === 'password',
+  })
+  const inputClasses = clsx(
+    s.field,
+    error && s.error,
+    className,
+    type === 'password' && s.passwordInput,
+    type === 'search' && s.searchInput
+  )
   let searchButtonColor: string
 
   if (!disabled) {
@@ -45,7 +52,7 @@ export const Textfield = (props: TextfieldProps) => {
   return (
     <div className={s.textfieldWrapper}>
       {label && (
-        <Typography style={{ color: 'var(--color-dark-100)' }} className={label} variant={'body2'}>
+        <Typography className={label} variant={'body2'}>
           {label}
         </Typography>
       )}
@@ -54,7 +61,7 @@ export const Textfield = (props: TextfieldProps) => {
           disabled={disabled}
           onMouseDown={() => setClick(true)}
           onMouseUp={() => setClick(false)}
-          className={`${s.field} ${input} ${error ? s.error : ''} ${className || ''}`}
+          className={inputClasses}
           type={showPassword ? 'password' : 'text'}
           placeholder={error ? error : placeholder}
           onChange={handleChange}

@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { Checkbox } from './checkbox.tsx'
+import { useState } from 'react'
 
 const meta = {
   title: 'Components/Checkbox',
@@ -14,6 +15,12 @@ const meta = {
     onChange: { action: 'checked changes' },
   },
 } satisfies Meta<typeof Checkbox>
+
+export const checkBox = () => {
+  const [value, setValue] = useState(false)
+
+  return <Checkbox checked={value} onValueChange={checked => setValue(checked)} />
+}
 
 export default meta
 type Story = StoryObj<typeof meta>

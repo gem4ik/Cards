@@ -18,15 +18,13 @@ export const CheckEmail = () => {
       <Header isAuth={false} />
       <Card className={s.card}>
         <div className={s.typography}>
-          <Typography style={{ color: 'white' }} variant={'large'}>
-            Check Email
-          </Typography>
+          <Typography variant={'large'}>Check Email</Typography>
         </div>
         <div className={s.emailIcon}>
           <EmailIcon />
         </div>
         <div className={s.typographyText}>
-          <Typography style={{ color: '#C3C1C7' }} variant={'body2'}>
+          <Typography variant={'body2'}>
             We’ve sent an Email with instructions to {email}
           </Typography>
         </div>

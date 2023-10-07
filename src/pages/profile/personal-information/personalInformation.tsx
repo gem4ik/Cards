@@ -45,6 +45,7 @@ export const PersonalInformation = ({ email, name }: Props): JSX.Element => {
           >
             Personal Information
           </Typography>
+
           <div className={s.photoContainer}>
             <div>
               <img src={Ava} alt={'avatar'} />

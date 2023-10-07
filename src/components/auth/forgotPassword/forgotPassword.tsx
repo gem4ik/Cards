@@ -46,13 +46,11 @@ export const ForgotPassword = (props: Props) => {
       })}
     >
       <Card className={s.card}>
-        <Typography style={{ color: 'var(--color-light-100)' }} variant={'large'}>
-          Forgot your password?
-        </Typography>
+        <Typography variant={'large'}>Forgot your password?</Typography>
         <div className={s.textFieldWrapper}>
           <ControlledTextfield control={control} name={'email'} label={'email'} />
           <div className={s.textWrapper}>
-            <Typography style={{ color: 'var(--color-light-900)' }} variant={'body2'}>
+            <Typography variant={'body2'}>
               Enter your email address and we will send you further instructions
             </Typography>
           </div>
@@ -61,12 +59,12 @@ export const ForgotPassword = (props: Props) => {
           <Button fullWidth={true}>Send Instructions</Button>
         </Link>
         <div className={s.buttonTextWrapper}>
-          <Typography style={{ color: 'var(--color-light-100)' }} variant={'body2'}>
-            Did you remember your password?
-          </Typography>
+          <Typography variant={'body2'}>Did you remember your password?</Typography>
         </div>
         <Link to={'/login'} className={s.buttonLinkWrapper}>
-          <Button variant={'link'}>Try logging in</Button>
+          <Button className={s.buttonStyle} variant={'link'}>
+            Try logging in
+          </Button>
         </Link>
       </Card>
     </form>

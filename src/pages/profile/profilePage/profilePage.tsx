@@ -8,24 +8,25 @@ import { Logout } from '@/pages/profile/editProfile/logout.tsx'
 type Props = {
   email?: string
   name?: string
-  onEditProfile: () => void
+  setEditProfile: () => void
 }
 
-export const Profile = ({ email, name, onEditProfile }: Props): JSX.Element => {
+export const Profile = ({ email, name, setEditProfile }: Props): JSX.Element => {
+  const logout = () => {}
+
   return (
     <div className={s.editProfileWrapper}>
       <div className={s.nameContainer}>
-        <Typography variant={'h1'}>{name ? name : 'Gem4ik'}</Typography>
-        <button onClick={onEditProfile}>
-          <Edit />
-        </button>
+        <Typography variant={'h1'}>
+          {name ? name : 'Gem4ik'} <Edit onClick={setEditProfile} />{' '}
+        </Typography>
       </div>
 
       <Typography>
-        <div className={s.emailPersonal}>{email ? email : 'busidoza4emhueta@gmail.com'}</div>
+        <div className={s.emailPersonal}>{email ? email : 'busidoza4em@gmail.com'}</div>
       </Typography>
       <div className={s.logout}>
-        <Button variant={'secondary'}>
+        <Button variant={'secondary'} onClick={logout}>
           <Logout />
           Logout
         </Button>

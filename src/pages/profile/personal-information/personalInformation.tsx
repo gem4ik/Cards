@@ -5,7 +5,6 @@ import Ava from '../editProfile/ava2.png'
 import s from './personalInformation.module.scss'
 
 import { Card } from '@/components/ui/card/card.tsx'
-import { Header } from '@/components/ui/header'
 import { Typography } from '@/components/ui/typography'
 import { Edit } from '@/pages/personalInformation/edit.tsx'
 import { EditProfile } from '@/pages/profile/editProfile'
@@ -14,17 +13,19 @@ import { Profile } from '@/pages/profile/profilePage'
 type Props = {
   email?: string
   name?: string
-  onAvatarChange: (newAvatar: string) => void
 }
 
-export const PersonalInformation = ({ email, name, onAvatarChange }: Props): JSX.Element => {
+export const PersonalInformation = ({ email, name }: Props): JSX.Element => {
   const [editMode, setEditMode] = useState(false)
 
+  const avatarChangeMutation = (avatar: string) => {
+    console.log(avatar)
+  }
   const handleAvatarChanged = () => {
-    onAvatarChange('new Avatar')
+    avatarChangeMutation('new Avatar')
   }
 
-  const onEditProfile = () => {
+  const setEditProfile = () => {
     setEditMode(true)
   }
 
@@ -34,24 +35,28 @@ export const PersonalInformation = ({ email, name, onAvatarChange }: Props): JSX
 
   return (
     <form className={s.form}>
-      <Header isAuth={true} />
       <div className={s.editProfileWrapper}>
         <Card className={s.card}>
-          <Typography style={{ color: 'var(--color-light-100)' }} variant={'large'} as="h1">
-            <p className={s.title}>Personal Information</p>
+          <Typography
+            className={'title'}
+            style={{ color: 'var(--color-light-100)' }}
+            variant={'large'}
+            as="h1"
+          >
+            Personal Information
           </Typography>
           <div className={s.photoContainer}>
             <div>
               <img src={Ava} alt={'avatar'} />
               <button className={s.editAvatarButton} onClick={handleAvatarChanged}>
-                <Edit />
+                <Edit className={s.edit} />
               </button>
             </div>
           </div>
           {editMode ? (
-            <EditProfile onSubmit={onSubmit} />
+            <EditProfile onSave={onSubmit} />
           ) : (
-            <Profile email={email} name={name} onEditProfile={onEditProfile} />
+            <Profile email={email} name={name} setEditProfile={setEditProfile} />
           )}
         </Card>
       </div>

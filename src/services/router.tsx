@@ -32,7 +32,7 @@ const publicRoutes: RouteObject[] = [
           },
           {
             path: 'profile',
-            element: <PersonalInformation onAvatarChange={() => {}} />,
+            element: <PersonalInformation />,
           },
           {
             path: 'login',

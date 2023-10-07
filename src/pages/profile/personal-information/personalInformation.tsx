@@ -4,9 +4,9 @@ import Ava from '../editProfile/ava2.png'
 
 import s from './personalInformation.module.scss'
 
+import { Edit } from '@/assets/components/personalInformation/editIcon.tsx'
 import { Card } from '@/components/ui/card/card.tsx'
 import { Typography } from '@/components/ui/typography'
-import { Edit } from '@/pages/personalInformation/edit.tsx'
 import { EditProfile } from '@/pages/profile/editProfile'
 import { Profile } from '@/pages/profile/profilePage'
 
@@ -50,7 +50,7 @@ export const PersonalInformation = ({ email, name }: Props): JSX.Element => {
             <div>
               <img src={Ava} alt={'avatar'} />
               <button className={s.editAvatarButton} onClick={handleAvatarChanged}>
-                <Edit className={s.edit} />
+                <Edit />
               </button>
             </div>
           </div>

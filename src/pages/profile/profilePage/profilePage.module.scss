@@ -1,0 +1,27 @@
+.editProfileWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.nameContainer {
+  display: flex;
+  gap: 0.56rem;
+  align-items: center;
+  justify-content: center;
+
+  > p {
+    color: #fff;
+  }
+}
+
+.emailPersonal {
+  color: var(--dark-100, #808080);
+  text-align: center;
+}
+
+.logout {
+  display: flex;
+  justify-content: center;
+  padding-top: 13px;
+}

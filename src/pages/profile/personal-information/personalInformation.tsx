@@ -4,7 +4,7 @@ import Ava from '../editProfile/ava2.png'
 
 import s from './personalInformation.module.scss'
 
-import { Edit } from '@/assets/components/personalInformation/editIcon.tsx'
+import { Edit } from '@/assets/components/personalInformation/edit.tsx'
 import { Card } from '@/components/ui/card/card.tsx'
 import { Typography } from '@/components/ui/typography'
 import { EditProfile } from '@/pages/profile/editProfile'

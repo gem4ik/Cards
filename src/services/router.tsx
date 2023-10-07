@@ -7,6 +7,7 @@ import { NewPasswordConfirm } from '@/components/auth/newPasswordConfirm/NewPass
 import { Layout } from '@/components/layout'
 import { Login } from '@/pages/login/login.tsx'
 import { Decks } from '@/pages/packsList/decks.tsx'
+import { PersonalInformation } from '@/pages/profile/personal-information/personalInformation.tsx'
 import { SignUpPage } from '@/pages/signUp/SignUpPage.tsx'
 
 const router = createBrowserRouter([
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
           {
             path: '',
             element: <Decks />,
+          },
+          {
+            path: 'profile',
+            element: <PersonalInformation />,
           },
           {
             path: 'signup',

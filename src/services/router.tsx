@@ -9,6 +9,7 @@ import { Decks } from '@/pages/Decks/decks.tsx'
 import { Login } from '@/pages/login/login.tsx'
 import { PersonalInformation } from '@/pages/profile/personal-information/personalInformation.tsx'
 import { SignUpPage } from '@/pages/signUp/SignUpPage.tsx'
+import { useGetMeQuery } from '@/services/AuthAPI.ts'
 
 const router = createBrowserRouter([
   {
@@ -67,7 +68,7 @@ export const Router = () => {
 }
 
 function PrivateRoutes() {
-  const isAuthenticated = true
+  const { error } = useGetMeQuery()
 
-  return isAuthenticated ? <Outlet /> : <Navigate to="login" />
+  return error ? <Navigate to="login" /> : <Outlet />
 }

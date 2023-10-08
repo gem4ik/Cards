@@ -68,13 +68,14 @@ export const DropDownMenuWithIcon = ({ icon, onSelect, itemText }: DropDownMenuI
   return (
     <DropdownMenu.Item
       asChild
-      onSelect={onSelect}
-      onClick={event => event.stopPropagation()}
+
       // className={s.itemWrapper}
     >
       <>
         <div className={s.itemWrapper}>
-          <div className={s.itemIconImg}>{icon}</div>
+          <div className={s.itemIconImg} onClick={() => onSelect()}>
+            {icon}
+          </div>
           <Typography variant="caption" style={{ color: 'white' }}>
             {itemText}
           </Typography>

@@ -4,19 +4,17 @@ import {
   SignUpRequest,
   SignUpResponses,
 } from '@/assets/types/AuthTypes.ts'
-import { baseApi } from '@/services/base-api.ts'
 import { Data } from '@/components/auth/signIn/signIn.tsx'
+import { baseApi } from '@/services/base-api.ts'
 
 const AuthAPI = baseApi.injectEndpoints({
   endpoints: build => {
     return {
       getMe: build.query<GetMeResponce, void>({
         query: () => {
-          return {
-            url: 'v1/auth/me',
-            method: 'GET',
-          }
+          return 'v1/auth/me'
         },
+        providesTags: ['Me'],
       }),
       signUp: build.mutation<SignUpResponses, SignUpRequest>({
         query: body => {
@@ -35,6 +33,7 @@ const AuthAPI = baseApi.injectEndpoints({
             body,
           }
         },
+        invalidatesTags: ['Me'],
       }),
     }
   },

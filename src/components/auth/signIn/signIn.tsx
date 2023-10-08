@@ -68,7 +68,7 @@ export const SignIn = (props: Props) => {
           {/* eslint-disable-next-line react/no-unescaped-entities */}
           Don't have an account?
         </Typography>
-        <Button type={'button'} variant={'link'}>
+        <Button type={'button'} variant={'link'} as={Link} to={'/signup'}>
           Sign Up
         </Button>
       </Card>

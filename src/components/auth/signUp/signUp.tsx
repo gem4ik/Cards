@@ -1,5 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
+import { Link } from 'react-router-dom'
 import { z } from 'zod'
 
 import s from './signUp.module.scss'
@@ -33,7 +34,7 @@ type Props = {
   onSubmit: (email: string, password: string) => void
 }
 
-export const SignUp = (props: Props) => {
+export const SignUpForm = (props: Props) => {
   const { handleSubmit, control } = useForm<Schema>({
     mode: 'onSubmit',
     defaultValues: {
@@ -79,7 +80,9 @@ export const SignUp = (props: Props) => {
             Sign Up
           </Button>
           <Typography variant={'body2'}>Already have an account?</Typography>
-          <Button variant={'link'}>Sign In</Button>
+          <Button variant={'link'} as={Link} to={'/login'}>
+            Sign In
+          </Button>
         </Card>
       </form>
     </>

@@ -1,4 +1,4 @@
-import { GetMeResponce } from '@/assets/types/AuthTypes.ts'
+import { GetMeResponce, SignUpRequest, SignUpResponses } from '@/assets/types/AuthTypes.ts'
 import { baseApi } from '@/services/base-api.ts'
 
 const AuthAPI = baseApi.injectEndpoints({
@@ -12,8 +12,17 @@ const AuthAPI = baseApi.injectEndpoints({
           }
         },
       }),
+      signUp: build.mutation<SignUpResponses, SignUpRequest>({
+        query: body => {
+          return {
+            url: 'v1/auth/sign-up',
+            method: 'POST',
+            body,
+          }
+        },
+      }),
     }
   },
 })
 
-export const { useGetMeQuery } = AuthAPI
+export const { useGetMeQuery, useSignUpMutation } = AuthAPI

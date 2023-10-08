@@ -13,7 +13,7 @@ const DecksAPI = baseApi.injectEndpoints({
           }
         },
       }),
-      getDecksById: build.query<CardsResponse, string>({
+      getCardsById: build.query<CardsResponse, string>({
         query: id => {
           return {
             url: `v1/decks/${id}/cards`,
@@ -25,4 +25,4 @@ const DecksAPI = baseApi.injectEndpoints({
   },
 })
 
-export const { useGetDecksQuery, useGetDecksByIdQuery } = DecksAPI
+export const { useGetDecksQuery, useGetCardsByIdQuery } = DecksAPI

@@ -41,6 +41,7 @@ export const Textfield = (props: TextfieldProps) => {
     type === 'password' && s.passwordInput,
     type === 'search' && s.searchInput
   )
+
   let searchButtonColor: string
 
   if (!disabled) {
@@ -80,7 +81,7 @@ export const Textfield = (props: TextfieldProps) => {
             <button type={'button'} className={searchButton}>
               <Search color={searchButtonColor} />
             </button>
-            <button type={'button'} className={`${s.button} ${s.cross}`}>
+            <button type={'button'} className={clsx(s.button, s.cross)}>
               <Cross color={searchButtonColor} />
             </button>
           </>

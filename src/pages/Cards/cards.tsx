@@ -8,11 +8,11 @@ import { Header } from '@/components/ui/header'
 import { Table } from '@/components/ui/table/table.tsx'
 import { Textfield } from '@/components/ui/textfield'
 import { Typography } from '@/components/ui/typography'
-import { useGetDecksByIdQuery } from '@/services/DecksAPI.ts'
+import { useGetCardsByIdQuery } from '@/services/DecksAPI.ts'
 
 export const Cards = () => {
   const idCard = 'cln2zvdvf0pdxvo2qwlenj6st'
-  const { data } = useGetDecksByIdQuery(idCard)
+  const { data } = useGetCardsByIdQuery(idCard)
 
   const dataV = data?.items.map(el => {
     const formattedDate = moment(el.updated).format('DD.MM.YYYY')

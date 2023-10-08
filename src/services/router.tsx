@@ -5,8 +5,8 @@ import { CreateNewPassword } from '@/components/auth/CreateNewPassword/CreateNew
 import { ForgotPassword } from '@/components/auth/forgotPassword'
 import { NewPasswordConfirm } from '@/components/auth/newPasswordConfirm/NewPasswordConfirm.tsx'
 import { Layout } from '@/components/layout'
+import { Decks } from '@/pages/Decks/decks.tsx'
 import { Login } from '@/pages/login/login.tsx'
-import { Decks } from '@/pages/packsList/decks.tsx'
 import { PersonalInformation } from '@/pages/profile/personal-information/personalInformation.tsx'
 import { SignUpPage } from '@/pages/signUp/SignUpPage.tsx'
 
@@ -26,26 +26,6 @@ const router = createBrowserRouter([
             path: 'profile',
             element: <PersonalInformation />,
           },
-          {
-            path: 'signup',
-            element: <SignUpPage />,
-          },
-          {
-            path: 'forgot-password',
-            element: <ForgotPassword />,
-          },
-          {
-            path: 'check-email',
-            element: <CheckEmail />,
-          },
-          {
-            path: 'create-new-password',
-            element: <CreateNewPassword />,
-          },
-          {
-            path: 'new-password-confirm',
-            element: <NewPasswordConfirm />,
-          },
         ],
       },
     ],
@@ -57,6 +37,26 @@ const router = createBrowserRouter([
       {
         path: 'login',
         element: <Login />,
+      },
+      {
+        path: 'signup',
+        element: <SignUpPage />,
+      },
+      {
+        path: 'forgot-password',
+        element: <ForgotPassword />,
+      },
+      {
+        path: 'check-email',
+        element: <CheckEmail />,
+      },
+      {
+        path: 'create-new-password',
+        element: <CreateNewPassword />,
+      },
+      {
+        path: 'new-password-confirm',
+        element: <NewPasswordConfirm />,
       },
     ],
   },

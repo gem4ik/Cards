@@ -37,17 +37,15 @@ export const Header = forwardRef<HTMLHeadElement, Props>((props, ref) => {
           <p>{user?.name}</p>
           {/*<img className={s.userPhoto} src={user?.photo ?? ''} alt="photo" />*/}
           <DropdownMenuRadix trigger={<Avatar />}>
-            <DropDownItem
-              children={
-                <div className={st.dropDownItemWrapper}>
-                  <Avatar />
-                  <div>
-                    <Typography variant={'subtitle2'}>{'Ivan'}</Typography>
-                    <Typography variant={'caption'}>{'j&johnson@gmail.com'}</Typography>
-                  </div>
+            <DropDownItem>
+              <div className={st.dropDownItemWrapper}>
+                <Avatar />
+                <div>
+                  <Typography variant={'subtitle2'}>{'Ivan'}</Typography>
+                  <Typography variant={'caption'}>{'j&johnson@gmail.com'}</Typography>
                 </div>
-              }
-            />
+              </div>
+            </DropDownItem>
             <DropDownMenuWithIcon icon={<PersonOutline />} onSelect={() => {}} itemText={'Edit'} />
             <DropDownMenuWithIcon icon={<LogOut />} onSelect={() => {}} itemText={'Sign Out'} />
           </DropdownMenuRadix>

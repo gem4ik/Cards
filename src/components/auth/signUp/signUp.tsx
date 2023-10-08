@@ -33,7 +33,7 @@ type Props = {
   onSubmit: (email: string, password: string) => void
 }
 
-export const SignUp = (props: Props) => {
+export const SignUpForm = (props: Props) => {
   const { handleSubmit, control } = useForm<Schema>({
     mode: 'onSubmit',
     defaultValues: {

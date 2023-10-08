@@ -8,7 +8,7 @@ export const SignUpPage = () => {
   const navigate = useNavigate()
   const SingUpHandler = (email: string, password: string) => {
     SignUp({ email, password })
-      .then(() => navigate('login'))
+      .then(() => navigate('/login'))
       .catch(error => console.log(error))
   }
 

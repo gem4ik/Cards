@@ -11,7 +11,7 @@ import { ControlledCheckbox } from '@/components/ui/checkbox/controlled-checkbox
 import { ControlledTextfield } from '@/components/ui/textfield/controlledTextfield.tsx'
 import { Typography } from '@/components/ui/typography'
 
-type Data = {
+export type Data = {
   email: string
   password: string
   rememberMe: boolean

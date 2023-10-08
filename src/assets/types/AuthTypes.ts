@@ -24,3 +24,6 @@ export type SignUpResponses = {
   created: string
   updated: string
 }
+export type LoginResponse = {
+  accessToken: string
+}

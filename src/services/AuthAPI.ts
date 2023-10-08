@@ -1,5 +1,11 @@
-import { GetMeResponce, SignUpRequest, SignUpResponses } from '@/assets/types/AuthTypes.ts'
+import {
+  GetMeResponce,
+  LoginResponse,
+  SignUpRequest,
+  SignUpResponses,
+} from '@/assets/types/AuthTypes.ts'
 import { baseApi } from '@/services/base-api.ts'
+import { Data } from '@/components/auth/signIn/signIn.tsx'
 
 const AuthAPI = baseApi.injectEndpoints({
   endpoints: build => {
@@ -21,8 +27,17 @@ const AuthAPI = baseApi.injectEndpoints({
           }
         },
       }),
+      SignIn: build.mutation<LoginResponse, Data>({
+        query: body => {
+          return {
+            url: '/v1/auth/login',
+            method: 'POST',
+            body,
+          }
+        },
+      }),
     }
   },
 })
 
-export const { useGetMeQuery, useSignUpMutation } = AuthAPI
+export const { useGetMeQuery, useSignUpMutation, useSignInMutation } = AuthAPI

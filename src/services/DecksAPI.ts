@@ -12,6 +12,7 @@ const DecksAPI = baseApi.injectEndpoints({
             params: params ?? {},
           }
         },
+        providesTags: ['Deck'],
       }),
       getCardsById: build.query<CardsResponse, string>({
         query: id => {
@@ -21,8 +22,18 @@ const DecksAPI = baseApi.injectEndpoints({
           }
         },
       }),
+      addDeck: build.mutation({
+        query: body => {
+          return {
+            url: `/v1/decks`,
+            method: 'POST',
+            body,
+          }
+        },
+        invalidatesTags: ['Deck'],
+      }),
     }
   },
 })
 
-export const { useGetDecksQuery, useGetCardsByIdQuery } = DecksAPI
+export const { useGetDecksQuery, useGetCardsByIdQuery, useAddDeckMutation } = DecksAPI

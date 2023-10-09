@@ -23,7 +23,7 @@ export const Header = forwardRef<HTMLHeadElement, Props>((props, ref) => {
 
   return (
     <header ref={ref} className={s.headerWrapper}>
-      <img className={s.logo} src={logo} alt="logo" />
+      <img className={s.logo} src={logo} alt="logo" onClick={() => {}} />
       {isAuth && <DropdownForHeader onLogOut={props.onLogOut} user={user} />}
       {!isAuth && <Button type={'button'}> Sign In </Button>}
     </header>

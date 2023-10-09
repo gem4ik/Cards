@@ -1,4 +1,11 @@
-import { ComponentPropsWithoutRef, ElementRef, forwardRef, ReactNode, useState } from 'react'
+import {
+  ComponentPropsWithoutRef,
+  CSSProperties,
+  ElementRef,
+  forwardRef,
+  ReactNode,
+  useState,
+} from 'react'
 
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
 
@@ -45,12 +52,13 @@ export type DropDownMenuItemProps = {
   children: ReactNode
   className?: string
 }
-export const DropDownItem = ({ children }: DropDownMenuItemProps) => {
+export const DropDownItem = ({ children, ...restProps }: DropDownMenuItemProps) => {
   // const DropDownMenuItemClass = clsx {s.item,className}
   return (
-    <DropdownMenu.Item className={s.noOutline}>
+    <DropdownMenu.Item className={s.noOutline} {...restProps}>
       <div>
         {children}
+
         <div>
           <DropdownMenu.Separator className={s.dropdownMenuSeparator} />
         </div>
@@ -59,23 +67,28 @@ export const DropDownItem = ({ children }: DropDownMenuItemProps) => {
   )
 }
 export type DropDownMenuIconProps = {
-  icon: ReactNode
-  onSelect: () => void
+  children?: ReactNode
+  style?: CSSProperties
+  icon?: ReactNode
   itemText: string
-}
+} & ComponentPropsWithoutRef<typeof DropdownMenu.Item>
 
-export const DropDownMenuWithIcon = ({ icon, onSelect, itemText }: DropDownMenuIconProps) => {
+export const DropDownMenuWithIcon = ({
+  icon,
+  itemText,
+  onSelect,
+  ...rest
+}: DropDownMenuIconProps) => {
   return (
     <DropdownMenu.Item
-      asChild
-
+      onSelect={onSelect}
+      onClick={event => event.stopPropagation()}
+      {...rest}
       // className={s.itemWrapper}
     >
       <>
         <div className={s.itemWrapper}>
-          <div className={s.itemIconImg} onClick={() => onSelect()}>
-            {icon}
-          </div>
+          <div className={s.itemIconImg}>{icon}</div>
           <Typography variant="caption" style={{ color: 'white' }}>
             {itemText}
           </Typography>

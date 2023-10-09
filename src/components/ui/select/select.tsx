@@ -9,10 +9,12 @@ import s from './select.module.scss'
 export type Props = {
   items?: string[]
   disabled: boolean
+  onPageSizeChange: (value: string) => void
+  placeholder?: number
 } & ComponentPropsWithoutRef<typeof Select.Root>
 
 export const Selector = forwardRef<ElementRef<typeof Select.Trigger>, Props>((props, ref) => {
-  const { items } = props
+  const { items, placeholder } = props
   const mappedItems = items?.map((el, index) => {
     return (
       <SelectItem key={index} className={s.SelectContent} value={el}>
@@ -22,14 +24,14 @@ export const Selector = forwardRef<ElementRef<typeof Select.Trigger>, Props>((pr
   })
 
   return (
-    <Select.Root>
+    <Select.Root onValueChange={value => props.onPageSizeChange(value)}>
       <Select.Trigger
         ref={ref}
         disabled={props.disabled}
         className={s.SelectTrigger}
-        aria-label="Food"
+        aria-label="select"
       >
-        <Select.Value placeholder="select" />
+        <Select.Value placeholder={placeholder ? placeholder : 'select'} />
         <Select.Icon className={s.SelectIcon}>
           <ChevronDownIcon />
         </Select.Icon>

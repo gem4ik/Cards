@@ -8,6 +8,7 @@ import { Pencil } from '@/assets/components/decksTable/pencil.tsx'
 import { Play } from '@/assets/components/decksTable/play.tsx'
 import { Trash } from '@/assets/components/decksTable/trash.tsx'
 import { Button } from '@/components/ui/button'
+import { Pagination } from '@/components/ui/pagination'
 import { RangeSlider } from '@/components/ui/slider'
 import { Column, Sort, Table, TableRoot } from '@/components/ui/table/table.tsx'
 import { TabSwitcher } from '@/components/ui/tabSwitcher/tabSwitcher.tsx'
@@ -17,9 +18,15 @@ import { useGetDecksQuery } from '@/services/DecksAPI.ts'
 
 export const Decks = () => {
   const [sort, setSort] = useState<Sort>({ key: 'cardsCount', direction: 'asc' })
+  const [currentPage, setCurrentPage] = useState(1)
+  const [itemsPerPage, setItemsPerPage] = useState('10')
   const sortString = sort ? `${sort.key}-${sort.direction}` : null
 
-  const { data } = useGetDecksQuery({ orderBy: sortString })
+  const { data } = useGetDecksQuery({
+    orderBy: sortString,
+    currentPage,
+    itemsPerPage: +itemsPerPage,
+  })
 
   const columns: Column[] = [
     {
@@ -92,6 +99,15 @@ export const Decks = () => {
           </Table.Tbody>
         </TableRoot>
       </div>
+      <Pagination
+        onPageChange={setCurrentPage}
+        totalCount={data?.pagination?.totalPages || 1}
+        siblingCount={1}
+        currentPage={data?.pagination?.currentPage || 1}
+        pageSize={data?.pagination?.itemsPerPage || 10}
+        className={''}
+        onPageSizeChange={setItemsPerPage}
+      />
     </div>
   )
 }

@@ -12,10 +12,19 @@ type PaginationProps = {
   currentPage: number
   pageSize: number
   className: string
+  onPageSizeChange: (value: string) => void
 }
 
 export const Pagination = (props: PaginationProps) => {
-  const { onPageChange, totalCount, siblingCount = 1, currentPage, pageSize, className } = props
+  const {
+    onPageChange,
+    totalCount,
+    siblingCount = 1,
+    currentPage,
+    pageSize,
+    className,
+    onPageSizeChange,
+  } = props
   //определяем в переменную !!!!!!!!!!пока непонятно что!!!!!!!!!!!!!!!
   const paginationRange = usePagination({ currentPage, totalCount, siblingCount, pageSize })
 
@@ -76,7 +85,12 @@ export const Pagination = (props: PaginationProps) => {
         </div>
       </li>
       <span>показать</span>
-      <Selector disabled={false} items={changePageSizeParams} />
+      <Selector
+        placeholder={props.pageSize}
+        onPageSizeChange={onPageSizeChange}
+        disabled={false}
+        items={changePageSizeParams}
+      />
       <span>на странице</span>
     </ul>
   )

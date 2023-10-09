@@ -3,7 +3,7 @@ import { useMemo } from 'react'
 type usePaginationProps = {
   totalCount: number
   pageSize: number
-  siblingCount?: number
+  siblingCount: number
   currentPage: number
 }
 export const DOTS = '...'

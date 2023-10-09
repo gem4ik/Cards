@@ -31,10 +31,15 @@ export const DropdownForHeader = (props: Props) => {
             </div>
           </div>
         </DropDownItem>
-        <DropDownMenuWithIcon icon={<PersonOutline />} onSelect={() => {}} itemText={'Edit'} />
         <DropDownMenuWithIcon
+          onClick={() => props.onLogOut()}
+          icon={<PersonOutline />}
+          onSelect={() => {}}
+          itemText={'Edit'}
+        />
+        <DropDownMenuWithIcon
+          onClick={() => props.onLogOut()}
           icon={<LogOut />}
-          onSelect={() => props.onLogOut()}
           itemText={'Sign Out'}
         />
       </DropdownMenuRadix>

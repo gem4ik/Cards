@@ -6,7 +6,6 @@ import s from './checEmail.module.scss'
 import { EmailIcon } from '@/assets/components/emailIcon/emailIcon.tsx'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card/card.tsx'
-import { Header } from '@/components/ui/header'
 import { Typography } from '@/components/ui/typography'
 import { RootState } from '@/services/store.ts'
 
@@ -15,7 +14,6 @@ export const CheckEmail = () => {
 
   return (
     <div className={s.checkEmailWrapper}>
-      <Header isAuth={false} />
       <Card className={s.card}>
         <div className={s.typography}>
           <Typography variant={'large'}>Check Email</Typography>

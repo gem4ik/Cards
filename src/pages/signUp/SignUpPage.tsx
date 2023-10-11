@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 
-import { SignUpForm } from '@/components/auth/signUp/signUp.tsx'
-import { useSignUpMutation } from '@/services/AuthAPI.ts'
+import { SignUpForm } from '@/components'
+import { useSignUpMutation } from '@/services'
 
 export const SignUpPage = () => {
   const [SignUp] = useSignUpMutation()

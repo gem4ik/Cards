@@ -4,9 +4,8 @@ import { useNavigate } from 'react-router-dom'
 
 import s from './header.module.css'
 
-import logo from '@/assets/components/headerIcon/Logo.svg'
-import { Button } from '@/components/ui/button'
-import { DropdownForHeader } from '@/components/ui/header/dropdownForHeader.tsx'
+import { Logo } from '@/assets'
+import { Button, DropdownForHeader } from '@/components'
 
 export type UserProps = {
   photo?: string | null
@@ -26,7 +25,7 @@ export const Header = forwardRef<HTMLHeadElement, Props>((props, ref) => {
 
   return (
     <header ref={ref} className={s.headerWrapper}>
-      <img className={s.logo} src={logo} alt="logo" onClick={() => {}} />
+      <Logo />
       {isAuth && <DropdownForHeader onLogOut={props.onLogOut} user={user} />}
       {!isAuth && (
         <Button onClick={() => navigate('/login')} type={'button'}>

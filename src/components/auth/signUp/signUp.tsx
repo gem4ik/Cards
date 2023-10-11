@@ -5,10 +5,7 @@ import { z } from 'zod'
 
 import s from './signUp.module.scss'
 
-import { Button } from '@/components/ui/button'
-import { Card } from '@/components/ui/card/card.tsx'
-import { ControlledTextfield } from '@/components/ui/textfield/controlledTextfield.tsx'
-import { Typography } from '@/components/ui/typography'
+import { Button, Card, ControlledTextfield, Typography } from '@/components'
 
 const signUpSchema = z
   .object({

@@ -2,11 +2,8 @@ import { useState } from 'react'
 
 import { useForm } from 'react-hook-form'
 
-import { Button } from '@/components'
-import { ControlledCheckbox } from '@/components/ui/checkbox/controlled-checkbox.tsx'
-import { Modal } from '@/components/ui/modal'
-import { ControlledTextfield } from '@/components/ui/textfield/controlledTextfield.tsx'
-import { useAddDeckMutation } from '@/services/DecksAPI.ts'
+import { Button, ControlledCheckbox, Modal, ControlledTextfield } from '@/components'
+import { useAddDeckMutation } from '@/services'
 
 type DataForm = {
   name: string

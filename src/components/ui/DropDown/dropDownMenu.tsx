@@ -11,7 +11,7 @@ import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
 
 import s from './dropDownMenu.module.scss'
 
-import { Typography } from '@/components/ui/typography'
+import { Typography } from '@/components'
 
 type Props = {
   align?: 'start' | 'center' | 'end'

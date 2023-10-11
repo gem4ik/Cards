@@ -2,7 +2,7 @@ import { ComponentProps, ComponentPropsWithoutRef, forwardRef } from 'react'
 
 import s from './avatar.module.scss'
 
-import i from '@/assets/components/avatarIcon/avatar3.png'
+import avatar from '@/assets/components/avatarIcon/avatar.png'
 
 export type AvatarProps = {
   name?: string
@@ -11,7 +11,7 @@ export type AvatarProps = {
 } & ComponentPropsWithoutRef<'img'>
 
 export const Avatar = forwardRef<HTMLImageElement, AvatarProps>(
-  ({ name, src = i, size = 36 }, ref) => {
+  ({ name, src = avatar, size = 36 }, ref) => {
     return (
       <img
         className={s.avatar}

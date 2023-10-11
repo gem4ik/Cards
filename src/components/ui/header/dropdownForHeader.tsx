@@ -1,15 +1,14 @@
-import { Avatar } from '@/components'
-import st from '@/components/ui/DropDown/dropDownMenu.module.scss'
+import { LogOut, PersonOutline } from '@/assets'
 import {
+  Avatar,
   DropDownItem,
   DropdownMenuRadix,
   DropDownMenuWithIcon,
-} from '@/components/ui/DropDown/dropDownMenu.tsx'
-import { LogOut } from '@/components/ui/DropDown/IconDropDownMenu/logOut.tsx'
-import { PersonOutline } from '@/components/ui/DropDown/IconDropDownMenu/personOutline.tsx'
+  UserProps,
+  Typography,
+} from '@/components'
+import st from '@/components/ui/DropDown/dropDownMenu.module.scss'
 import s from '@/components/ui/header/header.module.css'
-import { UserProps } from '@/components/ui/header/header.tsx'
-import { Typography } from '@/components/ui/typography'
 
 type Props = {
   user?: UserProps

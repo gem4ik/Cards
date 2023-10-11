@@ -7,9 +7,7 @@ export const SignUpPage = () => {
   const [SignUp] = useSignUpMutation()
   const navigate = useNavigate()
   const SingUpHandler = (email: string, password: string) => {
-    SignUp({ email, password })
-      .then(() => navigate('/login'))
-      .catch(error => console.log(error))
+    SignUp({ email, password }).then(() => navigate('/login'))
   }
 
   return <SignUpForm onSubmit={SingUpHandler} />

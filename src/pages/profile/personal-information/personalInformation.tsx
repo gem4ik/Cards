@@ -16,9 +16,7 @@ type Props = {
 export const PersonalInformation = ({ email, name }: Props): JSX.Element => {
   const [editMode, setEditMode] = useState(false)
 
-  const avatarChangeMutation = (avatar: string) => {
-    console.log(avatar)
-  }
+  const avatarChangeMutation = () => {}
   const handleAvatarChanged = () => {
     avatarChangeMutation('new Avatar')
   }

@@ -1,4 +1,6 @@
 import {
+  EditProfileRequest,
+  EditProfileResponse,
   GetMeResponce,
   LoginResponse,
   SignUpRequest,
@@ -41,8 +43,37 @@ const AuthAPI = baseApi.injectEndpoints({
           method: 'POST',
         }),
       }),
+      editProfile: build.mutation<EditProfileResponse, EditProfileRequest>({
+        query: body => {
+          return {
+            url: '/v1/auth/me',
+            method: 'PATCH',
+            body,
+          }
+        },
+        onQueryStarted: async (body, { queryFulfilled, dispatch }) => {
+          const patchResult = dispatch(
+            AuthAPI.util.updateQueryData('getMe', undefined, draft => {
+              draft.name = body.name!
+            })
+          )
+
+          try {
+            await queryFulfilled
+          } catch {
+            patchResult.undo()
+          }
+        },
+        invalidatesTags: ['Me'],
+      }),
     }
   },
 })
 
-export const { useGetMeQuery, useSignUpMutation, useSignInMutation, useLogoutMutation } = AuthAPI
+export const {
+  useGetMeQuery,
+  useSignUpMutation,
+  useSignInMutation,
+  useLogoutMutation,
+  useEditProfileMutation,
+} = AuthAPI

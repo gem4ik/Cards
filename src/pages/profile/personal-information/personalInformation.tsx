@@ -8,15 +8,13 @@ import { Edit } from '@/assets/components/personalInformation/edit.tsx'
 import { Card } from '@/components/ui/card/card.tsx'
 import { Typography } from '@/components/ui/typography'
 import { EditProfile } from '@/pages/profile/editProfile'
+import { EditProfileValues } from '@/pages/profile/editProfile/useEditProfile.ts'
 import { Profile } from '@/pages/profile/profilePage'
+import { useEditProfileMutation, useGetMeQuery } from '@/services/AuthAPI.ts'
 
-type Props = {
-  email?: string
-  name?: string
-}
-
-export const PersonalInformation = ({ email, name }: Props): JSX.Element => {
+export const PersonalInformation = (): JSX.Element => {
   const [editMode, setEditMode] = useState(false)
+  const { data } = useGetMeQuery()
 
   const avatarChangeMutation = (avatar: string) => {
     console.log(avatar)
@@ -28,8 +26,10 @@ export const PersonalInformation = ({ email, name }: Props): JSX.Element => {
   const setEditProfile = () => {
     setEditMode(true)
   }
-
-  const onSubmit = () => {
+  const [changeName] = useEditProfileMutation()
+  const onSubmit = (data: EditProfileValues) => {
+    debugger
+    changeName(data)
     setEditMode(false)
   }
 
@@ -57,7 +57,7 @@ export const PersonalInformation = ({ email, name }: Props): JSX.Element => {
           {editMode ? (
             <EditProfile onSave={onSubmit} />
           ) : (
-            <Profile email={email} name={name} setEditProfile={setEditProfile} />
+            <Profile email={data?.email} name={data?.name} setEditProfile={setEditProfile} />
           )}
         </Card>
       </div>

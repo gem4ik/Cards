@@ -8,8 +8,9 @@ const nameMutation = z.object({
 
 export type EditProfileValues = z.infer<typeof nameMutation>
 
-export const useEditProfile = (initialValues: EditProfileValues = { name: '' }) =>
-  useForm<EditProfileValues>({
+export const useEditProfile = (initialValues: EditProfileValues = { name: '' }) => {
+  return useForm<EditProfileValues>({
     resolver: zodResolver(nameMutation),
     defaultValues: initialValues,
   })
+}

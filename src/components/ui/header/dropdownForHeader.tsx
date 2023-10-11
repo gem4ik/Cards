@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom'
+
 import { Avatar } from '@/components'
 import st from '@/components/ui/DropDown/dropDownMenu.module.scss'
 import {
@@ -17,6 +19,8 @@ type Props = {
 }
 
 export const DropdownForHeader = (props: Props) => {
+  const navigate = useNavigate()
+
   return (
     <div className={s.user__header}>
       <p>{props.user?.name}</p>
@@ -32,7 +36,7 @@ export const DropdownForHeader = (props: Props) => {
           </div>
         </DropDownItem>
         <DropDownMenuWithIcon
-          onClick={() => props.onLogOut()}
+          onClick={() => navigate('/profile')}
           icon={<PersonOutline />}
           onSelect={() => {}}
           itemText={'Edit'}

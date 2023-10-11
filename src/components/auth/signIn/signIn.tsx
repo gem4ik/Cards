@@ -21,7 +21,7 @@ type Props = {
 }
 const signInSchema = z.object({
   email: z.string().nonempty('pystoe pole').email('ne validnii email'),
-  password: z.string().nonempty('napiwi wo nibyd').min(8),
+  password: z.string().nonempty('napiwi wo nibyd').min(3),
 })
 
 export const SignIn = (props: Props) => {

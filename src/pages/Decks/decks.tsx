@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import moment from 'moment'
 
@@ -14,19 +14,48 @@ import { Column, Sort, Table, TableRoot } from '@/components/ui/table/table.tsx'
 import { TabSwitcher } from '@/components/ui/tabSwitcher/tabSwitcher.tsx'
 import { Textfield } from '@/components/ui/textfield'
 import { Typography } from '@/components/ui/typography'
-import { useGetDecksQuery } from '@/services/DecksAPI.ts'
-
+import { useAddDeckMutation, useGetDecksQuery, useRemoveDeckMutation } from '@/services/DecksAPI.ts'
+import { Modal } from '@/components/ui/modal'
+import { useForm } from 'react-hook-form'
+import { ControlledTextfield } from '@/components/ui/textfield/controlledTextfield.tsx'
+import { ControlledCheckbox } from '@/components/ui/checkbox/controlled-checkbox.tsx'
+import { useDispatch } from 'react-redux'
+import { appActions } from '@/services/appSlice.tsx'
+type DataForm = {
+  name: string
+  isPrivate: boolean
+}
 export const Decks = () => {
+  const dispatch = useDispatch()
   const [sort, setSort] = useState<Sort>({ key: 'cardsCount', direction: 'asc' })
   const [currentPage, setCurrentPage] = useState(1)
   const [itemsPerPage, setItemsPerPage] = useState('10')
+  const [open, setOpen] = useState(false)
+  const [addDeck] = useAddDeckMutation()
+  const [removedecks] = useRemoveDeckMutation()
   const sortString = sort ? `${sort.key}-${sort.direction}` : null
+  const searchParams = {
+    currentPage: currentPage,
+    itemsPerPage: +itemsPerPage,
+    orderBy: sortString,
+  }
+
+  const { handleSubmit, control } = useForm<DataForm>({
+    mode: 'onSubmit',
+    defaultValues: {
+      name: '',
+      isPrivate: false,
+    },
+  })
 
   const { data } = useGetDecksQuery({
     orderBy: sortString,
     currentPage,
     itemsPerPage: +itemsPerPage,
   })
+  useEffect(() => {
+    dispatch(appActions.setSearchParams(searchParams))
+  }, [sortString, currentPage, itemsPerPage])
 
   const columns: Column[] = [
     {
@@ -59,7 +88,21 @@ export const Decks = () => {
     <div className={s.packlistWrapper}>
       <div className={s.packlistSection}>
         <Typography variant={'large'}>Packs list</Typography>
-        <Button>Add New Pack</Button>
+        {open && (
+          <Modal open={open} title={'Add New Pack'} setOpen={setOpen}>
+            <form
+              onSubmit={handleSubmit(data => {
+                addDeck(data)
+                setOpen(false)
+              })}
+            >
+              <ControlledTextfield control={control} name={'name'} label={'name '} />
+              <ControlledCheckbox control={control} name={'isPrivate'} label={'isPrivate'} />
+              <button>hyinya kakaya nibyd</button>
+            </form>
+          </Modal>
+        )}
+        {!open && <Button onClick={() => setOpen(!open)}>Add New Pack</Button>}
       </div>
       <div className={s.filterWrapper}>
         <Textfield
@@ -89,7 +132,7 @@ export const Decks = () => {
                 <Table.Cell>{el.author.name}</Table.Cell>
                 <Table.Cell>
                   <div className={s.icons}>
-                    <Trash />
+                    <Trash callBack={() => removedecks(el.id)} />
                     <Play />
                     <Pencil />
                   </div>

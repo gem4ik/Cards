@@ -9,18 +9,16 @@
 
   .pagination__item {
     display: flex;
-    align-items: center;
+    justify-content: center;
 
     box-sizing: border-box;
     width: 24px;
     height: 24px;
     margin: auto 4px;
-    padding: 0 8px;
 
     font-size: var(--font-size-s);
     line-height: var(--line-height-m);
     color: var(--color-light-100);
-    text-align: center;
     letter-spacing: 0.01071em;
 
     border-radius: 2px;

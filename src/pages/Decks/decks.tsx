@@ -32,7 +32,6 @@ export const Decks = () => {
   const [removeDecks] = useRemoveDeckMutation()
   const sortString = sort ? `${sort.key}-${sort.direction}` : null
 
-  console.log(author)
   const searchParams = {
     currentPage: currentPage,
     itemsPerPage: +itemsPerPage,
@@ -44,8 +43,13 @@ export const Decks = () => {
   }
   const { data } = useGetDecksQuery(searchParams)
   const rangeOptions = [0, data?.maxCardsCount ? data?.maxCardsCount : 20]
-  const changeRange = (values: string[]) => {
-    setRangeValues(values)
+  const clearFilters = () => {
+    setRangeValues(['0', '10'])
+    setCurrentPage(1)
+    setItemsPerPage('10')
+    setRangeValues(['0', '10'])
+    setSearchName('')
+    setAuthor('')
   }
 
   useEffect(() => {
@@ -87,8 +91,9 @@ export const Decks = () => {
       </div>
       <div className={s.filterWrapper}>
         <Textfield
+          value={SearchName}
           className={s.searchInput}
-          placeholder={'Input Search'}
+          placeholder={`Search By Deck's name`}
           type={'search'}
           onChangeText={setSearchName}
         ></Textfield>
@@ -101,9 +106,14 @@ export const Decks = () => {
         </div>
         <div>
           <Typography variant={'body2'}>Number of cards</Typography>
-          <RangeSlider range={rangeOptions} onChange={changeRange}></RangeSlider>
+          <RangeSlider
+            range={rangeOptions}
+            onChange={values => setRangeValues(values)}
+          ></RangeSlider>
         </div>
-        <Button variant={'secondary'}>{<Trash />}Clear Filter</Button>
+        <Button variant={'secondary'} onClick={clearFilters}>
+          {<Trash />}Clear Filter
+        </Button>
       </div>
       <div className={s.tableWrapper}>
         <TableRoot>

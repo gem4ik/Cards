@@ -62,6 +62,7 @@ export const Textfield = (props: TextfieldProps) => {
       )}
       <div className={s.fieldContainer}>
         <input
+          value={props.value}
           disabled={disabled}
           onMouseDown={() => setClick(true)}
           onMouseUp={() => setClick(false)}

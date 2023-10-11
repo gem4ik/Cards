@@ -1,5 +1,6 @@
 import { CardsResponse, DeckResponce, GetDeckParams } from '@/assets/types/DecksTypes.ts'
 import { baseApi } from '@/services/base-api.ts'
+import { RootState } from '@/services/store.ts'
 
 const DecksAPI = baseApi.injectEndpoints({
   endpoints: build => {
@@ -22,12 +23,54 @@ const DecksAPI = baseApi.injectEndpoints({
           }
         },
       }),
-      addDeck: build.mutation({
+      addDeck: build.mutation<any, any>({
         query: body => {
           return {
             url: `/v1/decks`,
             method: 'POST',
             body,
+          }
+        },
+        onQueryStarted: async (_, { getState, queryFulfilled, dispatch }) => {
+          const state = getState() as RootState
+          const { searchParams } = state.app
+          try {
+            const result = await queryFulfilled
+            console.log(result)
+            dispatch(
+              DecksAPI.util.updateQueryData('getDecks', searchParams, draft => {
+                draft.items.unshift(result.data)
+              })
+            )
+          } catch (e) {
+            console.log(e)
+          }
+        },
+        invalidatesTags: ['Deck'],
+      }),
+      removeDeck: build.mutation<any, string>({
+        query: id => {
+          return {
+            url: `/v1/decks/${id}`,
+            method: 'DELETE',
+          }
+        },
+        async onQueryStarted(id, { getState, queryFulfilled, dispatch }) {
+          const state = getState() as RootState
+          const { searchParams } = state.app
+          console.log(searchParams)
+          const patchResult = dispatch(
+            DecksAPI.util.updateQueryData('getDecks', searchParams, draft => {
+              draft.items.splice(
+                draft.items.findIndex(el => el.id === id),
+                1
+              )
+            })
+          )
+          try {
+            await queryFulfilled
+          } catch {
+            patchResult.undo()
           }
         },
         invalidatesTags: ['Deck'],
@@ -36,4 +79,5 @@ const DecksAPI = baseApi.injectEndpoints({
   },
 })
 
-export const { useGetDecksQuery, useGetCardsByIdQuery, useAddDeckMutation } = DecksAPI
+export const { useGetDecksQuery, useGetCardsByIdQuery, useAddDeckMutation, useRemoveDeckMutation } =
+  DecksAPI

@@ -1,4 +1,4 @@
-import { ChangeEvent, ComponentPropsWithoutRef, useState } from 'react'
+import { ChangeEvent, ComponentPropsWithoutRef, useEffect, useState } from 'react'
 
 import { clsx } from 'clsx'
 
@@ -30,6 +30,9 @@ export const Textfield = (props: TextfieldProps) => {
     onChangeText?.(e.currentTarget.value)
   }
 
+  useEffect(() => {
+    if (type === 'password') setShowPassword(true)
+  }, [])
   const searchButton = clsx(s.button, { [s.searchButton]: type === 'search' })
   const passwordButton = clsx(s.button, s.EyeButton, {
     [s.passwordButton]: type === 'password',

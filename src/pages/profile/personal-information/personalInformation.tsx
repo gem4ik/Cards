@@ -18,7 +18,7 @@ export const PersonalInformation = ({ email, name }: Props): JSX.Element => {
 
   const avatarChangeMutation = () => {}
   const handleAvatarChanged = () => {
-    avatarChangeMutation('new Avatar')
+    avatarChangeMutation()
   }
 
   const setEditProfile = () => {

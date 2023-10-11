@@ -25,7 +25,7 @@ export const Header = forwardRef<HTMLHeadElement, Props>((props, ref) => {
 
   return (
     <header ref={ref} className={s.headerWrapper}>
-      <Logo />
+      <Logo onClick={() => navigate('/')} />
       {isAuth && <DropdownForHeader onLogOut={props.onLogOut} user={user} />}
       {!isAuth && (
         <Button onClick={() => navigate('/login')} type={'button'}>

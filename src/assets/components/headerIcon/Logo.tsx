@@ -1,6 +1,11 @@
-export const Logo = () => {
+type Props = {
+  onClick: () => void
+}
+export const Logo = (props: Props) => {
   return (
     <svg
+      style={{ cursor: 'pointer' }}
+      onClick={props.onClick}
       width="156"
       height="36"
       viewBox="0 0 512 118"

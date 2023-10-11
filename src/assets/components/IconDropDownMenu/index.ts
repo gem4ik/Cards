@@ -1,0 +1,5 @@
+export * from './edit2Outline.tsx'
+export * from './logOut.tsx'
+export * from './personOutline.tsx'
+export * from './playCircleOutline.tsx'
+export * from './trashOutline.tsx'

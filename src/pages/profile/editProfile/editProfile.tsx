@@ -1,8 +1,7 @@
 import s from './editProfile.module.scss'
 
-import { Button } from '@/components/ui/button'
-import { ControlledTextfield } from '@/components/ui/textfield/controlledTextfield.tsx'
-import { EditProfileValues, useEditProfile } from '@/pages/profile/editProfile/useEditProfile.ts'
+import { Button, ControlledTextfield } from '@/components'
+import { EditProfileValues, useEditProfile } from '@/pages'
 
 type EditProfileProps = {
   onSave: (data: EditProfileValues) => void

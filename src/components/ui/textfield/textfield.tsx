@@ -4,11 +4,8 @@ import { clsx } from 'clsx'
 
 import s from './textfield.module.scss'
 
-import { Cross } from '@/assets/components/inputIcon/cross.tsx'
-import { Eye } from '@/assets/components/inputIcon/eye.tsx'
-import { EyeOff } from '@/assets/components/inputIcon/eyeOff.tsx'
-import { Search } from '@/assets/components/inputIcon/search.tsx'
-import { Typography } from '@/components/ui/typography'
+import { Cross, Eye, EyeOff, Search } from '@/assets'
+import { Typography } from '@/components'
 
 export type TextfieldProps = {
   checked?: boolean

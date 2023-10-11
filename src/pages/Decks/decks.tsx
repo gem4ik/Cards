@@ -5,20 +5,21 @@ import { useDispatch } from 'react-redux'
 
 import s from './decks.module.scss'
 
-import { Pencil } from '@/assets/components/decksTable/pencil.tsx'
-import { Play } from '@/assets/components/decksTable/play.tsx'
-import { Trash } from '@/assets/components/decksTable/trash.tsx'
-import { Button } from '@/components/ui/button'
-import { Pagination } from '@/components/ui/pagination'
-import { RangeSlider } from '@/components/ui/slider'
-import { Column, Sort, Table, TableRoot } from '@/components/ui/table/table.tsx'
-import { TabSwitcher } from '@/components/ui/tabSwitcher/tabSwitcher.tsx'
-import { Textfield } from '@/components/ui/textfield'
-import { Typography } from '@/components/ui/typography'
-import { AddNewPack } from '@/pages/Decks/addNewPack/addNewPack.tsx'
-import { appActions } from '@/services/appSlice.tsx'
-import { useGetMeQuery } from '@/services/AuthAPI.ts'
-import { useGetDecksQuery, useRemoveDeckMutation } from '@/services/DecksAPI.ts'
+import { Pencil, Play, Trash } from '@/assets'
+import {
+  Button,
+  Pagination,
+  RangeSlider,
+  Column,
+  Sort,
+  Table,
+  TableRoot,
+  TabSwitcher,
+  Textfield,
+  Typography,
+} from '@/components'
+import { AddNewPack } from '@/pages'
+import { appActions, useGetMeQuery, useGetDecksQuery, useRemoveDeckMutation } from '@/services'
 
 export const Decks = () => {
   const dispatch = useDispatch()

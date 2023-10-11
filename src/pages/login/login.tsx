@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 
-import { Data, SignIn } from '@/components/auth/signIn/signIn.tsx'
-import { useGetMeQuery, useSignInMutation } from '@/services/AuthAPI.ts'
+import { Data, SignIn } from '@/components'
+import { useGetMeQuery, useSignInMutation } from '@/services'
 
 export const Login = () => {
   const { error } = useGetMeQuery()

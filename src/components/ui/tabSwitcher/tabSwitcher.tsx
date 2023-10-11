@@ -5,7 +5,7 @@ import { Tabs } from '@radix-ui/themes'
 
 import s from './tabSwitcher.module.scss'
 
-import { Typography } from '@/components/ui/typography'
+import { Typography } from '@/components'
 
 type Props = {
   values: string[]

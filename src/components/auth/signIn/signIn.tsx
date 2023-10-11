@@ -5,11 +5,7 @@ import { z } from 'zod'
 
 import s from './signIn.module.scss'
 
-import { Button } from '@/components/ui/button'
-import { Card } from '@/components/ui/card/card.tsx'
-import { ControlledCheckbox } from '@/components/ui/checkbox/controlled-checkbox.tsx'
-import { ControlledTextfield } from '@/components/ui/textfield/controlledTextfield.tsx'
-import { Typography } from '@/components/ui/typography'
+import { Button, Card, ControlledCheckbox, ControlledTextfield, Typography } from '@/components'
 
 export type Data = {
   email: string
@@ -20,8 +16,8 @@ type Props = {
   onSubmit: (data: Data) => void
 }
 const signInSchema = z.object({
-  email: z.string().nonempty('pystoe pole').email('ne validnii email'),
-  password: z.string().nonempty('napiwi wo nibyd').min(3),
+  email: z.string().nonempty().email(),
+  password: z.string().nonempty().min(3),
 })
 
 export const SignIn = (props: Props) => {

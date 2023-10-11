@@ -4,11 +4,9 @@ import Ava from '../editProfile/ava2.png'
 
 import s from './personalInformation.module.scss'
 
-import { Edit } from '@/assets/components/personalInformation/edit.tsx'
-import { Card } from '@/components/ui/card/card.tsx'
-import { Typography } from '@/components/ui/typography'
-import { EditProfile } from '@/pages/profile/editProfile'
-import { Profile } from '@/pages/profile/profilePage'
+import { Edit } from '@/assets'
+import { Card, Typography } from '@/components'
+import { EditProfile, Profile } from '@/pages'
 
 type Props = {
   email?: string
@@ -18,11 +16,9 @@ type Props = {
 export const PersonalInformation = ({ email, name }: Props): JSX.Element => {
   const [editMode, setEditMode] = useState(false)
 
-  const avatarChangeMutation = (avatar: string) => {
-    console.log(avatar)
-  }
+  const avatarChangeMutation = () => {}
   const handleAvatarChanged = () => {
-    avatarChangeMutation('new Avatar')
+    avatarChangeMutation()
   }
 
   const setEditProfile = () => {

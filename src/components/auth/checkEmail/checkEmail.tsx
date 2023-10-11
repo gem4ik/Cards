@@ -4,10 +4,8 @@ import { Link } from 'react-router-dom'
 import s from './checEmail.module.scss'
 
 import { EmailIcon } from '@/assets/components/emailIcon/emailIcon.tsx'
-import { Button } from '@/components/ui/button'
-import { Card } from '@/components/ui/card/card.tsx'
-import { Typography } from '@/components/ui/typography'
-import { RootState } from '@/services/store.ts'
+import { Button, Card, Typography } from '@/components'
+import { RootState } from '@/services'
 
 export const CheckEmail = () => {
   const email = useSelector<RootState, string>(state => state.app.forgottenEmail)

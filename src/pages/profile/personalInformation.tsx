@@ -1,31 +1,32 @@
 import { useState } from 'react'
 
-import Ava from '../editProfile/ava2.png'
+import Ava from '../../assets/components/personalInformation/ava2.png'
 
 import s from './personalInformation.module.scss'
 
 import { Edit } from '@/assets'
 import { Card, Typography } from '@/components'
 import { EditProfile, Profile } from '@/pages'
+import { EditProfileValues } from '@/pages/profile/editProfile/useEditProfile.ts'
+import { useEditProfileMutation, useGetMeQuery } from '@/services/AuthAPI.ts'
 
-type Props = {
-  email?: string
-  name?: string
-}
-
-export const PersonalInformation = ({ email, name }: Props): JSX.Element => {
+export const PersonalInformation = (): JSX.Element => {
   const [editMode, setEditMode] = useState(false)
+  const { data } = useGetMeQuery()
 
-  const avatarChangeMutation = () => {}
+  const avatarChangeMutation = (avatar: string) => {
+    console.log(avatar)
+  }
   const handleAvatarChanged = () => {
-    avatarChangeMutation()
+    avatarChangeMutation('new Avatar')
   }
 
   const setEditProfile = () => {
     setEditMode(true)
   }
-
-  const onSubmit = () => {
+  const [changeName] = useEditProfileMutation()
+  const onSubmit = (data: EditProfileValues) => {
+    changeName(data)
     setEditMode(false)
   }
 
@@ -53,7 +54,7 @@ export const PersonalInformation = ({ email, name }: Props): JSX.Element => {
           {editMode ? (
             <EditProfile onSave={onSubmit} />
           ) : (
-            <Profile email={email} name={name} setEditProfile={setEditProfile} />
+            <Profile email={data?.email} name={data?.name} setEditProfile={setEditProfile} />
           )}
         </Card>
       </div>

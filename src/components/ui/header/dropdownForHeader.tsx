@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom'
+
 import { LogOut, PersonOutline } from '@/assets'
 import {
   Avatar,
@@ -16,6 +18,8 @@ type Props = {
 }
 
 export const DropdownForHeader = (props: Props) => {
+  const navigate = useNavigate()
+
   return (
     <div className={s.user__header}>
       <p>{props.user?.name}</p>
@@ -31,7 +35,7 @@ export const DropdownForHeader = (props: Props) => {
           </div>
         </DropDownItem>
         <DropDownMenuWithIcon
-          onClick={() => props.onLogOut()}
+          onClick={() => navigate('/profile')}
           icon={<PersonOutline />}
           onSelect={() => {}}
           itemText={'Edit'}

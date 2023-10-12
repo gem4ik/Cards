@@ -27,3 +27,17 @@ export type SignUpResponses = {
 export type LoginResponse = {
   accessToken: string
 }
+export type EditProfileRequest = {
+  avatar?: string
+  name?: string
+  email?: string
+}
+export type EditProfileResponse = {
+  avatar: string
+  id: string
+  email: string
+  isEmailVerified: boolean
+  name: string
+  created: string
+  updated: string
+}

@@ -15,9 +15,16 @@ export const EditProfile: React.FC<EditProfileProps> = ({
   const { control, handleSubmit } = useEditProfile(initialData)
 
   return (
-    <form className={s.form} onSubmit={handleSubmit(onSave)}>
+    <form className={s.form}>
       <ControlledTextfield className={s.input} name="name" control={control} label="Nickname" />
-      <Button type="submit" fullWidth>
+      <Button
+        type="submit"
+        onClick={e => {
+          e.preventDefault()
+          handleSubmit(onSave)()
+        }}
+        fullWidth
+      >
         Save Changes
       </Button>
     </form>

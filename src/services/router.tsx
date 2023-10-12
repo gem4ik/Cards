@@ -7,8 +7,10 @@ import {
   NewPasswordConfirm,
   Layout,
 } from '@/components'
-import { Decks, Login, PersonalInformation, SignUpPage } from '@/pages'
+import { Decks, Login, SignUpPage } from '@/pages'
 import { useGetMeQuery } from '@/services'
+import { PersonalInformation } from '@/pages/profile/personalInformation.tsx'
+
 
 const router = createBrowserRouter([
   {

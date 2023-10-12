@@ -1,12 +1,5 @@
-import {
-  EditProfileRequest,
-  EditProfileResponse,
-  GetMeResponce,
-  LoginResponse,
-  SignUpRequest,
-  SignUpResponses,
-} from '@/assets/types/AuthTypes.ts'
-import { Data } from '@/components/auth/signIn/signIn.tsx'
+import { GetMeResponce, LoginResponse, SignUpRequest, SignUpResponses } from '@/assets'
+import { Data } from '@/components'
 import { baseApi } from '@/services/base-api.ts'
 
 const AuthAPI = baseApi.injectEndpoints({

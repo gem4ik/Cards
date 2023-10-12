@@ -3,9 +3,9 @@ import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
 import * as RadixCheckbox from '@radix-ui/react-checkbox'
 import { CheckIcon } from '@radix-ui/react-icons'
 
-import { Typography } from '../typography'
-
 import s from './checkbox.module.scss'
+
+import { Typography } from '@/components'
 
 export type CheckboxProps = Partial<{
   className?: string

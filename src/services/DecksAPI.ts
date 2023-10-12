@@ -31,21 +31,6 @@ const DecksAPI = baseApi.injectEndpoints({
             body,
           }
         },
-        onQueryStarted: async (_, { getState, queryFulfilled, dispatch }) => {
-          const state = getState() as RootState
-          const { searchParams } = state.app
-          try {
-            const result = await queryFulfilled
-            console.log(result)
-            dispatch(
-              DecksAPI.util.updateQueryData('getDecks', searchParams, draft => {
-                draft.items.unshift(result.data)
-              })
-            )
-          } catch (e) {
-            console.log(e)
-          }
-        },
         invalidatesTags: ['Deck'],
       }),
       removeDeck: build.mutation<any, string>({
@@ -58,7 +43,6 @@ const DecksAPI = baseApi.injectEndpoints({
         async onQueryStarted(id, { getState, queryFulfilled, dispatch }) {
           const state = getState() as RootState
           const { searchParams } = state.app
-          console.log(searchParams)
           const patchResult = dispatch(
             DecksAPI.util.updateQueryData('getDecks', searchParams, draft => {
               draft.items.splice(
@@ -67,6 +51,7 @@ const DecksAPI = baseApi.injectEndpoints({
               )
             })
           )
+
           try {
             await queryFulfilled
           } catch {

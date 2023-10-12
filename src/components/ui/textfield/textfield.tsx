@@ -1,14 +1,11 @@
-import { ChangeEvent, ComponentPropsWithoutRef, useState } from 'react'
+import { ChangeEvent, ComponentPropsWithoutRef, useEffect, useState } from 'react'
 
 import { clsx } from 'clsx'
 
 import s from './textfield.module.scss'
 
-import { Cross } from '@/assets/components/inputIcon/cross.tsx'
-import { Eye } from '@/assets/components/inputIcon/eye.tsx'
-import { EyeOff } from '@/assets/components/inputIcon/eyeOff.tsx'
-import { Search } from '@/assets/components/inputIcon/search.tsx'
-import { Typography } from '@/components/ui/typography'
+import { Cross, Eye, EyeOff, Search } from '@/assets'
+import { Typography } from '@/components'
 
 export type TextfieldProps = {
   checked?: boolean
@@ -30,6 +27,9 @@ export const Textfield = (props: TextfieldProps) => {
     onChangeText?.(e.currentTarget.value)
   }
 
+  useEffect(() => {
+    if (type === 'password') setShowPassword(true)
+  }, [])
   const searchButton = clsx(s.button, { [s.searchButton]: type === 'search' })
   const passwordButton = clsx(s.button, s.EyeButton, {
     [s.passwordButton]: type === 'password',
@@ -59,6 +59,7 @@ export const Textfield = (props: TextfieldProps) => {
       )}
       <div className={s.fieldContainer}>
         <input
+          value={props.value}
           disabled={disabled}
           onMouseDown={() => setClick(true)}
           onMouseUp={() => setClick(false)}

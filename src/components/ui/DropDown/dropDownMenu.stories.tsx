@@ -1,14 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
 import s from './dropDownMenu.module.scss'
-import { DropDownItem, DropdownMenuRadix, DropDownMenuWithIcon } from './dropDownMenu.tsx'
 
+import { Edit2Outline } from '@/assets/components/IconDropDownMenu/edit2Outline.tsx'
+import { LogOut } from '@/assets/components/IconDropDownMenu/logOut.tsx'
+import { PersonOutline } from '@/assets/components/IconDropDownMenu/personOutline.tsx'
+import { PlayCircleOutline } from '@/assets/components/IconDropDownMenu/playCircleOutline.tsx'
+import { TrashOutline } from '@/assets/components/IconDropDownMenu/trashOutline.tsx'
+import { DropDownItem, DropdownMenuRadix, DropDownMenuWithIcon } from '@/components'
 import { Avatar } from '@/components/ui/avatar'
-import { Edit2Outline } from '@/components/ui/DropDown/IconDropDownMenu/edit2Outline.tsx'
-import { LogOut } from '@/components/ui/DropDown/IconDropDownMenu/logOut.tsx'
-import { PersonOutline } from '@/components/ui/DropDown/IconDropDownMenu/personOutline.tsx'
-import { PlayCircleOutline } from '@/components/ui/DropDown/IconDropDownMenu/playCircleOutline.tsx'
-import { TrashOutline } from '@/components/ui/DropDown/IconDropDownMenu/trashOutline.tsx'
 import { Typography } from '@/components/ui/typography'
 
 const meta = {
@@ -27,22 +27,19 @@ export const DropdownMenuAvatar: Story = {
     children: (
       <>
         <div>
-          <DropDownItem
-            className={''}
-            children={
-              <div className={s.dropDownItemWrapper}>
-                <Avatar />
-                <div>
-                  <Typography style={{ color: 'white' }} variant={'subtitle2'}>
-                    {'Ivan'}
-                  </Typography>
-                  <Typography style={{ color: 'grey' }} variant={'caption'}>
-                    {'j&johnson@gmail.com'}
-                  </Typography>
-                </div>
+          <DropDownItem className={''}>
+            <div className={s.dropDownItemWrapper}>
+              <Avatar />
+              <div>
+                <Typography style={{ color: 'white' }} variant={'subtitle2'}>
+                  {'Ivan'}
+                </Typography>
+                <Typography style={{ color: 'grey' }} variant={'caption'}>
+                  {'j&johnson@gmail.com'}
+                </Typography>
               </div>
-            }
-          />
+            </div>
+          </DropDownItem>
         </div>
         <DropDownMenuWithIcon icon={<PersonOutline />} onSelect={() => {}} itemText={'Edit'} />
         <DropDownMenuWithIcon icon={<LogOut />} onSelect={() => {}} itemText={'Sign Out'} />

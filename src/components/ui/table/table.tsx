@@ -66,7 +66,7 @@ export type HeadProps = {
   onSort?: (sort: Sort) => void
 }
 
-export const Header = (props: HeadProps) => {
+export const TableHeader = (props: HeadProps) => {
   const { columns, sort, onSort, ...res } = props
 
   const handleSort = (key: string, sortable?: boolean) => () => {
@@ -100,7 +100,7 @@ export const Header = (props: HeadProps) => {
 export const Table = {
   TableRoot,
   Thead,
-  Header,
+  Header: TableHeader,
   HeadCell,
   Row,
   Cell,

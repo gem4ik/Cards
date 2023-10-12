@@ -2,12 +2,9 @@ import moment from 'moment/moment'
 
 import s from './cards.module.scss'
 
-import { BackArrow } from '@/assets/components/backArrow/backArrow.tsx'
-import { Button } from '@/components/ui/button'
-import { Table } from '@/components/ui/table/table.tsx'
-import { Textfield } from '@/components/ui/textfield'
-import { Typography } from '@/components/ui/typography'
-import { useGetCardsByIdQuery } from '@/services/DecksAPI.ts'
+import { BackArrow } from '@/assets'
+import { Button, Table, Textfield, Typography } from '@/components'
+import { useGetCardsByIdQuery } from '@/services'
 
 export const Cards = () => {
   const idCard = 'cln2zvdvf0pdxvo2qwlenj6st'

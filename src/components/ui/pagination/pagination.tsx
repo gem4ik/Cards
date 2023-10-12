@@ -1,9 +1,7 @@
 import s from './pagination.module.scss'
 
-import { LeftArrow } from '@/assets/components/paginationArrow/leftArrow.tsx'
-import { RightArrow } from '@/assets/components/paginationArrow/rightArrow.tsx'
-import { DOTS, usePagination } from '@/components/ui/pagination/usePagination.tsx'
-import { Selector } from '@/components/ui/select/select.tsx'
+import { LeftArrow, RightArrow } from '@/assets'
+import { DOTS, usePagination, Selector } from '@/components'
 
 type PaginationProps = {
   onPageChange: (nextPage: number) => void

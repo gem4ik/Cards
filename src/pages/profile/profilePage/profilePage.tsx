@@ -1,12 +1,14 @@
 import { useNavigate } from 'react-router-dom'
 
+import { useNavigate } from 'react-router-dom'
+
 import s from './profilePage.module.scss'
 
-import { Edit } from '@/assets/components/personalInformation/edit.tsx'
+import { Edit } from '@/assets'
 import { Logout } from '@/assets/components/personalInformation/logout.tsx'
-import { Button } from '@/components/ui/button'
-import { Typography } from '@/components/ui/typography'
+import { Button, Typography } from '@/components'
 import { useLogoutMutation } from '@/services/AuthAPI.ts'
+
 
 type Props = {
   email?: string
@@ -15,7 +17,6 @@ type Props = {
 }
 
 export const Profile = ({ email, name, setEditProfile }: Props): JSX.Element => {
-  // const logout = () => {}
   const [logout] = useLogoutMutation()
   const navigate = useNavigate()
   const onLogOutHandler = () => {

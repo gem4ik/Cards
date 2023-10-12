@@ -1,61 +1,61 @@
 import { useEffect, useState } from 'react'
 
 import moment from 'moment'
+import { useDispatch } from 'react-redux'
 
 import s from './decks.module.scss'
 
-import { Pencil } from '@/assets/components/decksTable/pencil.tsx'
-import { Play } from '@/assets/components/decksTable/play.tsx'
-import { Trash } from '@/assets/components/decksTable/trash.tsx'
-import { Button } from '@/components/ui/button'
-import { Pagination } from '@/components/ui/pagination'
-import { RangeSlider } from '@/components/ui/slider'
-import { Column, Sort, Table, TableRoot } from '@/components/ui/table/table.tsx'
-import { TabSwitcher } from '@/components/ui/tabSwitcher/tabSwitcher.tsx'
-import { Textfield } from '@/components/ui/textfield'
-import { Typography } from '@/components/ui/typography'
-import { useAddDeckMutation, useGetDecksQuery, useRemoveDeckMutation } from '@/services/DecksAPI.ts'
-import { Modal } from '@/components/ui/modal'
-import { useForm } from 'react-hook-form'
-import { ControlledTextfield } from '@/components/ui/textfield/controlledTextfield.tsx'
-import { ControlledCheckbox } from '@/components/ui/checkbox/controlled-checkbox.tsx'
-import { useDispatch } from 'react-redux'
-import { appActions } from '@/services/appSlice.tsx'
-type DataForm = {
-  name: string
-  isPrivate: boolean
-}
+import { Pencil, Play, Trash } from '@/assets'
+import {
+  Button,
+  Pagination,
+  RangeSlider,
+  Column,
+  Sort,
+  Table,
+  TableRoot,
+  TabSwitcher,
+  Textfield,
+  Typography,
+} from '@/components'
+import { AddNewPack } from '@/pages'
+import { appActions, useGetMeQuery, useGetDecksQuery, useRemoveDeckMutation } from '@/services'
+
 export const Decks = () => {
   const dispatch = useDispatch()
+  const { data: getMeData } = useGetMeQuery()
   const [sort, setSort] = useState<Sort>({ key: 'cardsCount', direction: 'asc' })
   const [currentPage, setCurrentPage] = useState(1)
   const [itemsPerPage, setItemsPerPage] = useState('10')
-  const [open, setOpen] = useState(false)
-  const [addDeck] = useAddDeckMutation()
-  const [removedecks] = useRemoveDeckMutation()
+  const [rangeValues, setRangeValues] = useState(['0', '10'])
+  const [SearchName, setSearchName] = useState('')
+  const [author, setAuthor] = useState('')
+  const [removeDecks] = useRemoveDeckMutation()
   const sortString = sort ? `${sort.key}-${sort.direction}` : null
+
   const searchParams = {
     currentPage: currentPage,
     itemsPerPage: +itemsPerPage,
     orderBy: sortString,
+    maxCardsCount: rangeValues[1],
+    minCardsCount: rangeValues[0],
+    name: SearchName,
+    authorId: author === 'My Cards' ? getMeData?.id : '',
+  }
+  const { data } = useGetDecksQuery(searchParams)
+  const rangeOptions = [0, data?.maxCardsCount ? data?.maxCardsCount : 20]
+  const clearFilters = () => {
+    setRangeValues(['0', '10'])
+    setCurrentPage(1)
+    setItemsPerPage('10')
+    setRangeValues(['0', '10'])
+    setSearchName('')
+    setAuthor('')
   }
 
-  const { handleSubmit, control } = useForm<DataForm>({
-    mode: 'onSubmit',
-    defaultValues: {
-      name: '',
-      isPrivate: false,
-    },
-  })
-
-  const { data } = useGetDecksQuery({
-    orderBy: sortString,
-    currentPage,
-    itemsPerPage: +itemsPerPage,
-  })
   useEffect(() => {
     dispatch(appActions.setSearchParams(searchParams))
-  }, [sortString, currentPage, itemsPerPage])
+  }, [currentPage, itemsPerPage, sortString])
 
   const columns: Column[] = [
     {
@@ -88,37 +88,33 @@ export const Decks = () => {
     <div className={s.packlistWrapper}>
       <div className={s.packlistSection}>
         <Typography variant={'large'}>Packs list</Typography>
-        {open && (
-          <Modal open={open} title={'Add New Pack'} setOpen={setOpen}>
-            <form
-              onSubmit={handleSubmit(data => {
-                addDeck(data)
-                setOpen(false)
-              })}
-            >
-              <ControlledTextfield control={control} name={'name'} label={'name '} />
-              <ControlledCheckbox control={control} name={'isPrivate'} label={'isPrivate'} />
-              <button>hyinya kakaya nibyd</button>
-            </form>
-          </Modal>
-        )}
-        {!open && <Button onClick={() => setOpen(!open)}>Add New Pack</Button>}
+        <AddNewPack />
       </div>
       <div className={s.filterWrapper}>
         <Textfield
+          value={SearchName}
           className={s.searchInput}
-          placeholder={'Input Search'}
+          placeholder={`Search By Deck's name`}
           type={'search'}
+          onChangeText={setSearchName}
         ></Textfield>
         <div>
           <Typography variant={'body2'}>Show packs cards</Typography>
-          <TabSwitcher values={['My Cards', 'All Cards']} onValueChange={() => {}} />
+          <TabSwitcher
+            values={['My Cards', 'All Cards']}
+            onValueChange={value => setAuthor(value)}
+          />
         </div>
         <div>
           <Typography variant={'body2'}>Number of cards</Typography>
-          <RangeSlider range={[1, 50]} onChange={() => {}}></RangeSlider>
+          <RangeSlider
+            range={rangeOptions}
+            onChange={values => setRangeValues(values)}
+          ></RangeSlider>
         </div>
-        <Button variant={'secondary'}>{<Trash />}Clear Filter</Button>
+        <Button variant={'secondary'} onClick={clearFilters}>
+          {<Trash />}Clear Filter
+        </Button>
       </div>
       <div className={s.tableWrapper}>
         <TableRoot>
@@ -132,7 +128,7 @@ export const Decks = () => {
                 <Table.Cell>{el.author.name}</Table.Cell>
                 <Table.Cell>
                   <div className={s.icons}>
-                    <Trash callBack={() => removedecks(el.id)} />
+                    <Trash callBack={() => removeDecks(el.id)} />
                     <Play />
                     <Pencil />
                   </div>

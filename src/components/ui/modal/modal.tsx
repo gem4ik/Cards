@@ -1,8 +1,8 @@
 import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
 
-import closeIcon from '../../../assets/components/closeIcon/closeIcon.png'
-
 import s from './modal.module.scss'
+
+import { Cross } from '@/assets'
 
 export type ModalProps = {
   open: boolean
@@ -24,7 +24,7 @@ export const Modal = forwardRef<ElementRef<'div'>, ModalProps>(
               {title && (
                 <div className={s.title}>
                   <h4>{title}</h4>
-                  <img src={closeIcon} alt="image" onClick={() => setOpen(!open)} />
+                  <Cross onClick={() => setOpen(!open)} />
                 </div>
               )}
               <div>{children}</div>

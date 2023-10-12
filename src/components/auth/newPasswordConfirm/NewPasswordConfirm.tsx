@@ -2,9 +2,7 @@ import { Link } from 'react-router-dom'
 
 import s from './newPassowrdConfirm.module.scss'
 
-import { Button } from '@/components/ui/button'
-import { Card } from '@/components/ui/card/card.tsx'
-import { Typography } from '@/components/ui/typography'
+import { Button, Card, Typography } from '@/components'
 
 export const NewPasswordConfirm = () => {
   return (

@@ -4,12 +4,10 @@ import Ava from '../../assets/components/personalInformation/ava2.png'
 
 import s from './personalInformation.module.scss'
 
-import { Edit } from '@/assets/components/personalInformation/edit.tsx'
-import { Card } from '@/components/ui/card/card.tsx'
-import { Typography } from '@/components/ui/typography'
-import { EditProfile } from '@/pages/profile/editProfile'
+import { Edit } from '@/assets'
+import { Card, Typography } from '@/components'
+import { EditProfile, Profile } from '@/pages'
 import { EditProfileValues } from '@/pages/profile/editProfile/useEditProfile.ts'
-import { Profile } from '@/pages/profile/profilePage'
 import { useEditProfileMutation, useGetMeQuery } from '@/services/AuthAPI.ts'
 
 export const PersonalInformation = (): JSX.Element => {

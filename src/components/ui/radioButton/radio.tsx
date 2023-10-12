@@ -2,9 +2,9 @@ import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
 
 import * as RadioGroup from '@radix-ui/react-radio-group'
 
-import s from './/radio.module.scss'
+import s from './radio.module.scss'
 
-import { Typography } from '@/components/ui/typography'
+import { Typography } from '@/components'
 
 type Props = {
   labels: string[]

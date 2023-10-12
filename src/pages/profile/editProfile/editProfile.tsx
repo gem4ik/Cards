@@ -1,5 +1,3 @@
-// import { Form } from 'react-hook-form'
-
 import s from './editProfile.module.scss'
 
 import { Button } from '@/components/ui/button'
@@ -18,23 +16,14 @@ export const EditProfile: React.FC<EditProfileProps> = ({
   const { control, handleSubmit } = useEditProfile(initialData)
 
   return (
-    <form
-      // control={control}
-      className={s.form}
-      onSubmit={e => {
-        handleSubmit(onSave)()
-        e.preventDefault()
-
-        return false
-      }}
-    >
+    <form className={s.form}>
       <ControlledTextfield className={s.input} name="name" control={control} label="Nickname" />
       <Button
         type="submit"
-        // onClick={e => {
-        //   e.preventDefault()
-        //   handleSubmit(onSave)()
-        // }}
+        onClick={e => {
+          e.preventDefault()
+          handleSubmit(onSave)()
+        }}
         fullWidth
       >
         Save Changes

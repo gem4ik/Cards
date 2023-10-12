@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom'
+
 import { LogOut, PersonOutline } from '@/assets'
 import {
   Avatar,

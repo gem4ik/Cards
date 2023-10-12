@@ -1,14 +1,11 @@
 import { useNavigate } from 'react-router-dom'
 
-import { useNavigate } from 'react-router-dom'
-
 import s from './profilePage.module.scss'
 
 import { Edit } from '@/assets'
 import { Logout } from '@/assets/components/personalInformation/logout.tsx'
 import { Button, Typography } from '@/components'
 import { useLogoutMutation } from '@/services/AuthAPI.ts'
-
 
 type Props = {
   email?: string

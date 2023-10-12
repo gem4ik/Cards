@@ -28,7 +28,8 @@ export const PersonalInformation = (): JSX.Element => {
   }
   const [changeName] = useEditProfileMutation()
   const onSubmit = (data: EditProfileValues) => {
-    debugger
+    console.log('submit')
+    // debugger
     changeName(data)
     setEditMode(false)
   }

@@ -7,7 +7,7 @@ import { NewPasswordConfirm } from '@/components/auth/newPasswordConfirm/NewPass
 import { Layout } from '@/components/layout'
 import { Decks } from '@/pages/Decks/decks.tsx'
 import { Login } from '@/pages/login/login.tsx'
-import { PersonalInformation } from '@/pages/profile/personal-information/personalInformation.tsx'
+import { PersonalInformation } from '@/pages/profile/personalInformation.tsx'
 import { SignUpPage } from '@/pages/signUp/SignUpPage.tsx'
 import { useGetMeQuery } from '@/services/AuthAPI.ts'
 

@@ -1,9 +1,9 @@
 import s from './profilePage.module.scss'
 
 import { Edit } from '@/assets/components/personalInformation/edit.tsx'
+import { Logout } from '@/assets/components/personalInformation/logout.tsx'
 import { Button } from '@/components/ui/button'
 import { Typography } from '@/components/ui/typography'
-import { Logout } from '@/pages/profile/editProfile/logout.tsx'
 
 type Props = {
   email?: string

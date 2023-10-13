@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { ChangeEvent, useRef, useState } from 'react'
 
 import Ava from '../../../assets/components/personalInformation/ava2.png'
 
@@ -13,20 +13,28 @@ import { useEditProfileMutation, useGetMeQuery } from '@/services/AuthAPI.ts'
 export const PersonalInformation = (): JSX.Element => {
   const [editMode, setEditMode] = useState(false)
   const { data } = useGetMeQuery()
+  // const { avatar, setAvatar } = useState<Blob|undefined>()
+  const [editProfile] = useEditProfileMutation()
 
-  const avatarChangeMutation = (avatar: string) => {
-    console.log(avatar)
+  const fileInputRef = useRef<HTMLInputElement>(null)
+  const avatarChangeMutation = (event: ChangeEvent<HTMLInputElement>) => {
+    const formData = new FormData()
+
+    debugger
+    if (event.currentTarget.files) {
+      formData.append('avatarNew', event.currentTarget.files[0])
+      console.log(formData)
+      // editProfile(formData)
+    }
   }
   const handleAvatarChanged = () => {
-    avatarChangeMutation('new Avatar')
+    fileInputRef.current?.click()
   }
-
   const setEditProfile = () => {
     setEditMode(true)
   }
-  const [changeName] = useEditProfileMutation()
   const onSubmit = (data: EditProfileValues) => {
-    changeName(data)
+    editProfile(data)
     setEditMode(false)
   }
 
@@ -49,6 +57,12 @@ export const PersonalInformation = (): JSX.Element => {
               <button className={s.editAvatarButton} onClick={handleAvatarChanged}>
                 <Edit />
               </button>
+              <input
+                type="file"
+                ref={fileInputRef}
+                className={s.inputFile}
+                onChange={avatarChangeMutation}
+              />
             </div>
           </div>
           {editMode ? (

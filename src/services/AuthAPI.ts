@@ -1,4 +1,11 @@
-import { GetMeResponce, LoginResponse, SignUpRequest, SignUpResponses } from '@/assets'
+import {
+  EditProfileRequest,
+  EditProfileResponse,
+  GetMeResponce,
+  LoginResponse,
+  SignUpRequest,
+  SignUpResponses,
+} from '@/assets'
 import { Data } from '@/components'
 import { baseApi } from '@/services/base-api.ts'
 

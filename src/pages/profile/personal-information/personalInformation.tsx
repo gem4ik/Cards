@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import Ava from '../../assets/components/personalInformation/ava2.png'
+import Ava from '../../../assets/components/personalInformation/ava2.png'
 
 import s from './personalInformation.module.scss'
 

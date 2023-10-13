@@ -8,9 +8,8 @@ import {
   Layout,
 } from '@/components'
 import { Decks, Login, SignUpPage } from '@/pages'
+import { PersonalInformation } from '@/pages/profile/personal-information/personalInformation.tsx'
 import { useGetMeQuery } from '@/services'
-import { PersonalInformation } from '@/pages/profile/personalInformation.tsx'
-
 
 const router = createBrowserRouter([
   {

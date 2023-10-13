@@ -8,6 +8,7 @@ export const Cross = (props: Props) => {
 
   return (
     <svg
+      style={{ cursor: 'pointer' }}
       onClick={props.onClick}
       width="14"
       height="14"

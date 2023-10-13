@@ -2,7 +2,9 @@ import { useState } from 'react'
 
 import { useForm } from 'react-hook-form'
 
-import { Button, ControlledCheckbox, Modal, ControlledTextfield } from '@/components'
+import s from './addNewPack.module.scss'
+
+import { Button, ControlledCheckbox, ControlledTextfield, Modal } from '@/components'
 import { useAddDeckMutation } from '@/services'
 
 type DataForm = {
@@ -29,17 +31,23 @@ export const AddNewPack = () => {
   })
 
   return (
-    <div>
+    <form onSubmit={submitHandler}>
       {open && (
-        <Modal open={open} title={'Add New Pack'} setOpen={setOpen}>
-          <form onSubmit={submitHandler}>
-            <ControlledTextfield control={control} name={'name'} label={'name '} />
-            <ControlledCheckbox control={control} name={'isPrivate'} label={'isPrivate'} />
-            <button>add post</button>
-          </form>
+        <Modal
+          submitButtonTitle={'Add New Pack'}
+          open={open}
+          title={'Add New Pack'}
+          setOpen={setOpen}
+        >
+          <div className={s.addPack__formWrapper}>
+            <ControlledTextfield fullWidth control={control} name={'name'} label={'name '} />
+            <ControlledCheckbox control={control} name={'isPrivate'} label={'Private pack'} />
+          </div>
         </Modal>
       )}
-      {!open && <Button onClick={() => setOpen(!open)}>Add New Pack</Button>}
-    </div>
+      <Button type={'button'} onClick={() => setOpen(!open)}>
+        Add New Pack
+      </Button>
+    </form>
   )
 }

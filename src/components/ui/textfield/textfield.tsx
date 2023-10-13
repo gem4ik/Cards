@@ -16,10 +16,21 @@ export type TextfieldProps = {
   onChangeText?: (value: string) => void
   type?: string
   disabled?: boolean
+  fullWidth?: boolean
 } & ComponentPropsWithoutRef<'input'>
 
 export const Textfield = (props: TextfieldProps) => {
-  const { error, label, placeholder, onChangeText, className, type, disabled, onChange } = props
+  const {
+    fullWidth,
+    error,
+    label,
+    placeholder,
+    onChangeText,
+    className,
+    type,
+    disabled,
+    onChange,
+  } = props
   const [showPassword, setShowPassword] = useState(false)
   const [click, setClick] = useState(false)
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -51,7 +62,7 @@ export const Textfield = (props: TextfieldProps) => {
   }
 
   return (
-    <div className={s.textfieldWrapper}>
+    <div className={`${s.textfieldWrapper} ${fullWidth ? s.fullWidth : ''}`}>
       {label && (
         <Typography className={label} variant={'body2'}>
           {label}

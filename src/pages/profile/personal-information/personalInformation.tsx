@@ -1,40 +1,34 @@
 import { ChangeEvent, useRef, useState } from 'react'
 
-import Ava from '../../../assets/components/personalInformation/ava2.png'
-
 import s from './personalInformation.module.scss'
 
 import { Edit } from '@/assets'
 import { Card, Typography } from '@/components'
-import { EditProfile, Profile } from '@/pages'
-import { EditProfileValues } from '@/pages/profile/editProfile/useEditProfile.ts'
+import { EditProfile, Profile, EditProfileValues } from '@/pages'
 import { useEditProfileMutation, useGetMeQuery } from '@/services/AuthAPI.ts'
 
 export const PersonalInformation = (): JSX.Element => {
   const [editMode, setEditMode] = useState(false)
   const { data } = useGetMeQuery()
-  // const { avatar, setAvatar } = useState<Blob|undefined>()
   const [editProfile] = useEditProfileMutation()
 
-  const fileInputRef = useRef<HTMLInputElement>(null)
+  const fileInputRef = useRef<HTMLInputElement>(null!)
   const avatarChangeMutation = (event: ChangeEvent<HTMLInputElement>) => {
     const formData = new FormData()
 
-    debugger
     if (event.currentTarget.files) {
-      formData.append('avatarNew', event.currentTarget.files[0])
-      console.log(formData)
-      // editProfile(formData)
+      formData.append('avatar', event.currentTarget.files[0])
+      editProfile(formData)
     }
   }
   const handleAvatarChanged = () => {
-    fileInputRef.current?.click()
+    fileInputRef.current.click()
   }
   const setEditProfile = () => {
     setEditMode(true)
   }
   const onSubmit = (data: EditProfileValues) => {
-    editProfile(data)
+    editProfile(data?.name)
     setEditMode(false)
   }
 
@@ -53,8 +47,8 @@ export const PersonalInformation = (): JSX.Element => {
 
           <div className={s.photoContainer}>
             <div>
-              <img src={Ava} alt={'avatar'} />
-              <button className={s.editAvatarButton} onClick={handleAvatarChanged}>
+              <img src={data?.avatar} alt={'avatar'} />
+              <button type={'button'} className={s.editAvatarButton} onClick={handleAvatarChanged}>
                 <Edit />
               </button>
               <input

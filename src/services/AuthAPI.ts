@@ -1,4 +1,5 @@
 import {
+  EditProfileRequest,
   EditProfileResponse,
   GetMeResponce,
   LoginResponse,
@@ -42,7 +43,7 @@ const AuthAPI = baseApi.injectEndpoints({
           method: 'POST',
         }),
       }),
-      editProfile: build.mutation<EditProfileResponse, FormData>({
+      editProfile: build.mutation<EditProfileResponse, EditProfileRequest>({
         query: body => {
           return {
             url: '/v1/auth/me',
@@ -50,19 +51,29 @@ const AuthAPI = baseApi.injectEndpoints({
             body,
           }
         },
-        // onQueryStarted: async (body, { queryFulfilled, dispatch }) => {
-        //   const patchResult = dispatch(
-        //     AuthAPI.util.updateQueryData('getMe', undefined, draft => {
-        //       draft.name = body.name!
-        //     })
-        //   )
-        //
-        //   try {
-        //     await queryFulfilled
-        //   } catch {
-        //     patchResult.undo()
-        //   }
-        // },
+        onQueryStarted: async (body, { queryFulfilled, dispatch }) => {
+          const patchResult = dispatch(
+            AuthAPI.util.updateQueryData('getMe', undefined, draft => {
+              draft.name = body.name!
+            })
+          )
+
+          try {
+            await queryFulfilled
+          } catch {
+            patchResult.undo()
+          }
+        },
+        invalidatesTags: ['Me'],
+      }),
+      editProfileAvatar: build.mutation<EditProfileResponse, FormData>({
+        query: body => {
+          return {
+            url: '/v1/auth/me',
+            method: 'PATCH',
+            body,
+          }
+        },
         invalidatesTags: ['Me'],
       }),
     }
@@ -75,4 +86,5 @@ export const {
   useSignInMutation,
   useLogoutMutation,
   useEditProfileMutation,
+  useEditProfileAvatarMutation,
 } = AuthAPI

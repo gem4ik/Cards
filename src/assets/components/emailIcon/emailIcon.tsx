@@ -4,7 +4,7 @@ export const EmailIcon = () => {
       <path
         d="M95.5 48C95.5 74.2335 74.2335 95.5 48 95.5C21.7665 95.5 0.5 74.2335 0.5 48C0.5 21.7665 21.7665 0.5 48 0.5C74.2335 0.5 95.5 21.7665 95.5 48Z"
         fill="#8C61FF"
-        fill-opacity="0.05"
+        fillOpacity="0.05"
         stroke="#BEA6FF"
       />
       <path

@@ -1,16 +1,22 @@
 import { ChangeEvent, useRef, useState } from 'react'
 
+import Ava from './../../../assets/components/personalInformation/ava2.png'
 import s from './personalInformation.module.scss'
 
 import { Edit } from '@/assets'
 import { Card, Typography } from '@/components'
 import { EditProfile, Profile, EditProfileValues } from '@/pages'
-import { useEditProfileMutation, useGetMeQuery } from '@/services/AuthAPI.ts'
+import {
+  useEditProfileAvatarMutation,
+  useEditProfileMutation,
+  useGetMeQuery,
+} from '@/services/AuthAPI.ts'
 
 export const PersonalInformation = (): JSX.Element => {
   const [editMode, setEditMode] = useState(false)
   const { data } = useGetMeQuery()
   const [editProfile] = useEditProfileMutation()
+  const [editProfileAvatar] = useEditProfileAvatarMutation()
 
   const fileInputRef = useRef<HTMLInputElement>(null!)
   const avatarChangeMutation = (event: ChangeEvent<HTMLInputElement>) => {
@@ -18,7 +24,7 @@ export const PersonalInformation = (): JSX.Element => {
 
     if (event.currentTarget.files) {
       formData.append('avatar', event.currentTarget.files[0])
-      editProfile(formData)
+      editProfileAvatar(formData)
     }
   }
   const handleAvatarChanged = () => {
@@ -28,7 +34,7 @@ export const PersonalInformation = (): JSX.Element => {
     setEditMode(true)
   }
   const onSubmit = (data: EditProfileValues) => {
-    editProfile(data?.name)
+    editProfile(data)
     setEditMode(false)
   }
 
@@ -47,7 +53,7 @@ export const PersonalInformation = (): JSX.Element => {
 
           <div className={s.photoContainer}>
             <div>
-              <img src={data?.avatar} alt={'avatar'} />
+              <img src={data?.avatar ? data.avatar : Ava} alt={'avatar'} />
               <button type={'button'} className={s.editAvatarButton} onClick={handleAvatarChanged}>
                 <Edit />
               </button>

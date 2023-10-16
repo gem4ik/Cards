@@ -15,6 +15,14 @@ const DecksAPI = baseApi.injectEndpoints({
         },
         providesTags: ['Deck'],
       }),
+      getDecksByAuthorId: build.query<any, any>({
+        query: id => {
+          return {
+            url: `/v1/decks/${id}`,
+            method: 'GET',
+          }
+        },
+      }),
       getCardsById: build.query<CardsResponse, string>({
         query: id => {
           return {
@@ -22,6 +30,7 @@ const DecksAPI = baseApi.injectEndpoints({
             method: 'GET',
           }
         },
+        providesTags: ['Cards'],
       }),
       addDeck: build.mutation<any, any>({
         query: body => {
@@ -60,9 +69,39 @@ const DecksAPI = baseApi.injectEndpoints({
         },
         invalidatesTags: ['Deck'],
       }),
+      addNewCard: build.mutation<any, any>({
+        query: ({ id, ...data }) => {
+          console.log(`id => ${id}`)
+          console.log(`body => ${id}`)
+          return {
+            url: `/v1/decks/${id}/cards`,
+            method: 'POST',
+            body: data,
+          }
+        },
+        async onQueryStarted(id, { queryFulfilled, dispatch }) {
+          try {
+            const { data } = await queryFulfilled
+            dispatch(
+              DecksAPI.util.updateQueryData('getCardsById', id, draft => {
+                draft.items.unshift(data.items)
+              })
+            )
+          } catch (e) {
+            console.log(e)
+          }
+        },
+        invalidatesTags: ['Cards'],
+      }),
     }
   },
 })
 
-export const { useGetDecksQuery, useGetCardsByIdQuery, useAddDeckMutation, useRemoveDeckMutation } =
-  DecksAPI
+export const {
+  useGetDecksQuery,
+  useGetCardsByIdQuery,
+  useAddDeckMutation,
+  useRemoveDeckMutation,
+  useGetDecksByAuthorIdQuery,
+  useAddNewCardMutation,
+} = DecksAPI

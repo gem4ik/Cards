@@ -27,6 +27,7 @@ export const AddNewPack = () => {
 
   const submitHandler = handleSubmit(data => {
     addDeck(data)
+    console.log(data)
     setOpen(false)
   })
 

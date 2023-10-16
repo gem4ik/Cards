@@ -20,6 +20,7 @@ import {
 } from '@/components'
 import { AddNewPack } from '@/pages'
 import { appActions, useGetMeQuery, useGetDecksQuery, useRemoveDeckMutation } from '@/services'
+import { Link } from 'react-router-dom'
 
 export const Decks = () => {
   const dispatch = useDispatch()
@@ -122,7 +123,11 @@ export const Decks = () => {
           <Table.Tbody>
             {data?.items?.map(el => (
               <Table.Row key={el.id}>
-                <Table.Cell>{el.name}</Table.Cell>
+                <Table.Cell>
+                  <Link to={'redirectToPacks'} state={{ authorId: el.author.id, decksId: el.id }}>
+                    {el.name}
+                  </Link>
+                </Table.Cell>
                 <Table.Cell>{el.cardsCount}</Table.Cell>
                 <Table.Cell>{moment(el.updated).format('DD.MM.YYYY')}</Table.Cell>
                 <Table.Cell>{el.author.name}</Table.Cell>

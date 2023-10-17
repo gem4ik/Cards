@@ -10,6 +10,9 @@ import {
 import { Decks, Login, SignUpPage } from '@/pages'
 import { PersonalInformation } from '@/pages/profile/personal-information/personalInformation.tsx'
 import { useGetMeQuery } from '@/services'
+import { MyPacks } from '@/pages/Decks/myPacks/myPacks.tsx'
+import { FriendsPack } from '@/pages/Decks/riendsPack/friendsPack.tsx'
+import { RedirectToPacks } from '@/pages/Decks/hoocs/redirectToPacks.tsx'
 
 const router = createBrowserRouter([
   {
@@ -26,6 +29,18 @@ const router = createBrowserRouter([
           {
             path: 'profile',
             element: <PersonalInformation />,
+          },
+          {
+            path: 'myPacks',
+            element: <MyPacks />,
+          },
+          {
+            path: 'friendPack',
+            element: <FriendsPack />,
+          },
+          {
+            path: 'redirectToPacks',
+            element: <RedirectToPacks />,
           },
         ],
       },

@@ -81,6 +81,7 @@ export const Textfield = (props: TextfieldProps) => {
         />
         {type === 'password' && (
           <button
+            tabIndex={-1}
             type={'button'}
             className={passwordButton}
             onClick={() => setShowPassword(!showPassword)}
@@ -90,10 +91,10 @@ export const Textfield = (props: TextfieldProps) => {
         )}
         {type === 'search' && (
           <>
-            <button type={'button'} className={searchButton}>
+            <button tabIndex={-1} type={'button'} className={searchButton}>
               <Search color={searchButtonColor} />
             </button>
-            <button type={'button'} className={clsx(s.button, s.cross)}>
+            <button tabIndex={-1} type={'button'} className={clsx(s.button, s.cross)}>
               <Cross color={searchButtonColor} />
             </button>
           </>

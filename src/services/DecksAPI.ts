@@ -71,8 +71,6 @@ const DecksAPI = baseApi.injectEndpoints({
       }),
       addNewCard: build.mutation<any, any>({
         query: ({ id, ...data }) => {
-          console.log(`id => ${id}`)
-          console.log(`body => ${id}`)
           return {
             url: `/v1/decks/${id}/cards`,
             method: 'POST',
@@ -82,6 +80,7 @@ const DecksAPI = baseApi.injectEndpoints({
         async onQueryStarted(id, { queryFulfilled, dispatch }) {
           try {
             const { data } = await queryFulfilled
+
             dispatch(
               DecksAPI.util.updateQueryData('getCardsById', id, draft => {
                 draft.items.unshift(data.items)

@@ -1,18 +1,18 @@
-import { Column, Sort, Table, TableRoot, Textfield } from '@/components'
-import moment from 'moment/moment'
-import s from '@/pages/Decks/decks.module.scss'
-import { Pencil, Trash } from '@/assets'
-import { FC, useState } from 'react'
-import { useGetCardsByIdQuery, useRemoveDeckMutation } from '@/services'
-import { AddNewCard } from '@/pages/Decks/myPacks/addNewCard/addNewCard.tsx'
+import { useState } from 'react'
 
-type MyPacks = {
+import moment from 'moment'
+
+import { CardsItems, Pencil, Trash } from '@/assets'
+import { Column, Sort, Table, TableRoot, Textfield } from '@/components'
+import s from '@/pages/Decks/decks.module.scss'
+import { useGetCardsByIdQuery, useRemoveDeckMutation } from '@/services'
+
+type Props = {
   decksId?: string
 }
 
-export const MyPacks: FC<MyPacks> = ({ decksId }) => {
-  const { data: myPacks } = decksId && useGetCardsByIdQuery(decksId)
-
+export const FriendsPack = (props: Props) => {
+  const { data: friendDecks } = props.decksId && useGetCardsByIdQuery(props.decksId)
   const [removeDecks] = useRemoveDeckMutation()
   const [sort, setSort] = useState<Sort>({ key: 'cardsCount', direction: 'asc' })
   const columns: Column[] = [
@@ -42,14 +42,13 @@ export const MyPacks: FC<MyPacks> = ({ decksId }) => {
     <div>
       <span>Back to Packs List</span>
       <div>
-        <h1>My Pack</h1>
-        <AddNewCard id={decksId} />
+        <h1>Friend Pack</h1>
       </div>
       <Textfield />
       <TableRoot>
         <Table.Header columns={columns} sort={sort} onSort={setSort} />
         <Table.Tbody>
-          {myPacks?.items.map(el => (
+          {friendDecks?.items.map((el: CardsItems) => (
             <Table.Row key={el.id}>
               <Table.Cell>{el.question}</Table.Cell>
               <Table.Cell>{el.answer}</Table.Cell>

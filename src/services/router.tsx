@@ -8,11 +8,11 @@ import {
   Layout,
 } from '@/components'
 import { Decks, Login, SignUpPage } from '@/pages'
+import { FriendsPack } from '@/pages/Cards/friendsPack/friendsPack.tsx'
+import { RedirectToPacks } from '@/pages/Cards/hoocs/redirectToPacks.tsx'
+import { MyPacks } from '@/pages/Cards/myPacks/myPacks.tsx'
 import { PersonalInformation } from '@/pages/profile/personal-information/personalInformation.tsx'
 import { useGetMeQuery } from '@/services'
-import { MyPacks } from '@/pages/Decks/myPacks/myPacks.tsx'
-import { FriendsPack } from '@/pages/Decks/riendsPack/friendsPack.tsx'
-import { RedirectToPacks } from '@/pages/Decks/hoocs/redirectToPacks.tsx'
 
 const router = createBrowserRouter([
   {

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 
 import moment from 'moment'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import s from './decks.module.scss'
@@ -20,17 +20,23 @@ import {
   Typography,
 } from '@/components'
 import { AddNewPack } from '@/pages'
-import { appActions, useGetMeQuery, useGetDecksQuery, useRemoveDeckMutation } from '@/services'
+import {
+  appActions,
+  useGetMeQuery,
+  useGetDecksQuery,
+  useRemoveDeckMutation,
+  RootState,
+} from '@/services'
 
 export const Decks = () => {
   const dispatch = useDispatch()
   const { data: getMeData } = useGetMeQuery()
+  const authorFromState = useSelector<RootState, string>(state => state.app.author)
   const [sort, setSort] = useState<Sort>({ key: 'cardsCount', direction: 'asc' })
   const [currentPage, setCurrentPage] = useState(1)
   const [itemsPerPage, setItemsPerPage] = useState('10')
   const [rangeValues, setRangeValues] = useState(['0', '10'])
   const [SearchName, setSearchName] = useState('')
-  const [author, setAuthor] = useState('')
   const [removeDecks] = useRemoveDeckMutation()
   const sortString = sort ? `${sort.key}-${sort.direction}` : null
 
@@ -41,8 +47,9 @@ export const Decks = () => {
     maxCardsCount: rangeValues[1],
     minCardsCount: rangeValues[0],
     name: SearchName,
-    authorId: author === 'My Cards' ? getMeData?.id : '',
+    authorId: authorFromState === 'My Cards' ? getMeData?.id : '',
   }
+
   const { data } = useGetDecksQuery(searchParams)
   const rangeOptions = [0, data?.maxCardsCount ? data?.maxCardsCount : 20]
   const clearFilters = () => {
@@ -51,7 +58,7 @@ export const Decks = () => {
     setItemsPerPage('10')
     setRangeValues(['0', '10'])
     setSearchName('')
-    setAuthor('')
+    dispatch(appActions.setAuthor('All Cards'))
   }
 
   useEffect(() => {
@@ -103,7 +110,7 @@ export const Decks = () => {
           <Typography variant={'body2'}>Show packs cards</Typography>
           <TabSwitcher
             values={['My Cards', 'All Cards']}
-            onValueChange={value => setAuthor(value)}
+            onValueChange={value => dispatch(appActions.setAuthor(value))}
           />
         </div>
         <div>

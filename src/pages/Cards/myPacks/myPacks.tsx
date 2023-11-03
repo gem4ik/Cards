@@ -56,7 +56,7 @@ export const MyPacks: FC<Props> = ({ decksId }) => {
 
   return (
     <div className={f.myPacksWrapper}>
-      <Link to={'myPacks'} className={f.backToList}>
+      <Link to={'/'} className={f.backToList}>
         <BackArrow />
         <Typography style={{ marginLeft: '5px' }} variant={'body2'}>
           Back to Packs List

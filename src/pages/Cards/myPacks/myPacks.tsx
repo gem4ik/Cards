@@ -1,12 +1,21 @@
 import { FC, useState } from 'react'
 
 import moment from 'moment/moment'
+import { Link } from 'react-router-dom'
 
-import { Pencil, Trash } from '@/assets'
-import { Column, Sort, Table, TableRoot, Textfield } from '@/components'
+import { BackArrow, Edit2Outline, Pencil, PlayCircleOutline, Trash, TrashOutline } from '@/assets'
+import { MoreVerticaleOutline } from '@/assets/components/moreVerticalOutline/moreVerticaleOutline.tsx'
+import {
+  Column,
+  DropdownMenuRadix,
+  DropDownMenuWithIcon,
+  Sort,
+  Table,
+  Textfield,
+  Typography,
+} from '@/components'
 import { AddNewCard } from '@/pages'
 import f from '@/pages/Cards/myPacks/myPacks.module.scss'
-import s from '@/pages/Decks/decks.module.scss'
 import { useGetCardsByIdQuery, useRemoveDeckMutation } from '@/services'
 
 type Props = {
@@ -47,11 +56,28 @@ export const MyPacks: FC<Props> = ({ decksId }) => {
 
   return (
     <div className={f.myPacksWrapper}>
-      <div className={f.backToList}>
-        <span>Back to Packs List</span>
-      </div>
+      <Link to={'myPacks'} className={f.backToList}>
+        <BackArrow />
+        <Typography style={{ marginLeft: '5px' }} variant={'body2'}>
+          Back to Packs List
+        </Typography>
+      </Link>
+
       <div className={f.myPackHeading}>
-        <h1>My Pack</h1>
+        <div className={f.dropDown}>
+          <Typography variant={'h1'}>My Pack</Typography>
+          <DropdownMenuRadix trigger={<MoreVerticaleOutline />}>
+            <DropDownMenuWithIcon
+              icon={<PlayCircleOutline />}
+              onSelect={() => {}}
+              itemText={'Learn'}
+            />
+
+            <DropDownMenuWithIcon icon={<Edit2Outline />} onSelect={() => {}} itemText={'Edit'} />
+
+            <DropDownMenuWithIcon icon={<TrashOutline />} onSelect={() => {}} itemText={'Delete'} />
+          </DropdownMenuRadix>
+        </div>
         <AddNewCard id={decksId} />
       </div>
       <Textfield

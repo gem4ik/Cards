@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 
 import moment from 'moment'
 import { useDispatch } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 import s from './decks.module.scss'
 
@@ -20,7 +21,6 @@ import {
 } from '@/components'
 import { AddNewPack } from '@/pages'
 import { appActions, useGetMeQuery, useGetDecksQuery, useRemoveDeckMutation } from '@/services'
-import { Link } from 'react-router-dom'
 
 export const Decks = () => {
   const dispatch = useDispatch()
@@ -124,7 +124,7 @@ export const Decks = () => {
             {data?.items?.map(el => (
               <Table.Row key={el.id}>
                 <Table.Cell>
-                  <Link to={'redirectToPacks'} state={{ authorId: el.author.id, decksId: el.id }}>
+                  <Link to={'cards'} state={{ authorId: el.author.id, decksId: el.id }}>
                     {el.name}
                   </Link>
                 </Table.Cell>

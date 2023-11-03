@@ -39,7 +39,7 @@ const router = createBrowserRouter([
             element: <FriendsPack />,
           },
           {
-            path: 'redirectToPacks',
+            path: 'cards',
             element: <RedirectToPacks />,
           },
         ],

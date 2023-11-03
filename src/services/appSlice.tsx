@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 const slice = createSlice({
   name: 'app',
@@ -9,6 +9,7 @@ const slice = createSlice({
       itemsPerPage: 10,
       orderBy: 'cardsCount-asc',
     },
+    author: 'All Cards',
   },
   reducers: {
     setEmail: (state, action) => {
@@ -16,6 +17,9 @@ const slice = createSlice({
     },
     setSearchParams: (state, action) => {
       state.searchParams = action.payload
+    },
+    setAuthor: (state, action: PayloadAction<string>) => {
+      state.author = action.payload
     },
   },
 })

@@ -3,7 +3,7 @@ import moment from 'moment/moment'
 import s from './cards.module.scss'
 
 import { BackArrow } from '@/assets'
-import { Button, Table, Textfield, Typography } from '@/components'
+import { Button, Column, Table, TableRoot, Textfield, Typography } from '@/components'
 import { useGetCardsByIdQuery } from '@/services'
 
 export const Cards = () => {
@@ -22,9 +22,35 @@ export const Cards = () => {
       </Table.Row>
     )
   })
+  const columns: Column[] = [
+    {
+      key: 'Question',
+      title: 'Question',
+      sortable: true,
+    },
+    {
+      key: 'Answer',
+      title: 'Answer',
+      sortable: true,
+    },
+    {
+      key: 'Last Updated',
+      title: 'Last Updated',
+      sortable: true,
+    },
+    {
+      key: 'Grade',
+      title: 'Grade',
+      sortable: true,
+    },
+    {
+      key: 'actions',
+      title: '',
+    },
+  ]
 
   return (
-    <div>
+    <div className={s.cardWrapper}>
       <div className={s.packWrapper}>
         <div className={s.buttonWrapper}>
           <Button variant={'link'}>{<BackArrow />}Back to Packs List</Button>
@@ -35,15 +61,12 @@ export const Cards = () => {
           <Textfield type={'search'} placeholder={'Input search'} />
         </div>
       </div>
-      <Table.Thead>
-        <Table.Row>
-          <Table.HeadCell>Question</Table.HeadCell>
-          <Table.HeadCell>Answer</Table.HeadCell>
-          <Table.HeadCell>Last Updated</Table.HeadCell>
-          <Table.HeadCell>Grade</Table.HeadCell>
-        </Table.Row>
-      </Table.Thead>
-      <Table.Tbody>{dataV}</Table.Tbody>
+      <div className={s.tableWrapper}>
+        <TableRoot>
+          <Table.Header columns={columns} />
+          <Table.Tbody>{dataV}</Table.Tbody>
+        </TableRoot>
+      </div>
     </div>
   )
 }

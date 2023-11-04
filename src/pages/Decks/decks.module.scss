@@ -12,13 +12,7 @@
   width: 100%;
 }
 
-.filterWrapper {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 25px;
-  align-items: flex-end;
-  justify-content: space-between;
-}
+
 
 @media (width >= 1440px) {
   .packlistWrapper {

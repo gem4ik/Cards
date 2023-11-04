@@ -15,7 +15,6 @@ import {
 export const PersonalInformation = (): JSX.Element => {
   const [editMode, setEditMode] = useState(false)
   const { data } = useGetMeQuery()
-  console.log(data)
   const [editProfile] = useEditProfileMutation()
   const [editProfileAvatar] = useEditProfileAvatarMutation()
 

@@ -2,7 +2,7 @@ import moment from 'moment/moment'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-import s from './PacksTable.module.scss'
+import s from './DecksTable.module.scss'
 
 import { Deck, Pencil, Play, Trash } from '@/assets'
 import { Column, Sort, Table, TableRoot } from '@/components'
@@ -13,9 +13,10 @@ type Props = {
   sort: Sort
   items?: Deck[]
   removeDecks: (decksId: string) => void
+  myId?: string
 }
 
-export const PacksTable = (props: Props) => {
+export const DecksTable = (props: Props) => {
   const dispatch = useDispatch()
 
   return (
@@ -32,7 +33,11 @@ export const PacksTable = (props: Props) => {
           {props.items?.map(el => (
             <Table.Row key={el.id}>
               <Table.Cell>
-                <Link to={'cards'} state={{ authorId: el.author.id, decksId: el.id }}>
+                <Link
+                  to={'cards'}
+                  state={{ authorId: el.author.id, decksId: el.id }}
+                  className={s.nameCell}
+                >
                   {el.name}
                 </Link>
               </Table.Cell>
@@ -40,11 +45,17 @@ export const PacksTable = (props: Props) => {
               <Table.Cell>{moment(el.updated).format('DD.MM.YYYY')}</Table.Cell>
               <Table.Cell>{el.author.name}</Table.Cell>
               <Table.Cell>
-                <div className={s.icons}>
-                  <Trash callBack={() => props.removeDecks(el.id)} />
-                  <Play />
-                  <Pencil />
-                </div>
+                {props.myId === el.author.id ? (
+                  <div className={s.icons}>
+                    <Play />
+                    <Trash callBack={() => props.removeDecks(el.id)} />
+                    <Pencil />
+                  </div>
+                ) : (
+                  <div className={s.icons}>
+                    <Play />
+                  </div>
+                )}
               </Table.Cell>
             </Table.Row>
           ))}

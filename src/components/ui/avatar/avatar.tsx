@@ -12,6 +12,8 @@ export type AvatarProps = {
 
 export const Avatar = forwardRef<HTMLImageElement, AvatarProps>(
   ({ name, src = avatar, size = 36 }, ref) => {
+    console.log(src)
+
     return (
       <img
         className={s.avatar}

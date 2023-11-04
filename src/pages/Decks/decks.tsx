@@ -4,19 +4,10 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import s from './decks.module.scss'
 
-import { Trash } from '@/assets'
-import {
-  Button,
-  Column,
-  Pagination,
-  RangeSlider,
-  Sort,
-  TabSwitcher,
-  Textfield,
-  Typography,
-} from '@/components'
+import { Column, Pagination, Sort, Typography } from '@/components'
 import { AddNewPack } from '@/pages'
-import { PacksTable } from '@/pages/Decks/PacksTable/PacksTable.tsx'
+import { DecksFilter } from '@/pages/Decks/decksFilter/decksFilter.tsx'
+import { DecksTable } from '@/pages/Decks/decksTable/DecksTable.tsx'
 import {
   appActions,
   RootState,
@@ -33,7 +24,7 @@ export const Decks = () => {
   const sort = useSelector<RootState, Sort>(state => state.app.sort)
   const currentPage = useSelector<RootState, number>(state => state.app.currentPage)
   const itemsPerPage = useSelector<RootState, number>(state => state.app.itemsPerPage)
-  const rangeValue = useSelector<RootState, Array<string>>(state => state.app.rangeValue)
+  const rangeValue = useSelector<RootState, string[]>(state => state.app.rangeValue)
   const searchName = useSelector<RootState, string>(state => state.app.searchName)
   const sortString = sort ? `${sort.key}-${sort.direction}` : null
 
@@ -94,33 +85,18 @@ export const Decks = () => {
         <Typography variant={'large'}>Packs list</Typography>
         <AddNewPack />
       </div>
-      <div className={s.filterWrapper}>
-        <Textfield
-          value={searchName}
-          className={s.searchInput}
-          placeholder={`Search By Deck's name`}
-          type={'search'}
-          onChangeText={value => dispatch(appActions.setSearchName(value))}
-        />
-        <div>
-          <Typography variant={'body2'}>Show packs cards</Typography>
-          <TabSwitcher
-            values={['My Cards', 'All Cards']}
-            onValueChange={value => dispatch(appActions.setAuthor(value))}
-          />
-        </div>
-        <div>
-          <Typography variant={'body2'}>Number of cards</Typography>
-          <RangeSlider
-            range={rangeOptions}
-            onChange={values => dispatch(appActions.setRangeValue(values))}
-          ></RangeSlider>
-        </div>
-        <Button variant={'secondary'} onClick={clearFilters}>
-          {<Trash />}Clear Filter
-        </Button>
-      </div>
-      <PacksTable columns={columns} sort={sort} items={data?.items} removeDecks={removeDecks} />
+      <DecksFilter
+        searchName={searchName}
+        rangeOptions={rangeOptions}
+        clearFilters={clearFilters}
+      />
+      <DecksTable
+        columns={columns}
+        sort={sort}
+        items={data?.items}
+        removeDecks={removeDecks}
+        myId={getMeData?.id}
+      />
       <Pagination
         onPageChange={(nextPage: number) => {
           dispatch(appActions.setCurrentPage(nextPage))

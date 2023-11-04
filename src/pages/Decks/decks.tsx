@@ -12,12 +12,12 @@ import {
   Pagination,
   RangeSlider,
   Column,
-  Sort,
   Table,
   TableRoot,
   TabSwitcher,
   Textfield,
   Typography,
+  Sort,
 } from '@/components'
 import { AddNewPack } from '@/pages'
 import {
@@ -32,16 +32,17 @@ export const Decks = () => {
   const dispatch = useDispatch()
   const { data: getMeData } = useGetMeQuery()
   const authorFromState = useSelector<RootState, string>(state => state.app.author)
-  const [sort, setSort] = useState<Sort>({ key: 'cardsCount', direction: 'asc' })
-  const [currentPage, setCurrentPage] = useState(1)
+  const sortState = useSelector<RootState, Sort>(state => state.app.sort)
+  const currentPageState = useSelector<RootState, number>(state => state.app.currentPage)
+  // const [currentPage, setCurrentPage] = useState(1)
   const [itemsPerPage, setItemsPerPage] = useState('10')
   const [rangeValues, setRangeValues] = useState(['0', '10'])
   const [SearchName, setSearchName] = useState('')
   const [removeDecks] = useRemoveDeckMutation()
-  const sortString = sort ? `${sort.key}-${sort.direction}` : null
+  const sortString = sortState ? `${sortState.key}-${sortState.direction}` : null
 
   const searchParams = {
-    currentPage: currentPage,
+    currentPage: currentPageState,
     itemsPerPage: +itemsPerPage,
     orderBy: sortString,
     maxCardsCount: rangeValues[1],
@@ -54,7 +55,7 @@ export const Decks = () => {
   const rangeOptions = [0, data?.maxCardsCount ? data?.maxCardsCount : 20]
   const clearFilters = () => {
     setRangeValues(['0', '10'])
-    setCurrentPage(1)
+    dispatch(appActions.setCurrentPage(1))
     setItemsPerPage('10')
     setRangeValues(['0', '10'])
     setSearchName('')
@@ -63,7 +64,7 @@ export const Decks = () => {
 
   useEffect(() => {
     dispatch(appActions.setSearchParams(searchParams))
-  }, [currentPage, itemsPerPage, sortString])
+  }, [currentPageState, itemsPerPage, sortString])
 
   const columns: Column[] = [
     {
@@ -91,6 +92,9 @@ export const Decks = () => {
       title: '',
     },
   ]
+  const sortDecksHandler = (key: string, direction: 'asc' | 'desc') => {
+    dispatch(appActions.setSort({ key, direction }))
+  }
 
   return (
     <div className={s.packlistWrapper}>
@@ -126,7 +130,15 @@ export const Decks = () => {
       </div>
       <div className={s.tableWrapper}>
         <TableRoot>
-          <Table.Header columns={columns} sort={sort} onSort={setSort} />
+          <Table.Header
+            columns={columns}
+            sort={sortState}
+            onSort={(sort: Sort) => {
+              if (sort) {
+                sortDecksHandler(sort.key, sort.direction)
+              }
+            }}
+          />
           <Table.Tbody>
             {data?.items?.map(el => (
               <Table.Row key={el.id}>
@@ -151,7 +163,10 @@ export const Decks = () => {
         </TableRoot>
       </div>
       <Pagination
-        onPageChange={setCurrentPage}
+        onPageChange={(nextPage: number) => {
+          console.log(nextPage)
+          dispatch(appActions.setCurrentPage(nextPage))
+        }}
         totalCount={data?.pagination?.totalPages || 1}
         siblingCount={1}
         currentPage={data?.pagination?.currentPage || 1}

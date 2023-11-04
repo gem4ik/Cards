@@ -39,7 +39,7 @@ export const HeadCell = (props: HeadCellProps) => {
 
   return (
     <th className={s.headCell} {...res}>
-      <span>{children}</span>
+      <span className={s.pointer}>{children}</span>
     </th>
   )
 }

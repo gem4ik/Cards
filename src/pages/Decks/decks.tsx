@@ -1,31 +1,28 @@
 import { useEffect } from 'react'
 
-import moment from 'moment'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
 
 import s from './decks.module.scss'
 
-import { Pencil, Play, Trash } from '@/assets'
+import { Trash } from '@/assets'
 import {
   Button,
+  Column,
   Pagination,
   RangeSlider,
-  Column,
-  Table,
-  TableRoot,
+  Sort,
   TabSwitcher,
   Textfield,
   Typography,
-  Sort,
 } from '@/components'
 import { AddNewPack } from '@/pages'
+import { PacksTable } from '@/pages/Decks/PacksTable/PacksTable.tsx'
 import {
   appActions,
-  useGetMeQuery,
-  useGetDecksQuery,
-  useRemoveDeckMutation,
   RootState,
+  useGetDecksQuery,
+  useGetMeQuery,
+  useRemoveDeckMutation,
 } from '@/services'
 
 export const Decks = () => {
@@ -123,38 +120,7 @@ export const Decks = () => {
           {<Trash />}Clear Filter
         </Button>
       </div>
-      <div className={s.tableWrapper}>
-        <TableRoot>
-          <Table.Header
-            columns={columns}
-            sort={sort}
-            onSort={(sort: Sort) => {
-              if (sort) dispatch(appActions.setSort({ key: sort.key, direction: sort.direction }))
-            }}
-          />
-          <Table.Tbody>
-            {data?.items?.map(el => (
-              <Table.Row key={el.id}>
-                <Table.Cell>
-                  <Link to={'cards'} state={{ authorId: el.author.id, decksId: el.id }}>
-                    {el.name}
-                  </Link>
-                </Table.Cell>
-                <Table.Cell>{el.cardsCount}</Table.Cell>
-                <Table.Cell>{moment(el.updated).format('DD.MM.YYYY')}</Table.Cell>
-                <Table.Cell>{el.author.name}</Table.Cell>
-                <Table.Cell>
-                  <div className={s.icons}>
-                    <Trash callBack={() => removeDecks(el.id)} />
-                    <Play />
-                    <Pencil />
-                  </div>
-                </Table.Cell>
-              </Table.Row>
-            ))}
-          </Table.Tbody>
-        </TableRoot>
-      </div>
+      <PacksTable columns={columns} sort={sort} items={data?.items} removeDecks={removeDecks} />
       <Pagination
         onPageChange={(nextPage: number) => {
           dispatch(appActions.setCurrentPage(nextPage))

@@ -2,9 +2,10 @@ import moment from 'moment/moment'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 
+import s from './PacksTable.module.scss'
+
 import { Deck, Pencil, Play, Trash } from '@/assets'
 import { Column, Sort, Table, TableRoot } from '@/components'
-import s from '@/pages/Decks/decks.module.scss'
 import { appActions } from '@/services'
 
 type Props = {

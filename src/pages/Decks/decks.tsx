@@ -31,24 +31,23 @@ import {
 export const Decks = () => {
   const dispatch = useDispatch()
   const { data: getMeData } = useGetMeQuery()
-  const authorFromState = useSelector<RootState, string>(state => state.app.author)
-  const sortState = useSelector<RootState, Sort>(state => state.app.sort)
-  const currentPageState = useSelector<RootState, number>(state => state.app.currentPage)
+  const [removeDecks] = useRemoveDeckMutation()
+  const author = useSelector<RootState, string>(state => state.app.author)
+  const sort = useSelector<RootState, Sort>(state => state.app.sort)
+  const currentPage = useSelector<RootState, number>(state => state.app.currentPage)
   const itemsPerPage = useSelector<RootState, number>(state => state.app.itemsPerPage)
   const rangeValue = useSelector<RootState, Array<string>>(state => state.app.rangeValue)
   const searchName = useSelector<RootState, string>(state => state.app.searchName)
-  // const [SearchName, setSearchName] = useState('')
-  const [removeDecks] = useRemoveDeckMutation()
-  const sortString = sortState ? `${sortState.key}-${sortState.direction}` : null
+  const sortString = sort ? `${sort.key}-${sort.direction}` : null
 
   const searchParams = {
-    currentPage: currentPageState,
+    currentPage: currentPage,
     itemsPerPage: +itemsPerPage,
     orderBy: sortString,
     maxCardsCount: rangeValue[1],
     minCardsCount: rangeValue[0],
     name: searchName,
-    authorId: authorFromState === 'My Cards' ? getMeData?.id : '',
+    authorId: author === 'My Cards' ? getMeData?.id : '',
   }
 
   const { data } = useGetDecksQuery(searchParams)
@@ -63,7 +62,7 @@ export const Decks = () => {
 
   useEffect(() => {
     dispatch(appActions.setSearchParams(searchParams))
-  }, [currentPageState, itemsPerPage, sortString])
+  }, [currentPage, itemsPerPage, sortString])
 
   const columns: Column[] = [
     {
@@ -91,9 +90,6 @@ export const Decks = () => {
       title: '',
     },
   ]
-  const sortDecksHandler = (key: string, direction: 'asc' | 'desc') => {
-    dispatch(appActions.setSort({ key, direction }))
-  }
 
   return (
     <div className={s.packlistWrapper}>
@@ -131,11 +127,9 @@ export const Decks = () => {
         <TableRoot>
           <Table.Header
             columns={columns}
-            sort={sortState}
+            sort={sort}
             onSort={(sort: Sort) => {
-              if (sort) {
-                sortDecksHandler(sort.key, sort.direction)
-              }
+              if (sort) dispatch(appActions.setSort({ key: sort.key, direction: sort.direction }))
             }}
           />
           <Table.Tbody>

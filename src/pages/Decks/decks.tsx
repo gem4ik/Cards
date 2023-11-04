@@ -105,7 +105,7 @@ export const Decks = () => {
           placeholder={`Search By Deck's name`}
           type={'search'}
           onChangeText={setSearchName}
-        ></Textfield>
+        />
         <div>
           <Typography variant={'body2'}>Show packs cards</Typography>
           <TabSwitcher

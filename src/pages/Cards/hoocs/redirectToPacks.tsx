@@ -7,8 +7,6 @@ export const RedirectToPacks = () => {
   const { state } = useLocation()
   const { data } = useGetMeQuery()
 
-  console.log(state)
-
   const myId = data?.id
 
   if (state.authorId === myId) {

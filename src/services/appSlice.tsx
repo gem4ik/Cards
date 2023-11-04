@@ -5,7 +5,6 @@ const slice = createSlice({
   initialState: {
     forgottenEmail: '',
     searchParams: {
-      currentPage: 1,
       itemsPerPage: 10,
       orderBy: 'cardsCount-asc',
     },

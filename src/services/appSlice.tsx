@@ -7,7 +7,6 @@ const slice = createSlice({
   initialState: {
     forgottenEmail: '',
     searchParams: {
-      itemsPerPage: 10,
       orderBy: 'cardsCount-asc',
     },
     author: 'All Cards',
@@ -15,7 +14,10 @@ const slice = createSlice({
       key: 'cardsCount',
       direction: 'asc',
     } as Sort,
-    currentPage: 1 as number,
+    currentPage: 1,
+    itemsPerPage: 10,
+    rangeValue: ['0', '10'],
+    searchName: '',
   },
   reducers: {
     setEmail: (state, action) => {
@@ -32,6 +34,15 @@ const slice = createSlice({
     },
     setCurrentPage: (state, action: PayloadAction<number>) => {
       state.currentPage = action.payload
+    },
+    setItemsPerPage: (state, action) => {
+      state.itemsPerPage = action.payload
+    },
+    setRangeValue: (state, action) => {
+      state.rangeValue = action.payload
+    },
+    setSearchName: (state, action) => {
+      state.searchName = action.payload
     },
   },
 })

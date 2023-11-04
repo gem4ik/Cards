@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 
 import moment from 'moment'
 import { useDispatch, useSelector } from 'react-redux'
@@ -34,10 +34,10 @@ export const Decks = () => {
   const authorFromState = useSelector<RootState, string>(state => state.app.author)
   const sortState = useSelector<RootState, Sort>(state => state.app.sort)
   const currentPageState = useSelector<RootState, number>(state => state.app.currentPage)
-  // const [currentPage, setCurrentPage] = useState(1)
-  const [itemsPerPage, setItemsPerPage] = useState('10')
-  const [rangeValues, setRangeValues] = useState(['0', '10'])
-  const [SearchName, setSearchName] = useState('')
+  const itemsPerPage = useSelector<RootState, number>(state => state.app.itemsPerPage)
+  const rangeValue = useSelector<RootState, Array<string>>(state => state.app.rangeValue)
+  const searchName = useSelector<RootState, string>(state => state.app.searchName)
+  // const [SearchName, setSearchName] = useState('')
   const [removeDecks] = useRemoveDeckMutation()
   const sortString = sortState ? `${sortState.key}-${sortState.direction}` : null
 
@@ -45,20 +45,19 @@ export const Decks = () => {
     currentPage: currentPageState,
     itemsPerPage: +itemsPerPage,
     orderBy: sortString,
-    maxCardsCount: rangeValues[1],
-    minCardsCount: rangeValues[0],
-    name: SearchName,
+    maxCardsCount: rangeValue[1],
+    minCardsCount: rangeValue[0],
+    name: searchName,
     authorId: authorFromState === 'My Cards' ? getMeData?.id : '',
   }
 
   const { data } = useGetDecksQuery(searchParams)
   const rangeOptions = [0, data?.maxCardsCount ? data?.maxCardsCount : 20]
   const clearFilters = () => {
-    setRangeValues(['0', '10'])
+    dispatch(appActions.setRangeValue(['0', '10']))
     dispatch(appActions.setCurrentPage(1))
-    setItemsPerPage('10')
-    setRangeValues(['0', '10'])
-    setSearchName('')
+    dispatch(appActions.setItemsPerPage('10'))
+    dispatch(appActions.setSearchName(''))
     dispatch(appActions.setAuthor('All Cards'))
   }
 
@@ -104,11 +103,11 @@ export const Decks = () => {
       </div>
       <div className={s.filterWrapper}>
         <Textfield
-          value={SearchName}
+          value={searchName}
           className={s.searchInput}
           placeholder={`Search By Deck's name`}
           type={'search'}
-          onChangeText={setSearchName}
+          onChangeText={value => dispatch(appActions.setSearchName(value))}
         />
         <div>
           <Typography variant={'body2'}>Show packs cards</Typography>
@@ -121,7 +120,7 @@ export const Decks = () => {
           <Typography variant={'body2'}>Number of cards</Typography>
           <RangeSlider
             range={rangeOptions}
-            onChange={values => setRangeValues(values)}
+            onChange={values => dispatch(appActions.setRangeValue(values))}
           ></RangeSlider>
         </div>
         <Button variant={'secondary'} onClick={clearFilters}>
@@ -164,7 +163,6 @@ export const Decks = () => {
       </div>
       <Pagination
         onPageChange={(nextPage: number) => {
-          console.log(nextPage)
           dispatch(appActions.setCurrentPage(nextPage))
         }}
         totalCount={data?.pagination?.totalPages || 1}
@@ -172,7 +170,9 @@ export const Decks = () => {
         currentPage={data?.pagination?.currentPage || 1}
         pageSize={data?.pagination?.itemsPerPage || 10}
         className={''}
-        onPageSizeChange={setItemsPerPage}
+        onPageSizeChange={pageSize => {
+          dispatch(appActions.setItemsPerPage(pageSize))
+        }}
       />
     </div>
   )

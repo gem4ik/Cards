@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 import moment from 'moment/moment'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
@@ -6,6 +8,7 @@ import s from './DecksTable.module.scss'
 
 import { Deck, Pencil, Play, Trash } from '@/assets'
 import { Column, Sort, Table, TableRoot } from '@/components'
+import { EditPack } from '@/pages/Cards/myPacks/editPack/editPack.tsx'
 import { appActions } from '@/services'
 
 type Props = {
@@ -18,6 +21,7 @@ type Props = {
 
 export const DecksTable = (props: Props) => {
   const dispatch = useDispatch()
+  const [open, setOpen] = useState(false)
 
   return (
     <div className={s.tableWrapper}>
@@ -49,7 +53,8 @@ export const DecksTable = (props: Props) => {
                   <div className={s.icons}>
                     <Play />
                     <Trash callBack={() => props.removeDecks(el.id)} />
-                    <Pencil />
+                    <Pencil callback={() => setOpen(true)} />
+                    {open && <EditPack deckId={el.id} open={open} setOpen={setOpen} />}
                   </div>
                 ) : (
                   <div className={s.icons}>

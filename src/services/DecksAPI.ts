@@ -1,4 +1,12 @@
-import { CardsResponse, DeckResponce, GetDeckParams } from '@/assets/types/DecksTypes.ts'
+import {
+  addDeckRequest,
+  CardsItems,
+  CardsResponse,
+  CreateCardsRequest,
+  DeckByIdResponse,
+  DeckResponce,
+  GetDeckParams,
+} from '@/assets/types/DecksTypes.ts'
 import { baseApi } from '@/services/base-api.ts'
 import { RootState } from '@/services/store.ts'
 
@@ -15,7 +23,7 @@ const DecksAPI = baseApi.injectEndpoints({
         },
         providesTags: ['Deck'],
       }),
-      getDecksByAuthorId: build.query<any, any>({
+      getDecksByAuthorId: build.query<DeckByIdResponse, string>({
         query: id => {
           return {
             url: `/v1/decks/${id}`,
@@ -32,7 +40,7 @@ const DecksAPI = baseApi.injectEndpoints({
         },
         providesTags: ['Cards'],
       }),
-      addDeck: build.mutation<any, any>({
+      addDeck: build.mutation<DeckByIdResponse, Partial<addDeckRequest>>({
         query: body => {
           return {
             url: `/v1/decks`,
@@ -42,7 +50,36 @@ const DecksAPI = baseApi.injectEndpoints({
         },
         invalidatesTags: ['Deck'],
       }),
-      removeDeck: build.mutation<any, string>({
+      updateDeck: build.mutation<DeckByIdResponse, Partial<addDeckRequest> & { id: string }>({
+        query: ({ id, ...data }) => {
+          return {
+            url: `/v1/decks/${id}`,
+            method: 'PATCH',
+            body: data,
+          }
+        },
+        async onQueryStarted({ id, ...data }, { getState, queryFulfilled, dispatch }) {
+          const state = getState() as RootState
+          const { searchParams } = state.app
+          const patchResult = dispatch(
+            DecksAPI.util.updateQueryData('getDecks', searchParams, draft => {
+              const deckIndex = draft.items.findIndex(el => el.id === id)
+
+              if (deckIndex !== -1) {
+                draft.items[deckIndex] = { ...draft.items[deckIndex], ...data }
+              }
+            })
+          )
+
+          try {
+            await queryFulfilled
+          } catch {
+            patchResult.undo()
+          }
+        },
+        invalidatesTags: ['Deck'],
+      }),
+      removeDeck: build.mutation<Omit<DeckByIdResponse, 'author'>, string>({
         query: id => {
           return {
             url: `/v1/decks/${id}`,
@@ -69,7 +106,7 @@ const DecksAPI = baseApi.injectEndpoints({
         },
         invalidatesTags: ['Deck'],
       }),
-      addNewCard: build.mutation<any, any>({
+      addNewCard: build.mutation<CardsItems, CreateCardsRequest & { id: string }>({
         query: ({ id, ...data }) => {
           return {
             url: `/v1/decks/${id}/cards`,
@@ -77,13 +114,13 @@ const DecksAPI = baseApi.injectEndpoints({
             body: data,
           }
         },
-        async onQueryStarted(id, { queryFulfilled, dispatch }) {
+        async onQueryStarted({ id }, { queryFulfilled, dispatch }) {
           try {
             const { data } = await queryFulfilled
 
             dispatch(
               DecksAPI.util.updateQueryData('getCardsById', id, draft => {
-                draft.items.unshift(data.items)
+                draft.items.unshift(data)
               })
             )
           } catch (e) {
@@ -103,4 +140,5 @@ export const {
   useRemoveDeckMutation,
   useGetDecksByAuthorIdQuery,
   useAddNewCardMutation,
+  useUpdateDeckMutation,
 } = DecksAPI

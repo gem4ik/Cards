@@ -61,7 +61,7 @@ export type CardsItems = {
   created: string
   updated: string
   shots: number
-  grade: number
+  rating: number
   userId: string
 }
 export type CardParams = {
@@ -71,4 +71,31 @@ export type CardParams = {
   orderBy?: string
   currentPage?: number
   itemsPerPage?: number
+}
+export type DeckByIdResponse = {
+  id: string
+  userId: string
+  name: string
+  isPrivate: boolean
+  shots: number
+  cover?: string | null
+  rating: number
+  created: string
+  updated: string
+  cardsCount: number
+  author: Author
+}
+
+export type addDeckRequest = {
+  cover: string
+  name: string
+  isPrivate: boolean
+}
+export type CreateCardsRequest = {
+  question: string
+  answer: string
+  questionImg?: any
+  answerImg?: any
+  questionVideo?: any
+  answerVideo?: any
 }

@@ -15,8 +15,9 @@ import {
   Typography,
 } from '@/components'
 import { AddNewCard } from '@/pages'
+import { EditPack } from '@/pages/Cards/myPacks/editPack/editPack.tsx'
 import f from '@/pages/Cards/myPacks/myPacks.module.scss'
-import { useGetCardsByIdQuery, useRemoveDeckMutation } from '@/services'
+import { useGetCardsByIdQuery, useRemoveDeckMutation, useUpdateDeckMutation } from '@/services'
 
 type Props = {
   decksId?: string
@@ -26,7 +27,9 @@ export const MyPacks: FC<Props> = ({ decksId }) => {
   const { data: myPacks } = decksId && useGetCardsByIdQuery(decksId)
 
   const [removeDecks] = useRemoveDeckMutation()
+  const [changeDeck] = useUpdateDeckMutation()
   const [sort, setSort] = useState<Sort>({ key: 'cardsCount', direction: 'asc' })
+  const [open, setOpen] = useState(false)
   const columns: Column[] = [
     {
       key: 'question',
@@ -99,7 +102,9 @@ export const MyPacks: FC<Props> = ({ decksId }) => {
                 <Table.Cell>
                   <div className={f.icons}>
                     <Trash callBack={() => removeDecks(el.id)} />
-                    <Pencil />
+                    <Pencil callback={() => changeDeck(el.id)} />
+
+                    {/*{open && <EditPack open={open} setOpen={setOpen} />}*/}
                   </div>
                 </Table.Cell>
               </Table.Row>

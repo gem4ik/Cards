@@ -1,5 +1,7 @@
 import { FC, useState } from 'react'
+
 import { useForm } from 'react-hook-form'
+
 import { Button, ControlledTextfield, Modal } from '@/components'
 import { useAddNewCardMutation } from '@/services'
 
@@ -28,6 +30,7 @@ export const AddNewCard: FC<AddNewCard> = ({ id }) => {
       setOpen(false)
     }
   })
+
   return (
     <form onSubmit={sumbitHandler}>
       {open && (

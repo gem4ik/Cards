@@ -2,6 +2,8 @@ import { FC, useState } from 'react'
 
 import { useForm } from 'react-hook-form'
 
+import s from './addNewCard.module.scss'
+
 import { Button, ControlledTextfield, Modal } from '@/components'
 import { useAddCardMutation } from '@/services'
 
@@ -14,7 +16,7 @@ type AddNewCard = {
   id: string | undefined
 }
 export const AddNewCard: FC<AddNewCard> = ({ id }) => {
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState('')
   const { handleSubmit, control } = useForm<Data>({
     mode: 'onSubmit',
     defaultValues: {
@@ -27,7 +29,7 @@ export const AddNewCard: FC<AddNewCard> = ({ id }) => {
   const submitHandler = handleSubmit(data => {
     if (id !== undefined && id !== null) {
       addCard({ id, ...data })
-      setOpen(false)
+      setOpen('')
     }
   })
 
@@ -35,16 +37,24 @@ export const AddNewCard: FC<AddNewCard> = ({ id }) => {
     <form onSubmit={submitHandler}>
       {open && (
         <Modal
-          open={open}
+          open={open === 'open'}
           setOpen={setOpen}
           submitButtonTitle={'Add New Card'}
           title={'Add New Card'}
         >
-          <ControlledTextfield control={control} name={'question'} label={'question'} />
-          <ControlledTextfield control={control} name={'answer'} label={'answer'} />
+          <div>
+            <ControlledTextfield control={control} name={'question'} label={'question'} />
+            <ControlledTextfield control={control} name={'answer'} label={'answer'} />
+          </div>
+          <div className={s.modal__buttonsBlock}>
+            <Button onClick={() => setOpen('')} type={'button'} variant={'secondary'}>
+              Cancel
+            </Button>
+            <Button>Add New Card</Button>
+          </div>
         </Modal>
       )}
-      <Button type={'button'} onClick={() => setOpen(!open)}>
+      <Button type={'button'} onClick={() => setOpen('open')}>
         Add New Card
       </Button>
     </form>

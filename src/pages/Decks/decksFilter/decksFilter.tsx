@@ -10,8 +10,9 @@ type Props = {
   searchName: string
   rangeOptions: number[]
   clearFilters: () => void
+  tabValue: string
 }
-export const DecksFilter = ({ searchName, rangeOptions, clearFilters }: Props) => {
+export const DecksFilter = ({ searchName, rangeOptions, clearFilters, tabValue }: Props) => {
   const dispatch = useDispatch()
 
   return (
@@ -26,6 +27,7 @@ export const DecksFilter = ({ searchName, rangeOptions, clearFilters }: Props) =
       <div>
         <Typography variant={'body2'}>Show packs cards</Typography>
         <TabSwitcher
+          value={tabValue}
           values={['My Cards', 'All Cards']}
           onValueChange={value => dispatch(appActions.setAuthor(value))}
         />

@@ -5,18 +5,17 @@ import { Link } from 'react-router-dom'
 
 import s from './friendsPack.module.scss'
 
-import { BackArrow, CardsItems, Pencil, Trash } from '@/assets'
+import { BackArrow, CardsItems } from '@/assets'
 import { Button, Column, Sort, Table, TableRoot, Textfield, Typography } from '@/components'
 import f from '@/pages/Cards/myPacks/myPacks.module.scss'
-import { useGetCardsByIdQuery, useRemoveDeckMutation } from '@/services'
+import { useGetCardsByIdQuery } from '@/services'
 
 type Props = {
   decksId?: string
 }
 
 export const FriendsPack = (props: Props) => {
-  const { data } = props.decksId && useGetCardsByIdQuery(props.decksId)
-  const [removeDecks] = useRemoveDeckMutation()
+  const { data } = useGetCardsByIdQuery(props.decksId!)
   const [sort, setSort] = useState<Sort>({ key: 'cardsCount', direction: 'asc' })
   const columns: Column[] = [
     {

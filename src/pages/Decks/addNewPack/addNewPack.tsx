@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form'
 
 import s from './addNewPack.module.scss'
 
+import { ModalType } from '@/assets/types/commonTypes.ts'
 import { Button, ControlledCheckbox, ControlledTextfield, Modal } from '@/components'
 import { useAddDeckMutation } from '@/services'
 
@@ -13,7 +14,7 @@ type DataForm = {
 }
 
 export const AddNewPack = () => {
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState<ModalType>('')
 
   const { handleSubmit, control } = useForm<DataForm>({
     mode: 'onSubmit',
@@ -27,7 +28,7 @@ export const AddNewPack = () => {
 
   const submitHandler = handleSubmit(data => {
     addDeck(data)
-    setOpen(false)
+    setOpen('')
   })
 
   return (
@@ -35,7 +36,7 @@ export const AddNewPack = () => {
       {open && (
         <Modal
           submitButtonTitle={'Add New Pack'}
-          open={open}
+          open={open === 'open'}
           title={'Add New Pack'}
           setOpen={setOpen}
         >
@@ -43,9 +44,15 @@ export const AddNewPack = () => {
             <ControlledTextfield fullWidth control={control} name={'name'} label={'name '} />
             <ControlledCheckbox control={control} name={'isPrivate'} label={'Private pack'} />
           </div>
+          <div className={s.modal__buttonsBlock}>
+            <Button onClick={() => setOpen('')} type={'button'} variant={'secondary'}>
+              Cancel
+            </Button>
+            <Button>Add New Pack</Button>
+          </div>
         </Modal>
       )}
-      <Button type={'button'} onClick={() => setOpen(!open)}>
+      <Button type={'button'} onClick={() => setOpen('open')}>
         Add New Pack
       </Button>
     </form>

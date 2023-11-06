@@ -86,6 +86,7 @@ export const Decks = () => {
         <AddNewPack />
       </div>
       <DecksFilter
+        tabValue={author}
         searchName={searchName}
         rangeOptions={rangeOptions}
         clearFilters={clearFilters}

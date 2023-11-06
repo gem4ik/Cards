@@ -1,8 +1,6 @@
 import {
   addDeckRequest,
-  CardsItems,
   CardsResponse,
-  CreateCardsRequest,
   DeckByIdResponse,
   DeckResponce,
   GetDeckParams,
@@ -106,29 +104,6 @@ const DecksAPI = baseApi.injectEndpoints({
         },
         invalidatesTags: ['Deck'],
       }),
-      addNewCard: build.mutation<CardsItems, CreateCardsRequest & { id: string }>({
-        query: ({ id, ...data }) => {
-          return {
-            url: `/v1/decks/${id}/cards`,
-            method: 'POST',
-            body: data,
-          }
-        },
-        async onQueryStarted({ id }, { queryFulfilled, dispatch }) {
-          try {
-            const { data } = await queryFulfilled
-
-            dispatch(
-              DecksAPI.util.updateQueryData('getCardsById', id, draft => {
-                draft.items.unshift(data)
-              })
-            )
-          } catch (e) {
-            console.log(e)
-          }
-        },
-        invalidatesTags: ['Cards'],
-      }),
     }
   },
 })
@@ -139,6 +114,5 @@ export const {
   useAddDeckMutation,
   useRemoveDeckMutation,
   useGetDecksByAuthorIdQuery,
-  useAddNewCardMutation,
   useUpdateDeckMutation,
 } = DecksAPI

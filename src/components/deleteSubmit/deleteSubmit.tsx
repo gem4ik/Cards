@@ -9,6 +9,11 @@ type Props = {
   submit: () => void
 }
 export const DeleteSubmit = (props: Props) => {
+  const submitHandler = () => {
+    props.setOpen('')
+    props.submit()
+  }
+
   return (
     <Modal
       submit={props.submit}
@@ -22,7 +27,7 @@ export const DeleteSubmit = (props: Props) => {
         <Button onClick={() => props.setOpen('')} type={'button'} variant={'secondary'}>
           Cancel
         </Button>
-        <Button onClick={props.submit}>{props.deletedItem}</Button>
+        <Button onClick={submitHandler}>{props.deletedItem}</Button>
       </div>
     </Modal>
   )

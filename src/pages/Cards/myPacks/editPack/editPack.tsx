@@ -12,13 +12,14 @@ type Props = {
   open: boolean
   setOpen: (value: boolean) => void
   deckId: string
+  setDeckId: (id: string) => void
+  nameDeck: string
 }
 export const EditPack = (props: Props) => {
-  console.log(props.deckId)
   const { handleSubmit, control } = useForm<DataFormType>({
     mode: 'onSubmit',
     defaultValues: {
-      name: '',
+      name: props.nameDeck,
       isPrivate: false,
       cover: '',
     },
@@ -27,6 +28,7 @@ export const EditPack = (props: Props) => {
   const onSubmitHandler = handleSubmit(data => {
     updateDeck({ id: props.deckId, ...data })
     props.setOpen(false)
+    props.setDeckId('')
   })
 
   return (
@@ -38,8 +40,13 @@ export const EditPack = (props: Props) => {
           setOpen={props.setOpen}
           submitButtonTitle={'Save Changes'}
         >
-          <ControlledTextfield control={control} name={'name'} />
-          <ControlledCheckbox control={control} name={'isPrivate'} />
+          <ControlledTextfield
+            control={control}
+            name={'name'}
+            label={'Name Pack'}
+            title={props.nameDeck}
+          />
+          <ControlledCheckbox control={control} name={'isPrivate'} label={'Private pack'} />
         </Modal>
       </form>
     </div>

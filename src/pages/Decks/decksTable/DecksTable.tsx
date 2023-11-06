@@ -22,6 +22,12 @@ type Props = {
 export const DecksTable = (props: Props) => {
   const dispatch = useDispatch()
   const [open, setOpen] = useState(false)
+  const [deckId, setDeckId] = useState('')
+
+  const setDecksParams = (value: boolean, deckId: string) => {
+    setOpen(value)
+    setDeckId(deckId)
+  }
 
   return (
     <div className={s.tableWrapper}>
@@ -53,8 +59,16 @@ export const DecksTable = (props: Props) => {
                   <div className={s.icons}>
                     <Play />
                     <Trash callBack={() => props.removeDecks(el.id)} />
-                    <Pencil callback={() => setOpen(true)} />
-                    {open && <EditPack deckId={el.id} open={open} setOpen={setOpen} />}
+                    <Pencil callback={() => setDecksParams(true, el.id)} />
+                    {open && (
+                      <EditPack
+                        deckId={deckId}
+                        open={open}
+                        setDeckId={setDeckId}
+                        setOpen={setOpen}
+                        nameDeck={el.name}
+                      />
+                    )}
                   </div>
                 ) : (
                   <div className={s.icons}>

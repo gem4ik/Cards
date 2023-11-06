@@ -61,7 +61,7 @@ export const DecksTable = (props: Props) => {
                     <Play />
                     <Trash callBack={() => props.removeDecks(el.id)} />
                     <Pencil callback={() => setDecksParams(true, el)} />
-                    {open && deck && (
+                    {deck && (
                       <EditPack open={open} setDeck={setDeck} setOpen={setOpen} data={deck} />
                     )}
                   </div>

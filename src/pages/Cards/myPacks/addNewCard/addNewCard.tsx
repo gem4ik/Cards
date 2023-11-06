@@ -3,7 +3,7 @@ import { FC, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { Button, ControlledTextfield, Modal } from '@/components'
-import { useAddNewCardMutation } from '@/services'
+import { useAddCardMutation } from '@/services'
 
 type Data = {
   questionFormat: string
@@ -22,17 +22,17 @@ export const AddNewCard: FC<AddNewCard> = ({ id }) => {
       answer: '',
     },
   })
-  const [addNewCard] = useAddNewCardMutation()
+  const [addCard] = useAddCardMutation()
 
-  const sumbitHandler = handleSubmit(data => {
+  const submitHandler = handleSubmit(data => {
     if (id !== undefined && id !== null) {
-      addNewCard({ id, ...data })
+      addCard({ id, ...data })
       setOpen(false)
     }
   })
 
   return (
-    <form onSubmit={sumbitHandler}>
+    <form onSubmit={submitHandler}>
       {open && (
         <Modal
           open={open}

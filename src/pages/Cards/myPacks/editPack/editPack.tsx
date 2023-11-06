@@ -1,5 +1,6 @@
 import { useForm } from 'react-hook-form'
 
+import { Deck } from '@/assets'
 import { ControlledCheckbox, ControlledTextfield, Modal } from '@/components'
 import { useUpdateDeckMutation } from '@/services'
 
@@ -8,27 +9,29 @@ type DataFormType = {
   isPrivate: boolean
   cover: string
 }
+
 type Props = {
   open: boolean
   setOpen: (value: boolean) => void
-  deckId: string
-  setDeckId: (id: string) => void
-  nameDeck: string
+  setDeck: (value: null) => void
+  data: Deck
 }
 export const EditPack = (props: Props) => {
+  // const { data, isLoading } = useGetDecksByAuthorIdQuery(props.deckId)
+  const [updateDeck] = useUpdateDeckMutation()
+
   const { handleSubmit, control } = useForm<DataFormType>({
     mode: 'onSubmit',
     defaultValues: {
-      name: props.nameDeck,
+      name: props.data.name,
       isPrivate: false,
       cover: '',
     },
   })
-  const [updateDeck] = useUpdateDeckMutation()
   const onSubmitHandler = handleSubmit(data => {
-    updateDeck({ id: props.deckId, ...data })
+    updateDeck({ id: props.data.id, ...data })
     props.setOpen(false)
-    props.setDeckId('')
+    props.setDeck(null)
   })
 
   return (
@@ -44,7 +47,7 @@ export const EditPack = (props: Props) => {
             control={control}
             name={'name'}
             label={'Name Pack'}
-            title={props.nameDeck}
+            title={props.data.name}
           />
           <ControlledCheckbox control={control} name={'isPrivate'} label={'Private pack'} />
         </Modal>

@@ -20,27 +20,43 @@ export const Modal = forwardRef<ElementRef<'div'>, ModalProps>(
     return (
       <div ref={ref} onClick={() => setOpen(!open)}>
         {open && (
-          <Card
-            className={s.modalWrapper}
-            onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => e.stopPropagation()}
-          >
-            {title && (
-              <div className={s.modal__titleWrapper}>
-                <div className={s.modal__title}>
-                  <h4>{title}</h4>
-                  <Cross color={'var(--color-light-100)'} onClick={() => setOpen(!open)} />
+          <>
+            <Card
+              className={s.modalWrapper}
+              onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => e.stopPropagation()}
+            >
+              {title && (
+                <div className={s.modal__titleWrapper}>
+                  <div className={s.modal__title}>
+                    <h4>{title}</h4>
+                    <Cross color={'var(--color-light-100)'} onClick={() => setOpen(!open)} />
+                  </div>
+                  <Separator className={s.modal__titleSeparator} />
                 </div>
-                <Separator className={s.modal__titleSeparator} />
+              )}
+              {children}
+              <div className={s.modal__buttonsBlock}>
+                <Button onClick={() => setOpen(false)} type={'button'} variant={'secondary'}>
+                  Cancel
+                </Button>
+                <Button>{submitButtonTitle}</Button>
               </div>
-            )}
-            {children}
-            <div className={s.modal__buttonsBlock}>
-              <Button onClick={() => setOpen(false)} type={'button'} variant={'secondary'}>
-                Cancel
-              </Button>
-              <Button>{submitButtonTitle}</Button>
-            </div>
-          </Card>
+            </Card>
+            <div
+              onClick={() => setOpen(!open)}
+              style={{
+                zIndex: 10,
+                position: 'absolute',
+                top: 0,
+                right: 0,
+                left: 0,
+                bottom: 0,
+                width: '100%',
+                height: '100%',
+                backgroundColor: 'rgba(59,50,50,0.51)',
+              }}
+            />
+          </>
         )}
       </div>
     )

@@ -33,7 +33,7 @@ type Props = {
 }
 
 export const MyPacks: FC<Props> = ({ decksId }) => {
-  const { data } = decksId && useGetCardsByIdQuery(decksId)
+  const { data } = useGetCardsByIdQuery(decksId!)
 
   const [removeDecks] = useRemoveDeckMutation()
   const [changeDeck] = useUpdateDeckMutation()

@@ -3,7 +3,17 @@ import { FC, useState } from 'react'
 import moment from 'moment/moment'
 import { Link } from 'react-router-dom'
 
-import { BackArrow, Edit2Outline, Pencil, PlayCircleOutline, Trash, TrashOutline } from '@/assets'
+import f from './myPacks.module.scss'
+
+import {
+  BackArrow,
+  CardsItems,
+  Edit2Outline,
+  Pencil,
+  PlayCircleOutline,
+  Trash,
+  TrashOutline,
+} from '@/assets'
 import { MoreVerticaleOutline } from '@/assets/components/moreVerticalOutline/moreVerticaleOutline.tsx'
 import {
   Column,
@@ -11,12 +21,11 @@ import {
   DropDownMenuWithIcon,
   Sort,
   Table,
+  TableRoot,
   Textfield,
   Typography,
 } from '@/components'
 import { AddNewCard } from '@/pages'
-import { EditPack } from '@/pages/Cards/myPacks/editPack/editPack.tsx'
-import f from '@/pages/Cards/myPacks/myPacks.module.scss'
 import { useGetCardsByIdQuery, useRemoveDeckMutation, useUpdateDeckMutation } from '@/services'
 
 type Props = {
@@ -24,12 +33,12 @@ type Props = {
 }
 
 export const MyPacks: FC<Props> = ({ decksId }) => {
-  const { data: myPacks } = decksId && useGetCardsByIdQuery(decksId)
+  const { data } = decksId && useGetCardsByIdQuery(decksId)
 
   const [removeDecks] = useRemoveDeckMutation()
   const [changeDeck] = useUpdateDeckMutation()
   const [sort, setSort] = useState<Sort>({ key: 'cardsCount', direction: 'asc' })
-  const [open, setOpen] = useState(false)
+  // const [open, setOpen] = useState(false)
   const columns: Column[] = [
     {
       key: 'question',
@@ -90,27 +99,26 @@ export const MyPacks: FC<Props> = ({ decksId }) => {
         placeholder={'Input search'}
       />
       <div className={f.table}>
-        <Table.TableRoot>
+        <TableRoot>
           <Table.Header columns={columns} sort={sort} onSort={setSort} />
           <Table.Tbody>
-            {myPacks?.items.map(el => (
+            {data?.items.map((el: CardsItems) => (
               <Table.Row key={el.id}>
                 <Table.Cell>{el.question}</Table.Cell>
                 <Table.Cell>{el.answer}</Table.Cell>
                 <Table.Cell>{moment(el.updated).format('DD.MM.YYYY')}</Table.Cell>
-                <Table.Cell>{el.grade}</Table.Cell>
+                <Table.Cell>{el.rating}</Table.Cell>
                 <Table.Cell>
                   <div className={f.icons}>
                     <Trash callBack={() => removeDecks(el.id)} />
-                    <Pencil callback={() => changeDeck(el.id)} />
-
+                    <Pencil callback={() => changeDeck({ id: el.id })} />
                     {/*{open && <EditPack open={open} setOpen={setOpen} />}*/}
                   </div>
                 </Table.Cell>
               </Table.Row>
             ))}
           </Table.Tbody>
-        </Table.TableRoot>
+        </TableRoot>
       </div>
     </div>
   )

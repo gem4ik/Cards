@@ -45,7 +45,7 @@ export const AddNewCard: FC<AddNewCard> = ({ id }) => {
         </Modal>
       )}
       <Button type={'button'} onClick={() => setOpen(!open)}>
-        Add New Pack
+        Add New Card
       </Button>
     </form>
   )

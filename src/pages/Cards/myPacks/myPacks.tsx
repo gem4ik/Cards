@@ -1,7 +1,7 @@
 import { FC, useState } from 'react'
 
 import moment from 'moment/moment'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import f from './myPacks.module.scss'
 
@@ -15,8 +15,10 @@ import {
   TrashOutline,
 } from '@/assets'
 import { MoreVerticaleOutline } from '@/assets/components/moreVerticalOutline/moreVerticaleOutline.tsx'
+import { ModalType } from '@/assets/types/commonTypes.ts'
 import {
   Column,
+  DeleteSubmit,
   DropdownMenuRadix,
   DropDownMenuWithIcon,
   Sort,
@@ -34,11 +36,11 @@ type Props = {
 
 export const MyPacks: FC<Props> = ({ decksId }) => {
   const { data } = useGetCardsByIdQuery(decksId!)
-
+  const navigate = useNavigate()
   const [removeDecks] = useRemoveDeckMutation()
   const [changeDeck] = useUpdateDeckMutation()
   const [sort, setSort] = useState<Sort>({ key: 'cardsCount', direction: 'asc' })
-  // const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState<ModalType>('')
   const columns: Column[] = [
     {
       key: 'question',
@@ -65,6 +67,10 @@ export const MyPacks: FC<Props> = ({ decksId }) => {
       title: '',
     },
   ]
+  const submitHandler = (id: string) => {
+    removeDecks(id)
+    navigate('/')
+  }
 
   return (
     <div className={f.myPacksWrapper}>
@@ -87,7 +93,11 @@ export const MyPacks: FC<Props> = ({ decksId }) => {
 
             <DropDownMenuWithIcon icon={<Edit2Outline />} onSelect={() => {}} itemText={'Edit'} />
 
-            <DropDownMenuWithIcon icon={<TrashOutline />} onSelect={() => {}} itemText={'Delete'} />
+            <DropDownMenuWithIcon
+              icon={<TrashOutline />}
+              onSelect={() => setOpen('trash')}
+              itemText={'Delete'}
+            />
           </DropdownMenuRadix>
         </div>
         <AddNewCard id={decksId} />
@@ -110,7 +120,7 @@ export const MyPacks: FC<Props> = ({ decksId }) => {
                 <Table.Cell>{el.rating}</Table.Cell>
                 <Table.Cell>
                   <div className={f.icons}>
-                    <Trash callBack={() => removeDecks(el.id)} />
+                    <Trash />
                     <Pencil callback={() => changeDeck({ id: el.id })} />
                     {/*{open && <EditPack open={open} setOpen={setOpen} />}*/}
                   </div>
@@ -120,6 +130,13 @@ export const MyPacks: FC<Props> = ({ decksId }) => {
           </Table.Tbody>
         </TableRoot>
       </div>
+      <DeleteSubmit
+        open={open === 'trash'}
+        setOpen={setOpen}
+        deletedItem={'Delete Pack'}
+        item={'Pack'}
+        submit={() => submitHandler(decksId!)}
+      />
     </div>
   )
 }

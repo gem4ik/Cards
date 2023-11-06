@@ -5,20 +5,22 @@ import { Separator } from '@radix-ui/themes'
 import s from './modal.module.scss'
 
 import { Cross } from '@/assets'
-import { Button, Card } from '@/components'
+import { ModalType } from '@/assets/types/commonTypes.ts'
+import { Card } from '@/components'
 
 export type ModalProps = {
   open: boolean
-  setOpen: (open: boolean) => void
+  setOpen: (open: ModalType) => void
   children?: React.ReactNode
   title?: string
   submitButtonTitle?: string
+  submit?: () => void
 } & ComponentPropsWithoutRef<'div'>
 
 export const Modal = forwardRef<ElementRef<'div'>, ModalProps>(
-  ({ open, setOpen, children, title, submitButtonTitle }, ref): JSX.Element => {
+  ({ open, setOpen, children, title }, ref): JSX.Element => {
     return (
-      <div ref={ref} onClick={() => setOpen(!open)}>
+      <div ref={ref} onClick={() => setOpen('')}>
         {open && (
           <>
             <Card
@@ -29,21 +31,15 @@ export const Modal = forwardRef<ElementRef<'div'>, ModalProps>(
                 <div className={s.modal__titleWrapper}>
                   <div className={s.modal__title}>
                     <h4>{title}</h4>
-                    <Cross color={'var(--color-light-100)'} onClick={() => setOpen(!open)} />
+                    <Cross color={'var(--color-light-100)'} onClick={() => setOpen('')} />
                   </div>
                   <Separator className={s.modal__titleSeparator} />
                 </div>
               )}
               {children}
-              <div className={s.modal__buttonsBlock}>
-                <Button onClick={() => setOpen(false)} type={'button'} variant={'secondary'}>
-                  Cancel
-                </Button>
-                <Button>{submitButtonTitle}</Button>
-              </div>
             </Card>
             <div
-              onClick={() => setOpen(!open)}
+              onClick={() => setOpen('')}
               style={{
                 zIndex: 10,
                 position: 'absolute',

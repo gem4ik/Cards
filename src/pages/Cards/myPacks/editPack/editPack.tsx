@@ -1,7 +1,10 @@
 import { useForm } from 'react-hook-form'
 
+import s from './editPack.module.scss'
+
 import { Deck } from '@/assets'
-import { ControlledCheckbox, ControlledTextfield, Modal } from '@/components'
+import { ModalType } from '@/assets/types/commonTypes.ts'
+import { Button, ControlledCheckbox, ControlledTextfield, Modal } from '@/components'
 import { useUpdateDeckMutation } from '@/services'
 
 type DataFormType = {
@@ -12,12 +15,11 @@ type DataFormType = {
 
 type Props = {
   open: boolean
-  setOpen: (value: boolean) => void
+  setOpen: (value: ModalType) => void
   setDeck: (value: null) => void
   data: Deck
 }
 export const EditPack = (props: Props) => {
-  // const { data, isLoading } = useGetDecksByAuthorIdQuery(props.deckId)
   const [updateDeck] = useUpdateDeckMutation()
 
   const { handleSubmit, control } = useForm<DataFormType>({
@@ -30,26 +32,35 @@ export const EditPack = (props: Props) => {
   })
   const onSubmitHandler = handleSubmit(data => {
     updateDeck({ id: props.data.id, ...data })
-    props.setOpen(false)
+    props.setOpen('')
     props.setDeck(null)
   })
 
   return (
-    <div>
-      <form onSubmit={onSubmitHandler}>
+    <div className={s.editPack__wrapper}>
+      <form className={s.editPack__form} onSubmit={onSubmitHandler}>
         <Modal
           title={'Edit Pack'}
           open={props.open}
           setOpen={props.setOpen}
           submitButtonTitle={'Save Changes'}
         >
-          <ControlledTextfield
-            control={control}
-            name={'name'}
-            label={'Name Pack'}
-            title={props.data.name}
-          />
-          <ControlledCheckbox control={control} name={'isPrivate'} label={'Private pack'} />
+          <div className={s.editPack}>
+            <ControlledTextfield
+              control={control}
+              name={'name'}
+              label={'Name Pack'}
+              title={props.data.name}
+              fullWidth
+            />
+            <ControlledCheckbox control={control} name={'isPrivate'} label={'Private pack'} />
+            <div className={s.modal__buttonsBlock}>
+              <Button onClick={() => props.setOpen('')} type={'button'} variant={'secondary'}>
+                Cancel
+              </Button>
+              <Button>Save Changes</Button>
+            </div>
+          </div>
         </Modal>
       </form>
     </div>

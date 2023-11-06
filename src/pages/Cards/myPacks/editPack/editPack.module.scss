@@ -1,4 +1,4 @@
-.addPack__formWrapper {
+.editPack {
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -7,6 +7,15 @@
   padding-right: 30px;
   padding-left: 30px;
 }
+
+.editPack__wrapper {
+  width: 100%;
+}
+
+.editPack__form {
+  width: 100%;
+}
+
 .modal__buttonsBlock {
   display: flex;
   justify-content: space-between;

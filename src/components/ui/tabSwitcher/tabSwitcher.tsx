@@ -10,6 +10,7 @@ import { Typography } from '@/components'
 type Props = {
   values: string[]
   onValueChange: (value: string) => void
+  value: string
 } & ComponentPropsWithoutRef<typeof Tabs.Root>
 
 export const TabSwitcher = forwardRef<ElementRef<typeof Tabs.Root>, Props>((props, ref) => {
@@ -29,6 +30,7 @@ export const TabSwitcher = forwardRef<ElementRef<typeof Tabs.Root>, Props>((prop
       type="single"
       ref={ref}
       defaultValue={props.values[0]}
+      value={props.value}
       onValueChange={value => {
         if (value) {
           props.onValueChange(value)

@@ -7,7 +7,8 @@ import { Link } from 'react-router-dom'
 import s from './DecksTable.module.scss'
 
 import { Deck, Pencil, Play, Trash } from '@/assets'
-import { Column, Sort, Table, TableRoot } from '@/components'
+import { ModalType } from '@/assets/types/commonTypes.ts'
+import { Column, DeleteSubmit, Sort, Table, TableRoot } from '@/components'
 import { EditPack } from '@/pages/Cards/myPacks/editPack/editPack.tsx'
 import { appActions } from '@/services'
 
@@ -21,13 +22,18 @@ type Props = {
 
 export const DecksTable = (props: Props) => {
   const dispatch = useDispatch()
-  const [open, setOpen] = useState(false)
-  // const [chosenDeck, setChosenDeck] = useState<Deck | null>()
+  const [open, setOpen] = useState<ModalType>('')
   const [deck, setDeck] = useState<Deck | null>(null)
 
-  const setDecksParams = (value: boolean, deck: Deck) => {
+  const setDecksParams = (value: ModalType, deck: Deck) => {
     setOpen(value)
     setDeck(deck)
+  }
+  const deletePack = (value: ModalType) => {
+    setOpen(value)
+  }
+  const removeDeck = (id: string) => {
+    props.removeDecks(id)
   }
 
   return (
@@ -59,10 +65,24 @@ export const DecksTable = (props: Props) => {
                 {props.myId === el.author.id ? (
                   <div className={s.icons}>
                     <Play />
-                    <Trash callBack={() => props.removeDecks(el.id)} />
-                    <Pencil callback={() => setDecksParams(true, el)} />
+                    <Trash callBack={() => deletePack('trash')} />
+                    <Pencil callback={() => setDecksParams('pencil', el)} />
+                    <DeleteSubmit
+                      deletedItem={'Delete Pack'}
+                      item={'Pack'}
+                      open={open === 'trash'}
+                      setOpen={setOpen}
+                      submit={() => {
+                        removeDeck(el.id)
+                      }}
+                    />
                     {deck && (
-                      <EditPack open={open} setDeck={setDeck} setOpen={setOpen} data={deck} />
+                      <EditPack
+                        open={open === 'pencil'}
+                        setDeck={setDeck}
+                        setOpen={setOpen}
+                        data={deck}
+                      />
                     )}
                   </div>
                 ) : (

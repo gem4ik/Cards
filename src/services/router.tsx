@@ -7,6 +7,7 @@ import {
   NewPasswordConfirm,
   Layout,
 } from '@/components'
+import { PageNotFound } from '@/components/404'
 import { Decks, Login, SignUpPage } from '@/pages'
 import { FriendsPack } from '@/pages/Cards/friendsPack/friendsPack.tsx'
 import { RedirectToPacks } from '@/pages/Cards/hoocs/redirectToPacks.tsx'
@@ -73,6 +74,10 @@ const router = createBrowserRouter([
       {
         path: 'new-password-confirm',
         element: <NewPasswordConfirm />,
+      },
+      {
+        path: '*',
+        element: <PageNotFound />,
       },
     ],
   },

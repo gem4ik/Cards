@@ -65,6 +65,7 @@ export const MyPacks: FC<Props> = ({ decksId }) => {
     {
       key: 'actions',
       title: '',
+      sortable: false,
     },
   ]
   const submitHandler = (id: string) => {

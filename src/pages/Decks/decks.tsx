@@ -76,6 +76,7 @@ export const Decks = () => {
     {
       key: 'actions',
       title: '',
+      sortable: false,
     },
   ]
 

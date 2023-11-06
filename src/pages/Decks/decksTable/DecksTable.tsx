@@ -36,8 +36,6 @@ export const DecksTable = (props: Props) => {
     props.removeDecks(id)
   }
 
-  console.log(open)
-
   return (
     <div className={s.tableWrapper}>
       <TableRoot>

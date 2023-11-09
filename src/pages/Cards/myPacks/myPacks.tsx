@@ -2,6 +2,7 @@ import { FC, useState } from 'react'
 
 import moment from 'moment/moment'
 import { Link, useNavigate } from 'react-router-dom'
+import { Rating } from 'react-simple-star-rating'
 
 import f from './myPacks.module.scss'
 
@@ -118,7 +119,17 @@ export const MyPacks: FC<Props> = ({ decksId }) => {
                 <Table.Cell>{el.question}</Table.Cell>
                 <Table.Cell>{el.answer}</Table.Cell>
                 <Table.Cell>{moment(el.updated).format('DD.MM.YYYY')}</Table.Cell>
-                <Table.Cell>{el.rating}</Table.Cell>
+                <Table.Cell>
+                  <Rating
+                    initialValue={el.rating}
+                    size={13}
+                    SVGstrokeColor={'#e3ab39'}
+                    SVGstorkeWidth={1}
+                    fillColor={'#e3ab39'}
+                    emptyColor={'transparent'}
+                    readonly
+                  />
+                </Table.Cell>
                 <Table.Cell>
                   <div className={f.icons}>
                     <Trash />

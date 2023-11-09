@@ -2,7 +2,7 @@ import { FC, useState } from 'react'
 
 import moment from 'moment/moment'
 import { Link, useNavigate } from 'react-router-dom'
-import { Rating } from 'react-simple-star-rating'
+import { Rating } from 'react-simple-star-rating' //https://www.npmjs.com/package/react-simple-star-rating
 
 import f from './myPacks.module.scss'
 

@@ -4,7 +4,7 @@ import moment from 'moment/moment'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { Rating } from 'react-simple-star-rating' //https://www.npmjs.com/package/react-simple-star-rating
 
-import f from './myPacks.module.scss'
+import f from './Cards.module.scss'
 
 import {
   BackArrow,

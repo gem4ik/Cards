@@ -2,6 +2,7 @@ import { useState } from 'react'
 
 import moment from 'moment'
 import { Link } from 'react-router-dom'
+import { Rating } from 'react-simple-star-rating'
 
 import s from './friendsPack.module.scss'
 
@@ -67,7 +68,17 @@ export const FriendsPack = (props: Props) => {
                 <Table.Cell>{el.question}</Table.Cell>
                 <Table.Cell>{el.answer}</Table.Cell>
                 <Table.Cell>{moment(el.updated).format('DD.MM.YYYY')}</Table.Cell>
-                <Table.Cell>{el.rating}</Table.Cell>
+                <Table.Cell>
+                  <Rating
+                    initialValue={el.rating}
+                    size={13}
+                    SVGstrokeColor={'#e3ab39'}
+                    SVGstorkeWidth={1}
+                    fillColor={'#e3ab39'}
+                    emptyColor={'transparent'}
+                    readonly
+                  />
+                </Table.Cell>
               </Table.Row>
             ))}
           </Table.Tbody>

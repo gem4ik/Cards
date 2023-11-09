@@ -1,7 +1,7 @@
-import { FC, useState } from 'react'
+import { useState } from 'react'
 
 import moment from 'moment/moment'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { Rating } from 'react-simple-star-rating' //https://www.npmjs.com/package/react-simple-star-rating
 
 import f from './myPacks.module.scss'
@@ -18,6 +18,7 @@ import {
 import { MoreVerticaleOutline } from '@/assets/components/moreVerticalOutline/moreVerticaleOutline.tsx'
 import { ModalType } from '@/assets/types/commonTypes.ts'
 import {
+  Button,
   Column,
   DeleteSubmit,
   DropdownMenuRadix,
@@ -29,14 +30,19 @@ import {
   Typography,
 } from '@/components'
 import { AddNewCard } from '@/pages'
-import { useGetCardsByIdQuery, useRemoveDeckMutation, useUpdateDeckMutation } from '@/services'
+import {
+  useGetCardsByIdQuery,
+  useGetMeQuery,
+  useRemoveDeckMutation,
+  useUpdateDeckMutation,
+} from '@/services'
 
-type Props = {
-  decksId?: string
-}
+export const Cards = () => {
+  const { state } = useLocation()
+  const { data } = useGetCardsByIdQuery(state.decksId!)
+  const { data: Me } = useGetMeQuery()
 
-export const MyPacks: FC<Props> = ({ decksId }) => {
-  const { data } = useGetCardsByIdQuery(decksId!)
+  const isMyId = Me?.id === state.authorId
   const navigate = useNavigate()
   const [removeDecks] = useRemoveDeckMutation()
   const [changeDeck] = useUpdateDeckMutation()
@@ -69,6 +75,28 @@ export const MyPacks: FC<Props> = ({ decksId }) => {
       sortable: false,
     },
   ]
+  const friendsColumns: Column[] = [
+    {
+      key: 'question',
+      title: 'Question',
+      sortable: true,
+    },
+    {
+      key: 'answer',
+      title: 'Answer',
+      sortable: true,
+    },
+    {
+      key: 'updated',
+      title: 'Last Updated',
+      sortable: true,
+    },
+    {
+      key: 'grade',
+      title: 'Grade',
+      sortable: true,
+    },
+  ]
   const submitHandler = (id: string) => {
     removeDecks(id)
     navigate('/')
@@ -85,24 +113,26 @@ export const MyPacks: FC<Props> = ({ decksId }) => {
 
       <div className={f.myPackHeading}>
         <div className={f.dropDown}>
-          <Typography variant={'h1'}>My Pack</Typography>
-          <DropdownMenuRadix trigger={<MoreVerticaleOutline />}>
-            <DropDownMenuWithIcon
-              icon={<PlayCircleOutline />}
-              onSelect={() => {}}
-              itemText={'Learn'}
-            />
+          <Typography variant={'h1'}>{state.PackName}</Typography>
+          {isMyId && (
+            <DropdownMenuRadix trigger={<MoreVerticaleOutline />}>
+              <DropDownMenuWithIcon
+                icon={<PlayCircleOutline />}
+                onSelect={() => {}}
+                itemText={'Learn'}
+              />
 
-            <DropDownMenuWithIcon icon={<Edit2Outline />} onSelect={() => {}} itemText={'Edit'} />
+              <DropDownMenuWithIcon icon={<Edit2Outline />} onSelect={() => {}} itemText={'Edit'} />
 
-            <DropDownMenuWithIcon
-              icon={<TrashOutline />}
-              onSelect={() => setOpen('trash')}
-              itemText={'Delete'}
-            />
-          </DropdownMenuRadix>
+              <DropDownMenuWithIcon
+                icon={<TrashOutline />}
+                onSelect={() => setOpen('trash')}
+                itemText={'Delete'}
+              />
+            </DropdownMenuRadix>
+          )}
         </div>
-        <AddNewCard id={decksId} />
+        {!isMyId ? <Button>Learn To Pack</Button> : <AddNewCard id={state.decksId} />}
       </div>
       <Textfield
         className={f.searchDeck}
@@ -112,7 +142,7 @@ export const MyPacks: FC<Props> = ({ decksId }) => {
       />
       <div className={f.table}>
         <TableRoot>
-          <Table.Header columns={columns} sort={sort} onSort={setSort} />
+          <Table.Header columns={isMyId ? columns : friendsColumns} sort={sort} onSort={setSort} />
           <Table.Tbody>
             {data?.items.map((el: CardsItems) => (
               <Table.Row key={el.id}>
@@ -130,13 +160,15 @@ export const MyPacks: FC<Props> = ({ decksId }) => {
                     readonly
                   />
                 </Table.Cell>
-                <Table.Cell>
-                  <div className={f.icons}>
-                    <Trash />
-                    <Pencil callback={() => changeDeck({ id: el.id })} />
-                    {/*{open && <EditPack open={open} setOpen={setOpen} />}*/}
-                  </div>
-                </Table.Cell>
+                {isMyId && (
+                  <Table.Cell>
+                    <div className={f.icons}>
+                      <Trash />
+                      <Pencil callback={() => changeDeck({ id: el.id })} />
+                      {/*{open && <EditPack open={open} setOpen={setOpen} />}*/}
+                    </div>
+                  </Table.Cell>
+                )}
               </Table.Row>
             ))}
           </Table.Tbody>
@@ -147,7 +179,7 @@ export const MyPacks: FC<Props> = ({ decksId }) => {
         setOpen={setOpen}
         deletedItem={'Delete Pack'}
         item={'Pack'}
-        submit={() => submitHandler(decksId!)}
+        submit={() => submitHandler(state.decksId!)}
       />
     </div>
   )

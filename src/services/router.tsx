@@ -4,14 +4,11 @@ import {
   CheckEmail,
   CreateNewPassword,
   ForgotPassword,
-  NewPasswordConfirm,
   Layout,
+  NewPasswordConfirm,
 } from '@/components'
 import { PageNotFound } from '@/components/404'
-import { Decks, Login, SignUpPage } from '@/pages'
-import { FriendsPack } from '@/pages/Cards/friendsPack/friendsPack.tsx'
-import { RedirectToPacks } from '@/pages/Cards/hoocs/redirectToPacks.tsx'
-import { MyPacks } from '@/pages/Cards/myPacks/myPacks.tsx'
+import { Cards, Decks, Login, SignUpPage } from '@/pages'
 import { PersonalInformation } from '@/pages/profile/personal-information/personalInformation.tsx'
 import { useGetMeQuery } from '@/services'
 
@@ -32,16 +29,8 @@ const router = createBrowserRouter([
             element: <PersonalInformation />,
           },
           {
-            path: 'myPacks',
-            element: <MyPacks />,
-          },
-          {
-            path: 'friendPack',
-            element: <FriendsPack />,
-          },
-          {
             path: 'cards',
-            element: <RedirectToPacks />,
+            element: <Cards />,
           },
         ],
       },

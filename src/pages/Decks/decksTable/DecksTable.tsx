@@ -52,7 +52,7 @@ export const DecksTable = (props: Props) => {
               <Table.Cell>
                 <Link
                   to={'cards'}
-                  state={{ authorId: el.author.id, decksId: el.id }}
+                  state={{ PackName: el.name, authorId: el.author.id, decksId: el.id }}
                   className={s.nameCell}
                 >
                   {el.name}

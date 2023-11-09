@@ -9,7 +9,7 @@ import s from './DecksTable.module.scss'
 import { Deck, Pencil, Play, Trash } from '@/assets'
 import { ModalType } from '@/assets/types/commonTypes.ts'
 import { Column, DeleteSubmit, Sort, Table, TableRoot } from '@/components'
-import { EditPack } from '@/pages/Cards/myPacks/editPack/editPack.tsx'
+import { EditPack } from '@/pages'
 import { appActions } from '@/services'
 
 type Props = {

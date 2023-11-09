@@ -119,7 +119,7 @@ export const MyPacks: FC<Props> = ({ decksId }) => {
                 <Table.Cell>{el.question}</Table.Cell>
                 <Table.Cell>{el.answer}</Table.Cell>
                 <Table.Cell>{moment(el.updated).format('DD.MM.YYYY')}</Table.Cell>
-                <Table.Cell>
+                <Table.Cell className={f.RatingCell}>
                   <Rating
                     initialValue={el.rating}
                     size={13}

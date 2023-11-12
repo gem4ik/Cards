@@ -16,7 +16,7 @@ type DataForm = {
 export const AddNewPack = () => {
   const [open, setOpen] = useState<ModalType>('')
 
-  const { handleSubmit, control } = useForm<DataForm>({
+  const { handleSubmit, control, reset } = useForm<DataForm>({
     mode: 'onSubmit',
     defaultValues: {
       name: '',
@@ -29,17 +29,13 @@ export const AddNewPack = () => {
   const submitHandler = handleSubmit(data => {
     addDeck(data)
     setOpen('')
+    reset()
   })
 
   return (
     <form onSubmit={submitHandler}>
       {open && (
-        <Modal
-          submitButtonTitle={'Add New Pack'}
-          open={open === 'open'}
-          title={'Add New Pack'}
-          setOpen={setOpen}
-        >
+        <Modal open={open === 'open'} title={'Add New Pack'} setOpen={setOpen}>
           <div className={s.addPack__formWrapper}>
             <ControlledTextfield fullWidth control={control} name={'name'} label={'name '} />
             <ControlledCheckbox control={control} name={'isPrivate'} label={'Private pack'} />

@@ -36,21 +36,23 @@ export const AddNewCard: FC<AddNewCard> = ({ id }) => {
   return (
     <form onSubmit={submitHandler}>
       {open && (
-        <Modal
-          open={open === 'open'}
-          setOpen={setOpen}
-          submitButtonTitle={'Add New Card'}
-          title={'Add New Card'}
-        >
-          <div>
-            <ControlledTextfield control={control} name={'question'} label={'question'} />
-            <ControlledTextfield control={control} name={'answer'} label={'answer'} />
-          </div>
-          <div className={s.modal__buttonsBlock}>
-            <Button onClick={() => setOpen('')} type={'button'} variant={'secondary'}>
-              Cancel
-            </Button>
-            <Button>Add New Card</Button>
+        <Modal open={open === 'open'} setOpen={setOpen} title={'Add New Card'}>
+          <div className={s.ModalWrapper}>
+            <div className={s.modalInput}>
+              <ControlledTextfield
+                fullWidth
+                control={control}
+                name={'question'}
+                label={'question'}
+              />
+              <ControlledTextfield fullWidth control={control} name={'answer'} label={'answer'} />
+            </div>
+            <div className={s.modal__buttonsBlock}>
+              <Button onClick={() => setOpen('')} type={'button'} variant={'secondary'}>
+                Cancel
+              </Button>
+              <Button>Add New Card</Button>
+            </div>
           </div>
         </Modal>
       )}

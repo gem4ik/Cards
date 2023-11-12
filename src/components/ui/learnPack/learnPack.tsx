@@ -33,21 +33,40 @@ export const LearnPack = ({ open, setOpen, title, deckId }: Props) => {
         <div>isLoading</div>
       ) : (
         <section className={s.modalWrapper}>
-          <Typography variant={'subtitle1'}>Question:{data?.question}</Typography>
-          <Typography variant={'body2'}>
-            Количество попыток ответов на вопрос:{data?.shots}
-          </Typography>
-          {openAnswer && (
-            <>
-              <Typography variant={'subtitle1'}>Answer:{data?.answer}</Typography>
-              <Typography variant={'body2'}>Rate yourself:</Typography>
-              <Radio callback={value => setGrade(rate.indexOf(value) + 1)} labels={rate} />
-            </>
-          )}
-
-          <Button onClick={onclickHandler} fullWidth>
-            {(openAnswer && 'Next Question') || 'Show Answer'}
-          </Button>
+          <div className={s.modal}>
+            <div className={s.questionBlock}>
+              <Typography variant={'subtitle1'}>
+                Question: &nbsp;
+                {
+                  <Typography as={'span'} variant={'body1'}>
+                    {data?.question}
+                  </Typography>
+                }
+              </Typography>
+              <Typography variant={'body2'}>
+                Количество попыток ответов на вопрос:{data?.shots}
+              </Typography>
+            </div>
+            {openAnswer && (
+              <div className={s.answerBlock}>
+                <Typography variant={'subtitle1'}>
+                  Answer: &nbsp;
+                  {
+                    <Typography as={'span'} variant={'body1'}>
+                      {data?.answer}
+                    </Typography>
+                  }
+                </Typography>
+                <Typography variant={'subtitle1'}>Rate yourself:</Typography>
+                <Radio callback={value => setGrade(rate.indexOf(value) + 1)} labels={rate} />
+              </div>
+            )}
+          </div>
+          <div className={s.modalButton}>
+            <Button onClick={onclickHandler} fullWidth>
+              {(openAnswer && 'Next Question') || 'Show Answer'}
+            </Button>
+          </div>
         </section>
       )}
     </Modal>

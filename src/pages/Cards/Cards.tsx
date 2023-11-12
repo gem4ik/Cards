@@ -151,7 +151,7 @@ export const Cards = () => {
                 <Table.Cell>{moment(el.updated).format('DD.MM.YYYY')}</Table.Cell>
                 <Table.Cell className={f.RatingCell}>
                   <Rating
-                    initialValue={el.rating}
+                    initialValue={el.grade}
                     size={13}
                     SVGstrokeColor={'#e3ab39'}
                     SVGstorkeWidth={1}

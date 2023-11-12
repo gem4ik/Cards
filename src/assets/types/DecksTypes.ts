@@ -61,7 +61,7 @@ export type CardsItems = {
   created: string
   updated: string
   shots: number
-  rating: number
+  grade: number
   userId: string
 }
 export type CardParams = {

@@ -179,7 +179,6 @@ export const Cards = () => {
                     <div className={f.icons}>
                       <Trash />
                       <Pencil callback={() => changeDeck({ id: el.id })} />
-                      {/*{open && <EditPack open={open} setOpen={setOpen} />}*/}
                     </div>
                   </Table.Cell>
                 )}

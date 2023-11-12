@@ -36,15 +36,12 @@ export const EditPack = (props: Props) => {
     props.setDeck(null)
   })
 
+  console.log('asdasdsa')
+
   return (
     <div className={s.editPack__wrapper}>
       <form className={s.editPack__form} onSubmit={onSubmitHandler}>
-        <Modal
-          title={'Edit Pack'}
-          open={props.open}
-          setOpen={props.setOpen}
-          submitButtonTitle={'Save Changes'}
-        >
+        <Modal title={'Edit Pack'} open={props.open} setOpen={props.setOpen}>
           <div className={s.editPack}>
             <ControlledTextfield
               control={control}

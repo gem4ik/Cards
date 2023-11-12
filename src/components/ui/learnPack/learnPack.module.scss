@@ -1,4 +1,22 @@
 .modalWrapper {
   display: flex;
   flex-direction: column;
+  width: 100%;
+  padding: 30px;
+}
+
+.modalButton {
+  padding-top: 30px;
+}
+
+.modal {
+}
+
+.answerBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  width: 100%;
+  padding-top: 30px;
 }

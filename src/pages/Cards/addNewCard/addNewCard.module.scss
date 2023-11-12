@@ -1,9 +1,19 @@
 .modal__buttonsBlock {
   display: flex;
   justify-content: space-between;
+  width: 100%;
+}
+
+.modalInput {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 
   width: 100%;
-  padding-right: 30px;
   padding-bottom: 30px;
-  padding-left: 30px;
+}
+
+.ModalWrapper {
+  width: 100%;
+  padding: 30px;
 }

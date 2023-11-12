@@ -27,7 +27,7 @@ export const Header = forwardRef<HTMLHeadElement, Props>((props, ref) => {
   const dispatch = useDispatch()
 
   const clearFilters = () => {
-    dispatch(appActions.setRangeValue(['0', '10']))
+    dispatch(appActions.setRangeValue(['1', '10']))
     dispatch(appActions.setCurrentPage(1))
     dispatch(appActions.setItemsPerPage('10'))
     dispatch(appActions.setSearchName(''))

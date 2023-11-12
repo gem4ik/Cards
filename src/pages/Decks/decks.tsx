@@ -39,9 +39,9 @@ export const Decks = () => {
   }
 
   const { data } = useGetDecksQuery(searchParams)
-  const rangeOptions = [0, data?.maxCardsCount ? data?.maxCardsCount : 20]
+  const rangeOptions = [1, data?.maxCardsCount ? data?.maxCardsCount : 20]
   const clearFilters = () => {
-    dispatch(appActions.setRangeValue(['0', '10']))
+    dispatch(appActions.setRangeValue(['1', '10']))
     dispatch(appActions.setCurrentPage(1))
     dispatch(appActions.setItemsPerPage('10'))
     dispatch(appActions.setSearchName(''))

@@ -16,24 +16,18 @@ const slice = createSlice({
     } as Sort,
     currentPage: 1,
     itemsPerPage: 10,
-    rangeValue: ['0', '10'],
+    rangeValue: ['1', '10'],
     searchName: '',
   },
   reducers: {
-    setEmail: (state, action) => {
-      state.forgottenEmail = action.payload
-    },
-    setSearchParams: (state, action) => {
-      state.searchParams = action.payload
-    },
     setAuthor: (state, action: PayloadAction<string>) => {
       state.author = action.payload
     },
-    setSort: (state, action: PayloadAction<Sort>) => {
-      state.sort = action.payload
-    },
     setCurrentPage: (state, action: PayloadAction<number>) => {
       state.currentPage = action.payload
+    },
+    setEmail: (state, action) => {
+      state.forgottenEmail = action.payload
     },
     setItemsPerPage: (state, action) => {
       state.itemsPerPage = action.payload
@@ -43,6 +37,12 @@ const slice = createSlice({
     },
     setSearchName: (state, action) => {
       state.searchName = action.payload
+    },
+    setSearchParams: (state, action) => {
+      state.searchParams = action.payload
+    },
+    setSort: (state, action: PayloadAction<Sort>) => {
+      state.sort = action.payload
     },
   },
 })

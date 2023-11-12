@@ -1,9 +1,11 @@
 import {
   addDeckRequest,
+  CardsItems,
   CardsResponse,
   DeckByIdResponse,
   DeckResponce,
   GetDeckParams,
+  LearnCardsResponse,
 } from '@/assets/types/DecksTypes.ts'
 import { baseApi } from '@/services/base-api.ts'
 import { RootState } from '@/services/store.ts'
@@ -104,6 +106,24 @@ const DecksAPI = baseApi.injectEndpoints({
         },
         invalidatesTags: ['Deck'],
       }),
+      learnRandomDeck: build.query({
+        query: id => {
+          return {
+            url: `/v1/decks/${id}/learn`,
+          }
+        },
+        providesTags: ['LearnCard'],
+      }),
+      learnDeckRating: build.mutation<Omit<CardsItems, 'userId'>, LearnCardsResponse>({
+        query: ({ id, cardId, grade }) => {
+          return {
+            url: `/v1/decks/${id}/learn`,
+            method: 'POST',
+            body: { cardId, grade },
+          }
+        },
+        invalidatesTags: ['LearnCard', 'Cards'],
+      }),
     }
   },
 })
@@ -115,4 +135,6 @@ export const {
   useRemoveDeckMutation,
   useGetDecksByAuthorIdQuery,
   useUpdateDeckMutation,
+  useLearnRandomDeckQuery,
+  useLearnDeckRatingMutation,
 } = DecksAPI

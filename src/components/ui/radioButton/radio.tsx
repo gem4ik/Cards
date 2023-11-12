@@ -8,10 +8,11 @@ import { Typography } from '@/components'
 
 type Props = {
   labels: string[]
+  callback?: (value: string) => void
 } & ComponentPropsWithoutRef<typeof RadioGroup.Root>
 
 export const Radio = forwardRef<ElementRef<typeof RadioGroup.Root>, Props>((props, ref) => {
-  const { labels } = props
+  const { labels, callback } = props
 
   return (
     <RadioGroup.Root
@@ -19,6 +20,7 @@ export const Radio = forwardRef<ElementRef<typeof RadioGroup.Root>, Props>((prop
       className={s.RadioGroupRoot}
       defaultValue="default"
       aria-label="View density"
+      onValueChange={callback}
     >
       {labels.map((l, i) => {
         return (

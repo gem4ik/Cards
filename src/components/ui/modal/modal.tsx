@@ -13,8 +13,6 @@ export type ModalProps = {
   setOpen: (open: ModalType) => void
   children?: React.ReactNode
   title?: string
-  submitButtonTitle?: string
-  submit?: () => void
 } & ComponentPropsWithoutRef<'div'>
 
 export const Modal = forwardRef<ElementRef<'div'>, ModalProps>(

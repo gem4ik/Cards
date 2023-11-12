@@ -29,6 +29,7 @@ import {
   Textfield,
   Typography,
 } from '@/components'
+import { LearnPack } from '@/components/ui/learnPack/learnPack.tsx'
 import { AddNewCard } from '@/pages'
 import {
   useGetCardsByIdQuery,
@@ -97,6 +98,7 @@ export const Cards = () => {
       sortable: true,
     },
   ]
+  const [openLearnModal, setOpenLearnModal] = useState(false)
   const submitHandler = (id: string) => {
     removeDecks(id)
     navigate('/')
@@ -118,7 +120,9 @@ export const Cards = () => {
             <DropdownMenuRadix trigger={<MoreVerticaleOutline />}>
               <DropDownMenuWithIcon
                 icon={<PlayCircleOutline />}
-                onSelect={() => {}}
+                onSelect={() => {
+                  setOpenLearnModal(true)
+                }}
                 itemText={'Learn'}
               />
 
@@ -132,7 +136,17 @@ export const Cards = () => {
             </DropdownMenuRadix>
           )}
         </div>
-        {!isMyId ? <Button>Learn To Pack</Button> : <AddNewCard id={state.decksId} />}
+        {!isMyId ? (
+          <Button
+            onClick={() => {
+              setOpenLearnModal(true)
+            }}
+          >
+            Learn To Pack
+          </Button>
+        ) : (
+          <AddNewCard id={state.decksId} />
+        )}
       </div>
       <Textfield
         className={f.searchDeck}
@@ -181,6 +195,15 @@ export const Cards = () => {
         item={'Pack'}
         submit={() => submitHandler(state.decksId!)}
       />
+
+      {openLearnModal && (
+        <LearnPack
+          open={openLearnModal}
+          setOpen={() => setOpenLearnModal(false)}
+          title={state.PackName}
+          deckId={state.decksId}
+        />
+      )}
     </div>
   )
 }

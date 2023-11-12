@@ -9,6 +9,7 @@ import s from './DecksTable.module.scss'
 import { Deck, Pencil, Play, Trash } from '@/assets'
 import { ModalType } from '@/assets/types/commonTypes.ts'
 import { Column, DeleteSubmit, Sort, Table, TableRoot } from '@/components'
+import { LearnPack } from '@/components/ui/learnPack/learnPack.tsx'
 import { EditPack } from '@/pages'
 import { appActions } from '@/services'
 
@@ -23,7 +24,10 @@ type Props = {
 export const DecksTable = (props: Props) => {
   const dispatch = useDispatch()
   const [open, setOpen] = useState<ModalType>('')
+  const [openLearnModal, setOpenLearnModal] = useState(false)
   const [deck, setDeck] = useState<Deck | null>(null)
+  const [learnPackTitle, setLearnPackTitle] = useState('')
+  const [learnPackId, setLearnId] = useState('')
 
   const setDecksParams = (value: ModalType, deck: Deck) => {
     setOpen(value)
@@ -34,6 +38,11 @@ export const DecksTable = (props: Props) => {
   }
   const removeDeck = (id: string) => {
     props.removeDecks(id)
+  }
+  const learnPackHandler = (title: string, deckId: string) => {
+    setOpenLearnModal(true)
+    setLearnPackTitle(title)
+    setLearnId(deckId)
   }
 
   return (
@@ -64,7 +73,7 @@ export const DecksTable = (props: Props) => {
               <Table.Cell>
                 {props.myId === el.author.id ? (
                   <div className={s.icons}>
-                    <Play />
+                    <Play callback={() => learnPackHandler(el.name, el.id)} />
                     <Trash callBack={() => deletePack('trash')} />
                     <Pencil callback={() => setDecksParams('pencil', el)} />
                     <DeleteSubmit
@@ -87,7 +96,7 @@ export const DecksTable = (props: Props) => {
                   </div>
                 ) : (
                   <div className={s.icons}>
-                    <Play />
+                    <Play callback={() => learnPackHandler(el.name, el.id)} />
                   </div>
                 )}
               </Table.Cell>
@@ -95,6 +104,14 @@ export const DecksTable = (props: Props) => {
           ))}
         </Table.Tbody>
       </TableRoot>
+      {openLearnModal && (
+        <LearnPack
+          open={openLearnModal}
+          setOpen={() => setOpenLearnModal(false)}
+          title={learnPackTitle}
+          deckId={learnPackId}
+        />
+      )}
     </div>
   )
 }

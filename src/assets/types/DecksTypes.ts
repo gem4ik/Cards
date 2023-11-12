@@ -99,3 +99,8 @@ export type CreateCardsRequest = {
   questionVideo?: any
   answerVideo?: any
 }
+export type LearnCardsResponse = {
+  id: string
+  cardId: string
+  grade: number
+}
